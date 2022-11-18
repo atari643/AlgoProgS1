@@ -31,15 +31,14 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         for (int lig = 0; lig < Coordonnees.NB_LIGNES; lig++) {
             for (int col = 0; col < Coordonnees.NB_COLONNES; col++) {
                 Coordonnees coord = new Coordonnees(lig, col);
-                if (plateau[coord.ligne][coord.colonne].plantePresente() == false){
+                if (plateau[coord.ligne][coord.colonne].plantePresente() == false) {
                     ajoutActionPommier(coord, actions, vitalites, couleurJoueur);
-                } else{
-                    actions.ajouterAction(action);
+
                 }
             }
         }
         System.out.println("actionsPossibles : fin");
-        
+
         return actions.nettoyer();
     }
 
@@ -51,7 +50,21 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
      */
     static Vitalites vitalitesPlateau(Case[][] plateau) {
         // TODO il y en aura besoin à un moment !
-        return new Vitalites(0, 0);
+        int vitaliterR = 0;
+        int vitaliterB = 0;
+        for (int lig = 0; lig < Coordonnees.NB_LIGNES; lig++) {
+            for (int col = 0; col < Coordonnees.NB_COLONNES; col++) {
+                Coordonnees coord = new Coordonnees(lig, col);
+                if (plateau[coord.ligne][coord.colonne].plantePresente() == true) {
+                    if (plateau[coord.ligne][coord.colonne].couleur == 'R') {
+                        vitaliterR += 1;
+                    } else {
+                        vitaliterB += 1;
+                    }
+                }
+            }
+        }
+        return new Vitalites(vitaliterR, vitaliterB);
     }
 
     /**
@@ -60,14 +73,22 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
      *
      * @param coord coordonnées de la case où planter le pommier
      * @param actions l'ensemble des actions possibles (en construction)
-     * @param vitalites la somme des vitalités sur le plateau avant de jouer l'action
+     * @param vitalites la somme des vitalités sur le plateau avant de jouer
+     * l'action
      * @param couleur la couleur du pommier à ajouter
      */
     void ajoutActionPommier(Coordonnees coord, ActionsPossibles actions,
             Vitalites vitalites, char couleur) {
-        String action = "P" + coord.carLigne() + coord.carColonne() + "," 
-                + (vitalites.vitalitesRouge + 1) + ","
-                + (vitalites.vitalitesBleu);
+        int vitaliterR = 0;
+        int vitaliterB = 0;
+        if (couleur == 'R') {
+            vitaliterR = 1;
+        } else {
+            vitaliterB = 1;
+        }
+        String action = "P" + coord.carLigne() + coord.carColonne() + ","
+                + (vitalites.vitalitesRouge + vitaliterR) + ","
+                + (vitalites.vitalitesBleu + vitaliterB);
         actions.ajouterAction(action);
     }
 }
