@@ -31,8 +31,11 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         for (int lig = 0; lig < Coordonnees.NB_LIGNES; lig++) {
             for (int col = 0; col < Coordonnees.NB_COLONNES; col++) {
                 Coordonnees coord = new Coordonnees(lig, col);
-                if (plateau[lig][col].plantePresente()==false)
+                if (plateau[coord.ligne][coord.colonne].plantePresente() == false){
                     ajoutActionPommier(coord, actions, vitalites, couleurJoueur);
+                } else{
+                    actions.ajouterAction(action);
+                }
             }
         }
         System.out.println("actionsPossibles : fin");
