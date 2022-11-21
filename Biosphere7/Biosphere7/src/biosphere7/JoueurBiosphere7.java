@@ -101,7 +101,17 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                 + (vitalites.vitalitesBleu + vitaliterB);
         actions.ajouterAction(action);
     }
-    
+    /**
+     * Renvoie les coordonnées de la case suivante, en suivant une direction
+     * donnée.
+     *
+     * @param d la direction à suivre
+     * @return les coordonnées de la case suivante
+     */
+    static Coordonnees suivante(Coordonnees c, Direction d) {
+        return new Coordonnees(c.ligne + Direction.mvtVertic(d), 
+                c.colonne + Direction.mvtHoriz(d));
+    }
     /**
      * Ajout d'une action de plantation de pommier dans l'ensemble des actions
      * possibles.
@@ -114,16 +124,17 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
      */
     void ajoutActionCouper(Coordonnees coord, ActionsPossibles actions,
             Vitalites vitalites, char couleur) {
-        int vitaliterR = 0;
-        int vitaliterB = 0;
         if (couleur == 'R') {
-            vitaliterR -= 1;
+            vitalites.vitalitesRouge -= 1;
         } else {
-            vitaliterB -= 1;
+            vitalites.vitalitesBleu -= 1;
+        }
+        for(Direction d : Direction.values()){
+            
         }
         String action = "C" + coord.carLigne() + coord.carColonne() + ","
-                + (vitalites.vitalitesRouge + vitaliterR) + ","
-                + (vitalites.vitalitesBleu + vitaliterB);
+                + (vitalites.vitalitesRouge) + ","
+                + (vitalites.vitalitesBleu);
         actions.ajouterAction(action);
     }
 }
