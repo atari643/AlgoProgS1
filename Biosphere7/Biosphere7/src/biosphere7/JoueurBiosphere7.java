@@ -34,10 +34,7 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                 if (plateau[coord.ligne][coord.colonne].plantePresente() == false) {
                     ajoutActionPommier(coord, actions, vitalites, couleurJoueur);
                 } else {
-                    couperArbre(plateau, vitalites);
-                    for (Direction d : Direction.values()) {
-                        couperArbre(plateau, vitalites);
-                    }
+                    ajoutActionCouper(coord, actions, vitalites, plateau[lig][col].couleur);
                 }
             }
         }

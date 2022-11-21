@@ -95,7 +95,7 @@ public class JoueurBiosphere7Test {
         int niveau = 3;
         // on lance actionsPossibles
         String[] actionsPossiblesDepuisPlateau
-                = joueur.couperArbre(plateau, d);
+                = joueur.actionsPossibles(plateau, 'R', 3);
         ActionsPossibles actionsPossibles
                 = new ActionsPossibles(actionsPossiblesDepuisPlateau);
         assertTrue(actionsPossibles.contient("CaN,4,3"));
