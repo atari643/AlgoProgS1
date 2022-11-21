@@ -17,7 +17,8 @@ public class JoueurBiosphere7Test {
     @Test
     public void testActionsPossibles() {
         //testActionsPossibles_niveau1();
-        testActionsPossibles_niveau2();
+        //testActionsPossibles_niveau2();
+        testActionsPossibles_niveau3();
     }
 
     /**
@@ -83,6 +84,12 @@ public class JoueurBiosphere7Test {
         assertEquals(Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES - 4,
                 actionsPossiblesDepuisPlateau.length);
     }
+    /**
+     * Test de la fonction actionsPossibles, au niveau 1.
+     */
+    public void testActionsPossibles_niveau3(){
+        
+    }
     
     /**
      * Test de la fonction ajoutActionPommier.
@@ -115,7 +122,6 @@ public class JoueurBiosphere7Test {
     @Test
     public void testVitalitesPlateau() {
         // à décommenter le moment venu...
-        /*
         // plateau : rouge 0, bleu 0
         Case[][] plateau1 = Utils.plateauDepuisTexte(PLATEAU_VIDE);
         Vitalites vita1 = JoueurBiosphere7.vitalitesPlateau(plateau1);
@@ -126,7 +132,6 @@ public class JoueurBiosphere7Test {
         Vitalites vita2 = JoueurBiosphere7.vitalitesPlateau(plateau2);
         assertEquals(2, vita2.vitalitesRouge);
         assertEquals(2, vita2.vitalitesBleu);
-        */
     }
     
     /**
