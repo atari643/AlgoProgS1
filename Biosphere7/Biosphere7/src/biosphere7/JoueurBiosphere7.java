@@ -40,6 +40,9 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
 
         return actions.nettoyer();
     }
+    static couperArbre(Case[][] plateau, Direction d){
+        
+    }
 
     /**
      * Somme des vitalités des plantes de chaque joueur sur le plateau.

@@ -9,5 +9,8 @@ package biosphere7;
  * @author qartigala
  */
 public enum Direction {
-    
+    NORD,
+    SUD,
+    EST,
+    OUEST,
 }

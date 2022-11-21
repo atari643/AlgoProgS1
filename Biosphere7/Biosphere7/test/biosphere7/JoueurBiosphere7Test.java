@@ -88,7 +88,27 @@ public class JoueurBiosphere7Test {
      * Test de la fonction actionsPossibles, au niveau 1.
      */
     public void testActionsPossibles_niveau3(){
-        
+        JoueurBiosphere7 joueur = new JoueurBiosphere7();
+        Direction d;
+        // plateau, couleur et niveau
+        Case[][] plateau = Utils.plateauDepuisTexte(PLATEAU_NIVEAU3);
+        int niveau = 3;
+        // on lance actionsPossibles
+        String[] actionsPossiblesDepuisPlateau
+                = joueur.couperArbre(plateau, d);
+        ActionsPossibles actionsPossibles
+                = new ActionsPossibles(actionsPossiblesDepuisPlateau);
+        assertTrue(actionsPossibles.contient("CaN,4,3"));
+        assertTrue(actionsPossibles.contient("ChJ,4,3"));
+        assertTrue(actionsPossibles.contient("CfA,3,4"));
+        assertTrue(actionsPossibles.contient("CdI,4,4"));        
+        assertTrue(actionsPossibles.contient("CeH,5,3"));
+        assertTrue(actionsPossibles.contient("CeI,5,6"));
+        assertTrue(actionsPossibles.contient("CeJ,4,4"));
+        assertTrue(actionsPossibles.contient("CfI,5,3"));
+        // nombre correct d'actions possibles :
+        assertEquals(Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES - 1,
+                actionsPossiblesDepuisPlateau.length);
     }
     
     /**
@@ -189,6 +209,40 @@ public class JoueurBiosphere7Test {
             + "e|   |   |   |   |   |   |   |   |PR1|   |   |   |   |   |\n"
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
             + "f|PR1|   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "g|   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "h|   |   |   |   |   |   |   |   |   |PB1|   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "i|   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "j|   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "k|   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "l|   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "m|   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "n|   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n";
+    /**
+     * Un plateau pour tester le niveau 3.
+     */
+    final String PLATEAU_NIVEAU3
+            = "   A   B   C   D   E   F   G   H   I   J   K   L   M   N \n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "a|   |   |   |   |   |   |   |   |   |   |   |   |   |PB1|\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "b|   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "c|   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "d|   |   |   |   |   |   |   |   |PR1|   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "e|   |   |   |   |   |   |   |PB1|PR1|PR1|   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "f|PR1|   |   |   |   |   |   |   |PB1|   |   |   |   |   |\n"
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
             + "g|   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
