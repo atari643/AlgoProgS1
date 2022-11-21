@@ -33,14 +33,22 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                 Coordonnees coord = new Coordonnees(lig, col);
                 if (plateau[coord.ligne][coord.colonne].plantePresente() == false) {
                     ajoutActionPommier(coord, actions, vitalites, couleurJoueur);
+                } else {
+                    couperArbre(plateau, vitalites);
+                    for (Direction d : Direction.values()) {
+                        couperArbre(plateau, vitalites);
+                    }
                 }
             }
         }
-        System.out.println("actionsPossibles : fin");
+            System.out.println("actionsPossibles : fin");
 
-        return actions.nettoyer();
-    }
-    static couperArbre(Case[][] plateau, Direction d){
+            return actions.nettoyer();
+        }
+        
+ 
+
+    void couperArbre(Case[][] plateau, Vitalites vitalite) {
         
     }
 
@@ -89,6 +97,31 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
             vitaliterB = 1;
         }
         String action = "P" + coord.carLigne() + coord.carColonne() + ","
+                + (vitalites.vitalitesRouge + vitaliterR) + ","
+                + (vitalites.vitalitesBleu + vitaliterB);
+        actions.ajouterAction(action);
+    }
+    
+    /**
+     * Ajout d'une action de plantation de pommier dans l'ensemble des actions
+     * possibles.
+     *
+     * @param coord coordonnées de la case où planter le pommier
+     * @param actions l'ensemble des actions possibles (en construction)
+     * @param vitalites la somme des vitalités sur le plateau avant de jouer
+     * l'action
+     * @param couleur la couleur du pommier à ajouter
+     */
+    void ajoutActionCouper(Coordonnees coord, ActionsPossibles actions,
+            Vitalites vitalites, char couleur) {
+        int vitaliterR = 0;
+        int vitaliterB = 0;
+        if (couleur == 'R') {
+            vitaliterR -= 1;
+        } else {
+            vitaliterB -= 1;
+        }
+        String action = "C" + coord.carLigne() + coord.carColonne() + ","
                 + (vitalites.vitalitesRouge + vitaliterR) + ","
                 + (vitalites.vitalitesBleu + vitaliterB);
         actions.ajouterAction(action);
