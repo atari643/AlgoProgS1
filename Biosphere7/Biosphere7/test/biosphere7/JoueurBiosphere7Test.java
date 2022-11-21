@@ -89,25 +89,23 @@ public class JoueurBiosphere7Test {
      */
     public void testActionsPossibles_niveau3(){
         JoueurBiosphere7 joueur = new JoueurBiosphere7();
-        Direction d;
         // plateau, couleur et niveau
         Case[][] plateau = Utils.plateauDepuisTexte(PLATEAU_NIVEAU3);
-        int niveau = 3;
         // on lance actionsPossibles
         String[] actionsPossiblesDepuisPlateau
                 = joueur.actionsPossibles(plateau, 'R', 3);
         ActionsPossibles actionsPossibles
                 = new ActionsPossibles(actionsPossiblesDepuisPlateau);
         assertTrue(actionsPossibles.contient("CaN,4,3"));
-        assertTrue(actionsPossibles.contient("ChJ,4,3"));
+        assertTrue(actionsPossibles.contient("CdI,4,4")); 
         assertTrue(actionsPossibles.contient("CfA,3,4"));
-        assertTrue(actionsPossibles.contient("CdI,4,4"));        
         assertTrue(actionsPossibles.contient("CeH,5,3"));
         assertTrue(actionsPossibles.contient("CeI,5,6"));
         assertTrue(actionsPossibles.contient("CeJ,4,4"));
         assertTrue(actionsPossibles.contient("CfI,5,3"));
+        assertTrue(actionsPossibles.contient("ChJ,4,3"));
         // nombre correct d'actions possibles :
-        assertEquals(Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES - 1,
+        assertEquals(Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES,
                 actionsPossiblesDepuisPlateau.length);
     }
     

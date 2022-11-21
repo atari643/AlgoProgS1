@@ -33,22 +33,45 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                 Coordonnees coord = new Coordonnees(lig, col);
                 if (plateau[coord.ligne][coord.colonne].plantePresente() == false) {
                     ajoutActionPommier(coord, actions, vitalites, couleurJoueur);
-                } else {
-                    ajoutActionCouper(coord, actions, vitalites, plateau[lig][col].couleur);
+                } else if (plateau[coord.ligne][coord.colonne].plantePresente() == true) {
+                    ajoutActionCouper(coord, actions, vitalites, plateau[lig][col].couleur, plateau);
                 }
             }
         }
-            System.out.println("actionsPossibles : fin");
+        System.out.println("actionsPossibles : fin");
 
-            return actions.nettoyer();
-        }
-        
- 
-
-    void couperArbre(Case[][] plateau, Vitalites vitalite) {
-        
+        return actions.nettoyer();
     }
 
+    void vitaliteAutour(Case[][] plateau, Vitalites vitalite, Coordonnees coord) {
+        System.out.println(voisines(coord, 14)[0].ligne);
+        System.out.println(voisines(coord, 14)[1].colonne);
+        for (int i = 0; i<2; i++){
+            if (plateau[voisines(coord, 14)[i].ligne][voisines(coord, 14)[i].colonne].couleur=='R'){
+                vitalite.vitalitesRouge+=1;
+            }else{
+                vitalite.vitalitesBleu+=1;
+            }
+        }
+    }
+    /**
+     * Retourne les coordonnées de toutes les cases voisines.
+     * 
+     * @param coord coordonnées de la case considérée
+     * @param taille taille du plateau (carré)
+     * @return les coordonnées de toutes les cases voisines
+     */
+    static Coordonnees[] voisines(Coordonnees coord, int taille) {
+        Coordonnees[] voisines = new Coordonnees[4];
+        int nbVoisines = 0;
+        for(Direction d : Direction.values()){
+              if (estDansPlateau(suivante(coord, d), taille)){
+                  voisines[nbVoisines]=suivante(coord, d);
+                  nbVoisines+=1;
+              }
+        }
+        return voisines;
+    }
     /**
      * Somme des vitalités des plantes de chaque joueur sur le plateau.
      *
@@ -98,6 +121,7 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                 + (vitalites.vitalitesBleu + vitaliterB);
         actions.ajouterAction(action);
     }
+
     /**
      * Renvoie les coordonnées de la case suivante, en suivant une direction
      * donnée.
@@ -106,9 +130,21 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
      * @return les coordonnées de la case suivante
      */
     static Coordonnees suivante(Coordonnees c, Direction d) {
-        return new Coordonnees(c.ligne + Direction.mvtVertic(d), 
+        return new Coordonnees(c.ligne + Direction.mvtVertic(d),
                 c.colonne + Direction.mvtHoriz(d));
     }
+
+    /**
+     * Indique si ces coordonnées sont dans le plateau.
+     *
+     * @param coord coordonnées à tester
+     * @param taille taille du plateau (carré)
+     * @return vrai ssi ces coordonnées sont dans le plateau
+     */
+    static boolean estDansPlateau(Coordonnees coord, int taille) {
+        return coord.ligne < taille && coord.ligne >= 0 && coord.colonne < taille && coord.colonne >= 0; // TODO
+    }
+
     /**
      * Ajout d'une action de plantation de pommier dans l'ensemble des actions
      * possibles.
@@ -120,20 +156,13 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
      * @param couleur la couleur du pommier à ajouter
      */
     void ajoutActionCouper(Coordonnees coord, ActionsPossibles actions,
-            Vitalites vitalites, char couleur) {
+            Vitalites vitalites, char couleur, Case[][] plateau) {
         if (couleur == 'R') {
             vitalites.vitalitesRouge -= 1;
         } else {
             vitalites.vitalitesBleu -= 1;
         }
-        for(Direction d : Direction.values()){
-            if (suivante(coord, d).equals(couleur=='R')){
-                vitalites.vitalitesRouge += 1;
-            }
-            else if(suivante(coord, d).equals(couleur=='B')){
-                vitalites.vitalitesBleu += 1;
-            }
-        }
+        vitaliteAutour(plateau, vitalites, coord);
         String action = "C" + coord.carLigne() + coord.carColonne() + ","
                 + (vitalites.vitalitesRouge) + ","
                 + (vitalites.vitalitesBleu);
