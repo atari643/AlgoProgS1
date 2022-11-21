@@ -130,7 +130,12 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
             vitalites.vitalitesBleu -= 1;
         }
         for(Direction d : Direction.values()){
-            
+            if (suivante(coord, d).equals(couleur=='R')){
+                vitalites.vitalitesRouge += 1;
+            }
+            else if(suivante(coord, d).equals(couleur=='B')){
+                vitalites.vitalitesBleu += 1;
+            }
         }
         String action = "C" + coord.carLigne() + coord.carColonne() + ","
                 + (vitalites.vitalitesRouge) + ","
