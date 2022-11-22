@@ -42,7 +42,21 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         System.out.println("actionsPossibles : fin");
         return actions.nettoyer();
     }
-
+    
+    Vitalites vitaliteAutour(Coordonnees coord, Case[][] plateau){
+        int vitaliterR=0;
+        int vitaliterB=0;
+        for (int i = 0; i < voisines(coord, 14).length; i++) {
+            if (plateau[voisines(coord, 14)[i].ligne][voisines(coord, 14)[i].colonne].plantePresente() == true) {
+                if (plateau[voisines(coord, 14)[i].ligne][voisines(coord, 14)[i].colonne].couleur == 'R') {
+                    vitaliterR += 1;
+                } else if (plateau[voisines(coord, 14)[i].ligne][voisines(coord, 14)[i].colonne].couleur == 'B') {
+                    vitaliterB += 1;
+                }
+            }
+        }
+        return new Vitalites(vitaliterR, vitaliterB);
+    }
     /**
      * Retourne les coordonnées de toutes les cases voisines.
      *
@@ -154,18 +168,10 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         } else {
             vitaliterB = -1;
         }
-        for (int i = 0; i < voisines(coord, 14).length; i++) {
-            if (plateau[voisines(coord, 14)[i].ligne][voisines(coord, 14)[i].colonne].plantePresente() == true) {
-                if (plateau[voisines(coord, 14)[i].ligne][voisines(coord, 14)[i].colonne].couleur == 'R') {
-                    vitaliterR += 1;
-                } else if (plateau[voisines(coord, 14)[i].ligne][voisines(coord, 14)[i].colonne].couleur == 'B') {
-                    vitaliterB += 1;
-                }
-            }
-        }
+        Vitalites autreVital = vitaliteAutour(coord, plateau);
         String action = "C" + coord.carLigne() + coord.carColonne() + ","
-                + (vitalites.vitalitesRouge + vitaliterR) + ","
-                + (vitalites.vitalitesBleu + vitaliterB);
+                + (vitalites.vitalitesRouge + vitaliterR + autreVital.vitalitesRouge) + ","
+                + (vitalites.vitalitesBleu + vitaliterB + autreVital.vitalitesBleu);
         actions.ajouterAction(action);
     }
 }

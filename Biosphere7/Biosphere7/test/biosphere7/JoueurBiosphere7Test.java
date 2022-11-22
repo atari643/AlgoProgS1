@@ -96,6 +96,9 @@ public class JoueurBiosphere7Test {
                 = joueur.actionsPossibles(plateau, 'R', 3);
         ActionsPossibles actionsPossibles
                 = new ActionsPossibles(actionsPossiblesDepuisPlateau);
+        // on peut afficher toutes les actions possibles calculées :
+        actionsPossibles.afficher();
+        // on vérifie que toute les cases occuper on une action possible 
         assertTrue(actionsPossibles.contient("CaN,4,3"));
         assertTrue(actionsPossibles.contient("CdI,4,4")); 
         assertTrue(actionsPossibles.contient("CfA,3,4"));
