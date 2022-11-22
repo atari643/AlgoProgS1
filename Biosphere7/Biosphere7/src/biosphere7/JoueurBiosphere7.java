@@ -42,7 +42,12 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         System.out.println("actionsPossibles : fin");
         return actions.nettoyer();
     }
-    
+    /**
+     * Retourne le nombre de voisin de couleur dans le plateau
+     * @param coord une case occupé
+     * @param plateau plateau de jeu
+     * @return la vitaliter a rajouter 
+     */
     Vitalites vitaliteAutour(Coordonnees coord, Case[][] plateau){
         int vitaliterR=0;
         int vitaliterB=0;
