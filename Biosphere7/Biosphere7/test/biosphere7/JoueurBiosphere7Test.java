@@ -111,7 +111,7 @@ public class JoueurBiosphere7Test {
         assertEquals(Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES,
                 actionsPossiblesDepuisPlateau.length);
     }
-    
+  
     /**
      * Test de la fonction ajoutActionPommier.
      */
@@ -139,6 +139,35 @@ public class JoueurBiosphere7Test {
         // désormais, deux actions possibles
         assertEquals(2, actions.nbActions);
     }
+    
+    @Test
+    public void testEstDansPlateau() {
+        assertTrue(JoueurBiosphere7.estDansPlateau(new Coordonnees(0, 0), 14));
+        assertTrue(JoueurBiosphere7.estDansPlateau(new Coordonnees(13, 13), 14));
+        assertTrue(JoueurBiosphere7.estDansPlateau(new Coordonnees(0, 1), 14));
+        assertFalse(JoueurBiosphere7.estDansPlateau(new Coordonnees(-1, 1), 14));
+        assertTrue(JoueurBiosphere7.estDansPlateau(new Coordonnees(7, 13), 14));
+        assertFalse(JoueurBiosphere7.estDansPlateau(new Coordonnees(7, 14), 14));
+        assertTrue(JoueurBiosphere7.estDansPlateau(new Coordonnees(13, 0), 14));
+        assertFalse(JoueurBiosphere7.estDansPlateau(new Coordonnees(14, 0), 14));
+        assertTrue(JoueurBiosphere7.estDansPlateau(new Coordonnees(7, 0), 14));
+        assertFalse(JoueurBiosphere7.estDansPlateau(new Coordonnees(7, -1), 14));
+        assertTrue(JoueurBiosphere7.estDansPlateau(new Coordonnees(0, 1), 2));
+        assertFalse(JoueurBiosphere7.estDansPlateau(new Coordonnees(0, 1), 1));
+    }
+
+    @Test
+    public void testSuivante() {
+        assertEquals(new Coordonnees(5, 4),
+                JoueurBiosphere7.suivante(new Coordonnees(4, 4), Direction.SUD));
+        assertEquals(new Coordonnees(2, 3),
+                JoueurBiosphere7.suivante(new Coordonnees(3, 3), Direction.NORD));
+        assertEquals(new Coordonnees(0, -1),
+                JoueurBiosphere7.suivante(new Coordonnees(0, 0), Direction.OUEST));
+        assertEquals(new Coordonnees(200, 201),
+                JoueurBiosphere7.suivante(new Coordonnees(200, 200), Direction.EST));
+    }
+    
 
     @Test
     public void testVitalitesPlateau() {
