@@ -85,7 +85,7 @@ public class JoueurBiosphere7Test {
                 actionsPossiblesDepuisPlateau.length);
     }
     /**
-     * Test de la fonction actionsPossibles, au niveau 1.
+     * Test de la fonction actionsPossibles, au niveau 3.
      */
     public void testActionsPossibles_niveau3(){
         JoueurBiosphere7 joueur = new JoueurBiosphere7();
