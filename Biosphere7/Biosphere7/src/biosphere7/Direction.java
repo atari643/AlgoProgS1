@@ -12,7 +12,6 @@ package biosphere7;
  * Les 4 directions cardinales, ainsi que les 4 directions intermédiaires.
  */
 enum Direction {
-
     NORD,
     SUD,
     EST,

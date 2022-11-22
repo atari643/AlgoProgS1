@@ -1,6 +1,7 @@
 package biosphere7;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -39,24 +40,12 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
             }
         }
         System.out.println("actionsPossibles : fin");
-
         return actions.nettoyer();
     }
 
-    void vitaliteAutour(Case[][] plateau, Vitalites vitalite, Coordonnees coord) {
-        System.out.println(voisines(coord, 14)[0].ligne);
-        System.out.println(voisines(coord, 14)[1].colonne);
-        for (int i = 0; i<2; i++){
-            if (plateau[voisines(coord, 14)[i].ligne][voisines(coord, 14)[i].colonne].couleur=='R'){
-                vitalite.vitalitesRouge+=1;
-            }else{
-                vitalite.vitalitesBleu+=1;
-            }
-        }
-    }
     /**
      * Retourne les coordonnées de toutes les cases voisines.
-     * 
+     *
      * @param coord coordonnées de la case considérée
      * @param taille taille du plateau (carré)
      * @return les coordonnées de toutes les cases voisines
@@ -64,14 +53,15 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
     static Coordonnees[] voisines(Coordonnees coord, int taille) {
         Coordonnees[] voisines = new Coordonnees[4];
         int nbVoisines = 0;
-        for(Direction d : Direction.values()){
-              if (estDansPlateau(suivante(coord, d), taille)){
-                  voisines[nbVoisines]=suivante(coord, d);
-                  nbVoisines+=1;
-              }
+        for (Direction d : Direction.values()) {
+            if (estDansPlateau(suivante(coord, d), taille)) {
+                voisines[nbVoisines] = suivante(coord, d);
+                nbVoisines += 1;
+            }
         }
-        return voisines;
+        return Arrays.copyOf(voisines, nbVoisines);
     }
+
     /**
      * Somme des vitalités des plantes de chaque joueur sur le plateau.
      *
@@ -157,15 +147,25 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
      */
     void ajoutActionCouper(Coordonnees coord, ActionsPossibles actions,
             Vitalites vitalites, char couleur, Case[][] plateau) {
+        int vitaliterR = 0;
+        int vitaliterB = 0;
         if (couleur == 'R') {
-            vitalites.vitalitesRouge -= 1;
+            vitaliterR = -1;
         } else {
-            vitalites.vitalitesBleu -= 1;
+            vitaliterB = -1;
         }
-        vitaliteAutour(plateau, vitalites, coord);
+        for (int i = 0; i < voisines(coord, 14).length; i++) {
+            if (plateau[voisines(coord, 14)[i].ligne][voisines(coord, 14)[i].colonne].plantePresente() == true) {
+                if (plateau[voisines(coord, 14)[i].ligne][voisines(coord, 14)[i].colonne].couleur == 'R') {
+                    vitaliterR += 1;
+                } else if (plateau[voisines(coord, 14)[i].ligne][voisines(coord, 14)[i].colonne].couleur == 'B') {
+                    vitaliterB += 1;
+                }
+            }
+        }
         String action = "C" + coord.carLigne() + coord.carColonne() + ","
-                + (vitalites.vitalitesRouge) + ","
-                + (vitalites.vitalitesBleu);
+                + (vitalites.vitalitesRouge + vitaliterR) + ","
+                + (vitalites.vitalitesBleu + vitaliterB);
         actions.ajouterAction(action);
     }
 }
