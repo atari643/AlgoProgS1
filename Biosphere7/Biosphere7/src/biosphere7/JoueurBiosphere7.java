@@ -36,8 +36,10 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                     Coordonnees[] v = voisines(coord, 14);
                     for (int i = 0; i < v.length; i++) {
                         if (plateau[v[i].ligne][v[i].colonne].plantePresente()) {
-                            vitalites.vitalitesBleu+=1;
-                            vitalites.vitalitesRouge+=1;
+                            if (couleurJoueur=='B'){
+                                vitalites.vitalitesBleu+=1;}
+                            else if (couleurJoueur=='R')
+                                vitalites.vitalitesRouge+=1;
                         }
                     }
                     ajoutActionPommier(coord, actions, vitalites, couleurJoueur);
