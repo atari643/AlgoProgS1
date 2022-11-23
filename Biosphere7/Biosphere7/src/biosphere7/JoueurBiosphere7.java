@@ -33,18 +33,15 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
             for (int col = 0; col < Coordonnees.NB_COLONNES; col++) {
                 Coordonnees coord = new Coordonnees(lig, col);
                 if (plateau[coord.ligne][coord.colonne].plantePresente() == false) {
-                    int compteur1 = 0;
                     Coordonnees[] v = voisines(coord, 14);
                     for (int i = 0; i < v.length; i++) {
                         if (plateau[v[i].ligne][v[i].colonne].plantePresente()) {
-                            compteur1 += 1;
                             vitalites.vitalitesBleu+=1;
                             vitalites.vitalitesRouge+=1;
                         }
                     }
                     ajoutActionPommier(coord, actions, vitalites, couleurJoueur);
-                    vitalites.vitalitesBleu-=compteur1;
-                    vitalites.vitalitesRouge-=compteur1;
+                    vitalites = vitalitesPlateau(plateau);
                 } else if (plateau[coord.ligne][coord.colonne].plantePresente()) {
                     ajoutActionCouper(coord, actions, vitalites, plateau[lig][col].couleur, plateau);
                 }
@@ -53,7 +50,10 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         System.out.println("actionsPossibles : fin");
         return actions.nettoyer();
     }
-
+    
+    Vitalites modificationTempVitalite(Case[][] plateau, Coordonnees coord){
+        
+    }
     /**
      * Retourne les coordonnées de toutes les cases voisines.
      *
