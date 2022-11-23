@@ -51,9 +51,6 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         return actions.nettoyer();
     }
     
-    Vitalites modificationTempVitalite(Case[][] plateau, Coordonnees coord){
-        
-    }
     /**
      * Retourne les coordonnées de toutes les cases voisines.
      *

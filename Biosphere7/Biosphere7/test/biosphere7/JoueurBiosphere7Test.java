@@ -131,14 +131,17 @@ public class JoueurBiosphere7Test {
         // on peut afficher toutes les actions possibles calculées :
         actionsPossibles.afficher();
         // on vérifie que toute les cases occuper on une action possible 
-        assertTrue(actionsPossibles.contient("PaM,8,5"));
-        assertTrue(actionsPossibles.contient("PbN,8,5"));
-        assertTrue(actionsPossibles.contient("PdH,9,6"));
-        assertTrue(actionsPossibles.contient("PdJ,9,6"));
-        assertTrue(actionsPossibles.contient("PfJ,9,6"));
-        assertTrue(actionsPossibles.contient("PfH,9,6"));
+        assertTrue(actionsPossibles.contient("PaM,8,4"));
+        assertTrue(actionsPossibles.contient("PbN,8,4"));
+        assertTrue(actionsPossibles.contient("PdH,9,4"));
+        assertTrue(actionsPossibles.contient("PdJ,9,4"));
+        assertTrue(actionsPossibles.contient("PfJ,9,4"));
+        assertTrue(actionsPossibles.contient("PfH,9,4"));
         // nombre correct d'actions possibles :
         assertTrue(actionsPossibles.contient("PhL,7,4"));
+        String[] actionsPossiblesDepuisPlateau2
+                = joueur.actionsPossibles(plateau, 'B', 4);
+        
         assertEquals(Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES,
                 actionsPossiblesDepuisPlateau.length);
     }
