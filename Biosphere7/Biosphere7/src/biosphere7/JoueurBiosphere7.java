@@ -33,7 +33,7 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
             for (int col = 0; col < Coordonnees.NB_COLONNES; col++) {
                 Coordonnees coord = new Coordonnees(lig, col);
                 if (plateau[coord.ligne][coord.colonne].plantePresente() == false) {
-                    ajoutActionPommier(coord, actions, vitalites, couleurJoueur);
+                    ajoutActionPommier(coord, actions, vitalites, couleurJoueur, plateau);
                 } else if (plateau[coord.ligne][coord.colonne].plantePresente()) {
                     ajoutActionCouper(coord, actions, vitalites, plateau[lig][col].couleur, plateau);
                 }
@@ -98,27 +98,31 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
      * @param couleur la couleur du pommier à ajouter
      */
     void ajoutActionPommier(Coordonnees coord, ActionsPossibles actions,
-            Vitalites vitalites, char couleur) {
+            Vitalites vitalites, char couleur, Case[][] plateau) {
         int vitaliterR = 0;
         int vitaliterB = 0;
-        if (couleur == 'R') {
-            vitaliterR = 1;
-        } else {
-            vitaliterB = 1;
+        Coordonnees[] v = voisines(coord, 14);
+        for (int i = 0; i < v.length; i++) {
+            if (plateau[v[i].ligne][v[i].colonne].plantePresente()) {
+                if (couleur == 'R') {
+                    vitaliterR = 1 + v.length;
+                } else {
+                    vitaliterB = 1 + v.length;
+                }
+            }
+            String action = "P" + coord.carLigne() + coord.carColonne() + ","
+                    + (vitalites.vitalitesRouge + vitaliterR) + ","
+                    + (vitalites.vitalitesBleu + vitaliterB);
+            actions.ajouterAction(action);
         }
-        String action = "P" + coord.carLigne() + coord.carColonne() + ","
-                + (vitalites.vitalitesRouge + vitaliterR) + ","
-                + (vitalites.vitalitesBleu + vitaliterB);
-        actions.ajouterAction(action);
     }
-
-    /**
-     * Renvoie les coordonnées de la case suivante, en suivant une direction
-     * donnée.
-     *
-     * @param d la direction à suivre
-     * @return les coordonnées de la case suivante
-     */
+        /**
+         * Renvoie les coordonnées de la case suivante, en suivant une direction
+         * donnée.
+         *
+         * @param d la direction à suivre
+         * @return les coordonnées de la case suivante
+         */
     static Coordonnees suivante(Coordonnees c, Direction d) {
         return new Coordonnees(c.ligne + Direction.mvtVertic(d),
                 c.colonne + Direction.mvtHoriz(d));

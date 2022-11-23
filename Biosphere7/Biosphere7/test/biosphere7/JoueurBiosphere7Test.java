@@ -18,7 +18,8 @@ public class JoueurBiosphere7Test {
     public void testActionsPossibles() {
         //testActionsPossibles_niveau1();
         //testActionsPossibles_niveau2();
-        testActionsPossibles_niveau3();
+        //testActionsPossibles_niveau3();
+        testActionsPossibles_niveau4();
     }
 
     /**
@@ -109,6 +110,33 @@ public class JoueurBiosphere7Test {
         assertTrue(actionsPossibles.contient("CfI,7,3"));
         assertTrue(actionsPossibles.contient("ChJ,6,3"));
         assertTrue(actionsPossibles.contient("ChH,4,4"));
+        // nombre correct d'actions possibles :
+        assertTrue(actionsPossibles.contient("PhL,7,4"));
+        assertEquals(Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES,
+                actionsPossiblesDepuisPlateau.length);
+    }
+
+    /**
+     * Test de la fonction actionsPossibles, au niveau 4
+     */
+    public void testActionsPossibles_niveau4() {
+        JoueurBiosphere7 joueur = new JoueurBiosphere7();
+        // plateau, couleur et niveau
+        Case[][] plateau = Utils.plateauDepuisTexte(PLATEAU_NIVEAU3);
+        // on lance actionsPossibles
+        String[] actionsPossiblesDepuisPlateau
+                = joueur.actionsPossibles(plateau, 'R', 4);
+        ActionsPossibles actionsPossibles
+                = new ActionsPossibles(actionsPossiblesDepuisPlateau);
+        // on peut afficher toutes les actions possibles calculées :
+        actionsPossibles.afficher();
+        // on vérifie que toute les cases occuper on une action possible 
+        assertTrue(actionsPossibles.contient("PaM,9,6"));
+        assertTrue(actionsPossibles.contient("PbN,9,6"));
+        assertTrue(actionsPossibles.contient("PdH,11,8"));
+        assertTrue(actionsPossibles.contient("PdJ,11,8"));
+        assertTrue(actionsPossibles.contient("PfJ,11,8"));
+        assertTrue(actionsPossibles.contient("PfH,11,8"));
         // nombre correct d'actions possibles :
         assertTrue(actionsPossibles.contient("PhL,7,4"));
         assertEquals(Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES,
