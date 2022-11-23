@@ -141,7 +141,12 @@ public class JoueurBiosphere7Test {
         assertTrue(actionsPossibles.contient("PhL,7,4"));
         String[] actionsPossiblesDepuisPlateau2
                 = joueur.actionsPossibles(plateau, 'B', 4);
-        
+        assertTrue(actionsPossibles.contient("PaM,7,6"));
+        assertTrue(actionsPossibles.contient("PbN,7,6"));
+        assertTrue(actionsPossibles.contient("PdH,7,7"));
+        assertTrue(actionsPossibles.contient("PdJ,7,7"));
+        assertTrue(actionsPossibles.contient("PfJ,7,7"));
+        assertTrue(actionsPossibles.contient("PfH,7,7"));
         assertEquals(Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES,
                 actionsPossiblesDepuisPlateau.length);
     }
