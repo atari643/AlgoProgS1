@@ -141,6 +141,9 @@ public class JoueurBiosphere7Test {
         assertTrue(actionsPossibles.contient("PhL,7,4"));
         String[] actionsPossiblesDepuisPlateau2
                 = joueur.actionsPossibles(plateau, 'B', 4);
+        ActionsPossibles actionsPossibles2
+                = new ActionsPossibles(actionsPossiblesDepuisPlateau);
+        actionsPossibles2.afficher();
         assertTrue(actionsPossibles.contient("PaM,7,6"));
         assertTrue(actionsPossibles.contient("PbN,7,6"));
         assertTrue(actionsPossibles.contient("PdH,7,7"));
