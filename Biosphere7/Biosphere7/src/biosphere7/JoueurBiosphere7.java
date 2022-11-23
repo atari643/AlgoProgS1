@@ -105,9 +105,9 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         for (int i = 0; i < v.length; i++) {
             if (plateau[v[i].ligne][v[i].colonne].plantePresente()) {
                 if (couleur == 'R') {
-                    vitalites.vitalitesRouge += v.length;
+                    vitaliterR += 1;
                 } else if (couleur == 'B') {
-                    vitalites.vitalitesBleu += v.length;
+                    vitaliterB += 1;
                 }
             }
         }

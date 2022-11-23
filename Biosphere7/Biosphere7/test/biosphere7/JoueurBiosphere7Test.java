@@ -151,11 +151,12 @@ public class JoueurBiosphere7Test {
         JoueurBiosphere7 joueur = new JoueurBiosphere7();
         ActionsPossibles actions = new ActionsPossibles();
         Vitalites vitalites = new Vitalites(0, 0);
+        Case[][] plateau1 = Utils.plateauDepuisTexte(PLATEAU_NIVEAU3);
         // pour l'instant pas d'action possible
         assertEquals(0, actions.nbActions);
         // on crée le tableau d'actions et on en ajoute une
         joueur.ajoutActionPommier(Coordonnees.depuisCars('f', 'D'), actions,
-                vitalites, Case.CAR_ROUGE);
+                vitalites, Case.CAR_ROUGE, plateau1);
         // l'action est devenue possible
         assertTrue(actions.contient("PfD,1,0"));
         // une action possible mais qui n'a pas encore été ajoutée
@@ -164,7 +165,7 @@ public class JoueurBiosphere7Test {
         assertEquals(1, actions.nbActions);
         // ajout d'une deuxième action possible
         joueur.ajoutActionPommier(Coordonnees.depuisCars('b', 'H'), actions,
-                vitalites, Case.CAR_ROUGE);
+                vitalites, Case.CAR_ROUGE, plateau1);
         // l'action a bien été ajoutée
         assertTrue(actions.contient("PbH,1,0"));
         // désormais, deux actions possibles
