@@ -142,14 +142,14 @@ public class JoueurBiosphere7Test {
         String[] actionsPossiblesDepuisPlateau2
                 = joueur.actionsPossibles(plateau, 'B', 4);
         ActionsPossibles actionsPossibles2
-                = new ActionsPossibles(actionsPossiblesDepuisPlateau);
+                = new ActionsPossibles(actionsPossiblesDepuisPlateau2);
         actionsPossibles2.afficher();
-        assertTrue(actionsPossibles.contient("PaM,7,6"));
-        assertTrue(actionsPossibles.contient("PbN,7,6"));
-        assertTrue(actionsPossibles.contient("PdH,7,7"));
-        assertTrue(actionsPossibles.contient("PdJ,7,7"));
-        assertTrue(actionsPossibles.contient("PfJ,7,7"));
-        assertTrue(actionsPossibles.contient("PfH,7,7"));
+        assertTrue(actionsPossibles2.contient("PaM,6,6"));
+        assertTrue(actionsPossibles2.contient("PbN,6,6"));
+        assertTrue(actionsPossibles2.contient("PdH,6,7"));
+        assertTrue(actionsPossibles2.contient("PdJ,6,7"));
+        assertTrue(actionsPossibles2.contient("PfJ,6,7"));
+        assertTrue(actionsPossibles2.contient("PfH,6,7"));
         assertEquals(Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES,
                 actionsPossiblesDepuisPlateau.length);
     }
