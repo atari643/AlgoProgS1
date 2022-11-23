@@ -150,6 +150,7 @@ public class JoueurBiosphere7Test {
         assertTrue(actionsPossibles2.contient("PdJ,6,7"));
         assertTrue(actionsPossibles2.contient("PfJ,6,7"));
         assertTrue(actionsPossibles2.contient("PfH,6,7"));
+        assertTrue(actionsPossibles2.contient("PhL,6,5"));
         assertEquals(Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES,
                 actionsPossiblesDepuisPlateau.length);
     }
