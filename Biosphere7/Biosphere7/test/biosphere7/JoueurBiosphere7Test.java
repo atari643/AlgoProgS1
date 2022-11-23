@@ -49,12 +49,12 @@ public class JoueurBiosphere7Test {
         assertTrue(actionsPossibles.contient("PaA,1,0"));
         assertTrue(actionsPossibles.contient("PnA,1,0"));
         assertTrue(actionsPossibles.contient("PaN,1,0"));
-        assertTrue(actionsPossibles.contient("PnN,1,0"));        
+        assertTrue(actionsPossibles.contient("PnN,1,0"));
         // vérifions s'il y a le bon nombre d'actions possibles :
         assertEquals(Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES,
                 actionsPossiblesDepuisPlateau.length);
     }
-    
+
     /**
      * Test de la fonction actionsPossibles, au niveau 2.
      */
@@ -73,7 +73,7 @@ public class JoueurBiosphere7Test {
         assertTrue(actionsPossibles.contient("PaA,2,3"));
         assertTrue(actionsPossibles.contient("PnA,2,3"));
         assertFalse(actionsPossibles.contient("PaN,2,3"));
-        assertTrue(actionsPossibles.contient("PnN,2,3"));        
+        assertTrue(actionsPossibles.contient("PnN,2,3"));
         // on peut poser sur une case quelconque vide :
         assertTrue(actionsPossibles.contient("PkD,2,3"));
         // on ne peut pas poser sur une case occupée :
@@ -84,10 +84,11 @@ public class JoueurBiosphere7Test {
         assertEquals(Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES - 4,
                 actionsPossiblesDepuisPlateau.length);
     }
+
     /**
      * Test de la fonction actionsPossibles, au niveau 3.
      */
-    public void testActionsPossibles_niveau3(){
+    public void testActionsPossibles_niveau3() {
         JoueurBiosphere7 joueur = new JoueurBiosphere7();
         // plateau, couleur et niveau
         Case[][] plateau = Utils.plateauDepuisTexte(PLATEAU_NIVEAU3);
@@ -99,19 +100,21 @@ public class JoueurBiosphere7Test {
         // on peut afficher toutes les actions possibles calculées :
         actionsPossibles.afficher();
         // on vérifie que toute les cases occuper on une action possible 
-        assertTrue(actionsPossibles.contient("CaN,4,3"));
-        assertTrue(actionsPossibles.contient("CdI,4,4")); 
-        assertTrue(actionsPossibles.contient("CfA,3,4"));
-        assertTrue(actionsPossibles.contient("CeH,5,3"));
-        assertTrue(actionsPossibles.contient("CeI,5,6"));
-        assertTrue(actionsPossibles.contient("CeJ,4,4"));
-        assertTrue(actionsPossibles.contient("CfI,5,3"));
-        assertTrue(actionsPossibles.contient("ChJ,4,3"));
+        assertTrue(actionsPossibles.contient("CaN,6,3"));
+        assertTrue(actionsPossibles.contient("CdI,6,4"));
+        assertTrue(actionsPossibles.contient("CfA,5,4"));
+        assertTrue(actionsPossibles.contient("CeH,7,3"));
+        assertTrue(actionsPossibles.contient("CeI,7,6"));
+        assertTrue(actionsPossibles.contient("CeJ,6,4"));
+        assertTrue(actionsPossibles.contient("CfI,7,3"));
+        assertTrue(actionsPossibles.contient("ChJ,6,3"));
+        assertTrue(actionsPossibles.contient("ChH,4,4"));
         // nombre correct d'actions possibles :
+        assertTrue(actionsPossibles.contient("PhL,7,4"));
         assertEquals(Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES,
                 actionsPossiblesDepuisPlateau.length);
     }
-  
+
     /**
      * Test de la fonction ajoutActionPommier.
      */
@@ -123,7 +126,7 @@ public class JoueurBiosphere7Test {
         // pour l'instant pas d'action possible
         assertEquals(0, actions.nbActions);
         // on crée le tableau d'actions et on en ajoute une
-        joueur.ajoutActionPommier(Coordonnees.depuisCars('f', 'D'), actions, 
+        joueur.ajoutActionPommier(Coordonnees.depuisCars('f', 'D'), actions,
                 vitalites, Case.CAR_ROUGE);
         // l'action est devenue possible
         assertTrue(actions.contient("PfD,1,0"));
@@ -132,14 +135,14 @@ public class JoueurBiosphere7Test {
         // pour l'instant une seule action possible
         assertEquals(1, actions.nbActions);
         // ajout d'une deuxième action possible
-        joueur.ajoutActionPommier(Coordonnees.depuisCars('b', 'H'), actions, 
+        joueur.ajoutActionPommier(Coordonnees.depuisCars('b', 'H'), actions,
                 vitalites, Case.CAR_ROUGE);
         // l'action a bien été ajoutée
         assertTrue(actions.contient("PbH,1,0"));
         // désormais, deux actions possibles
         assertEquals(2, actions.nbActions);
     }
-    
+
     @Test
     public void testEstDansPlateau() {
         assertTrue(JoueurBiosphere7.estDansPlateau(new Coordonnees(0, 0), 14));
@@ -167,7 +170,6 @@ public class JoueurBiosphere7Test {
         assertEquals(new Coordonnees(200, 201),
                 JoueurBiosphere7.suivante(new Coordonnees(200, 200), Direction.EST));
     }
-    
 
     @Test
     public void testVitalitesPlateau() {
@@ -183,7 +185,7 @@ public class JoueurBiosphere7Test {
         assertEquals(2, vita2.vitalitesRouge);
         assertEquals(2, vita2.vitalitesBleu);
     }
-    
+
     /**
      * Un plateau de base, sous forme de chaîne. Pour construire une telle
      * chaîne depuis votre sortie.log, déclarez simplement : final String
@@ -276,7 +278,7 @@ public class JoueurBiosphere7Test {
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
             + "g|   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
-            + "h|   |   |   |   |   |   |   |   |   |PB1|   |   |   |   |\n"
+            + "h|   |   |   |   |   |   |   |PR2|   |PB1|   |   |   |   |\n"
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
             + "i|   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"

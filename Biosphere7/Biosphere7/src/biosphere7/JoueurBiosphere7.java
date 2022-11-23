@@ -34,7 +34,7 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                 Coordonnees coord = new Coordonnees(lig, col);
                 if (plateau[coord.ligne][coord.colonne].plantePresente() == false) {
                     ajoutActionPommier(coord, actions, vitalites, couleurJoueur);
-                } else if (plateau[coord.ligne][coord.colonne].plantePresente() == true) {
+                } else if (plateau[coord.ligne][coord.colonne].plantePresente()) {
                     ajoutActionCouper(coord, actions, vitalites, plateau[lig][col].couleur, plateau);
                 }
             }
@@ -42,26 +42,7 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         System.out.println("actionsPossibles : fin");
         return actions.nettoyer();
     }
-    /**
-     * Retourne le nombre de voisin de couleur dans le plateau
-     * @param coord une case occupé
-     * @param plateau plateau de jeu
-     * @return la vitaliter a rajouter 
-     */
-    Vitalites vitaliteAutour(Coordonnees coord, Case[][] plateau){
-        int vitaliterR=0;
-        int vitaliterB=0;
-        for (int i = 0; i < voisines(coord, 14).length; i++) {
-            if (plateau[voisines(coord, 14)[i].ligne][voisines(coord, 14)[i].colonne].plantePresente() == true) {
-                if (plateau[voisines(coord, 14)[i].ligne][voisines(coord, 14)[i].colonne].couleur == 'R') {
-                    vitaliterR += 1;
-                } else if (plateau[voisines(coord, 14)[i].ligne][voisines(coord, 14)[i].colonne].couleur == 'B') {
-                    vitaliterB += 1;
-                }
-            }
-        }
-        return new Vitalites(vitaliterR, vitaliterB);
-    }
+
     /**
      * Retourne les coordonnées de toutes les cases voisines.
      *
@@ -96,9 +77,9 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                 Coordonnees coord = new Coordonnees(lig, col);
                 if (plateau[coord.ligne][coord.colonne].plantePresente() == true) {
                     if (plateau[coord.ligne][coord.colonne].couleur == 'R') {
-                        vitaliterR += 1;
+                        vitaliterR += plateau[coord.ligne][coord.colonne].vitalite;
                     } else {
-                        vitaliterB += 1;
+                        vitaliterB += plateau[coord.ligne][coord.colonne].vitalite;
                     }
                 }
             }
@@ -166,17 +147,31 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
      */
     void ajoutActionCouper(Coordonnees coord, ActionsPossibles actions,
             Vitalites vitalites, char couleur, Case[][] plateau) {
-        int vitaliterR = 0;
-        int vitaliterB = 0;
+        int vitaliterR = vitalites.vitalitesRouge;
+        int vitaliterB = vitalites.vitalitesBleu;
+
         if (couleur == 'R') {
-            vitaliterR = -1;
+            vitaliterR -= plateau[coord.ligne][coord.colonne].vitalite;
         } else {
-            vitaliterB = -1;
+            vitaliterB -= plateau[coord.ligne][coord.colonne].vitalite;
         }
-        Vitalites autreVital = vitaliteAutour(coord, plateau);
+
+        Coordonnees[] v = voisines(coord, 14);
+
+        for (int i = 0; i < v.length; i++) {
+            if (plateau[v[i].ligne][v[i].colonne].plantePresente()) {
+                if (plateau[v[i].ligne][v[i].colonne].vitalite < 9) {
+                    if (plateau[v[i].ligne][v[i].colonne].couleur == 'R') {
+                        vitaliterR += 1;
+                    } else if (plateau[v[i].ligne][v[i].colonne].couleur == 'B') {
+                        vitaliterB += 1;
+                    }
+                }
+            }
+        }
         String action = "C" + coord.carLigne() + coord.carColonne() + ","
-                + (vitalites.vitalitesRouge + vitaliterR + autreVital.vitalitesRouge) + ","
-                + (vitalites.vitalitesBleu + vitaliterB + autreVital.vitalitesBleu);
+                + (vitaliterR) + ","
+                + (vitaliterB);
         actions.ajouterAction(action);
     }
 }
