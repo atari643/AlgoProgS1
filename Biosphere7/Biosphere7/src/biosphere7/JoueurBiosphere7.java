@@ -33,17 +33,7 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
             for (int col = 0; col < Coordonnees.NB_COLONNES; col++) {
                 Coordonnees coord = new Coordonnees(lig, col);
                 if (plateau[coord.ligne][coord.colonne].plantePresente() == false) {
-                    Coordonnees[] v = voisines(coord, 14);
-                    for (int i = 0; i < v.length; i++) {
-                        if (plateau[v[i].ligne][v[i].colonne].plantePresente()) {
-                            if (couleurJoueur == 'R') {
-                                vitalites.vitalitesRouge += v.length;
-                            } else if (couleurJoueur == 'B') {
-                                vitalites.vitalitesBleu += v.length;
-                            }
-                        }
-                    }
-                    ajoutActionPommier(coord, actions, vitalites, couleurJoueur);
+                    ajoutActionPommier(coord, actions, vitalites, couleurJoueur, plateau);
                 } else if (plateau[coord.ligne][coord.colonne].plantePresente()) {
                     ajoutActionCouper(coord, actions, vitalites, plateau[lig][col].couleur, plateau);
                 }
@@ -108,13 +98,23 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
      * @param couleur la couleur du pommier à ajouter
      */
     void ajoutActionPommier(Coordonnees coord, ActionsPossibles actions,
-            Vitalites vitalites, char couleur) {
+            Vitalites vitalites, char couleur, Case[][] plateau) {
         int vitaliterR = 0;
         int vitaliterB = 0;
+        Coordonnees[] v = voisines(coord, 14);
+        for (int i = 0; i < v.length; i++) {
+            if (plateau[v[i].ligne][v[i].colonne].plantePresente()) {
+                if (couleur == 'R') {
+                    vitalites.vitalitesRouge += v.length;
+                } else if (couleur == 'B') {
+                    vitalites.vitalitesBleu += v.length;
+                }
+            }
+        }
         if (couleur == 'R') {
-            vitaliterR=1;
+            vitaliterR += 1;
         } else if (couleur == 'B') {
-            vitaliterB=1;
+            vitaliterB += 1;
         }
         String action = "P" + coord.carLigne() + coord.carColonne() + ","
                 + (vitalites.vitalitesRouge + vitaliterR) + ","
