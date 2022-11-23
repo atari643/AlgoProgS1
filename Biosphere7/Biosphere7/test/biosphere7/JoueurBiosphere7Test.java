@@ -131,7 +131,7 @@ public class JoueurBiosphere7Test {
         // on peut afficher toutes les actions possibles calculées :
         actionsPossibles.afficher();
         // on vérifie que toute les cases occuper on une action possible 
-        assertTrue(actionsPossibles.contient("PaM,9,6"));
+        assertTrue(actionsPossibles.contient("PaM,8,6"));
         assertTrue(actionsPossibles.contient("PbN,9,6"));
         assertTrue(actionsPossibles.contient("PdH,11,8"));
         assertTrue(actionsPossibles.contient("PdJ,11,8"));
@@ -156,7 +156,7 @@ public class JoueurBiosphere7Test {
         assertEquals(0, actions.nbActions);
         // on crée le tableau d'actions et on en ajoute une
         joueur.ajoutActionPommier(Coordonnees.depuisCars('f', 'D'), actions,
-                vitalites, Case.CAR_ROUGE, plateau1);
+                vitalites, Case.CAR_ROUGE);
         // l'action est devenue possible
         assertTrue(actions.contient("PfD,1,0"));
         // une action possible mais qui n'a pas encore été ajoutée
@@ -165,7 +165,7 @@ public class JoueurBiosphere7Test {
         assertEquals(1, actions.nbActions);
         // ajout d'une deuxième action possible
         joueur.ajoutActionPommier(Coordonnees.depuisCars('b', 'H'), actions,
-                vitalites, Case.CAR_ROUGE, plateau1);
+                vitalites, Case.CAR_ROUGE);
         // l'action a bien été ajoutée
         assertTrue(actions.contient("PbH,1,0"));
         // désormais, deux actions possibles

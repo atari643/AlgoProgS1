@@ -33,7 +33,18 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
             for (int col = 0; col < Coordonnees.NB_COLONNES; col++) {
                 Coordonnees coord = new Coordonnees(lig, col);
                 if (plateau[coord.ligne][coord.colonne].plantePresente() == false) {
-                    ajoutActionPommier(coord, actions, vitalites, couleurJoueur, plateau);
+                    int compteur1 = 0;
+                    Coordonnees[] v = voisines(coord, 14);
+                    for (int i = 0; i < v.length; i++) {
+                        if (plateau[v[i].ligne][v[i].colonne].plantePresente()) {
+                            compteur1 += 1;
+                            vitalites.vitalitesBleu+=1;
+                            vitalites.vitalitesRouge+=1;
+                        }
+                    }
+                    ajoutActionPommier(coord, actions, vitalites, couleurJoueur);
+                    vitalites.vitalitesBleu-=compteur1;
+                    vitalites.vitalitesRouge-=compteur1;
                 } else if (plateau[coord.ligne][coord.colonne].plantePresente()) {
                     ajoutActionCouper(coord, actions, vitalites, plateau[lig][col].couleur, plateau);
                 }
@@ -98,19 +109,9 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
      * @param couleur la couleur du pommier à ajouter
      */
     void ajoutActionPommier(Coordonnees coord, ActionsPossibles actions,
-            Vitalites vitalites, char couleur, Case[][] plateau) {
+            Vitalites vitalites, char couleur) {
         int vitaliterR = 0;
         int vitaliterB = 0;
-        Coordonnees[] v = voisines(coord, 14);
-        for (int i = 0; i < v.length; i++) {
-            if (plateau[v[i].ligne][v[i].colonne].plantePresente()) {
-                if (couleur == 'R') {
-                    vitaliterR += 1;
-                } else if (couleur == 'B') {
-                    vitaliterB += 1;
-                }
-            }
-        }
         if (couleur == 'R') {
             vitaliterR += 1;
         } else if (couleur == 'B') {
