@@ -183,5 +183,6 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                 + (vitaliterR) + ","
                 + (vitaliterB);
         actions.ajouterAction(action);
+        
     }
 }

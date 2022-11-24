@@ -163,7 +163,6 @@ public class JoueurBiosphere7Test {
         JoueurBiosphere7 joueur = new JoueurBiosphere7();
         ActionsPossibles actions = new ActionsPossibles();
         Vitalites vitalites = new Vitalites(0, 0);
-        Case[][] plateau1 = Utils.plateauDepuisTexte(PLATEAU_NIVEAU3);
         // pour l'instant pas d'action possible
         assertEquals(0, actions.nbActions);
         // on crée le tableau d'actions et on en ajoute une
@@ -198,6 +197,16 @@ public class JoueurBiosphere7Test {
         assertFalse(JoueurBiosphere7.estDansPlateau(new Coordonnees(7, -1), 14));
         assertTrue(JoueurBiosphere7.estDansPlateau(new Coordonnees(0, 1), 2));
         assertFalse(JoueurBiosphere7.estDansPlateau(new Coordonnees(0, 1), 1));
+    }
+    
+    @Test
+    public void testCasesVoisines() {
+        Coordonnees coord = new Coordonnees(0, 0);
+        assertEquals(2, JoueurBiosphere7.voisines(coord, 14).length);
+        Coordonnees coord2 = new Coordonnees(6, 6);
+        assertEquals(4, JoueurBiosphere7.voisines(coord2, 14).length);
+        Coordonnees coord3 = new Coordonnees(0, 6);
+        assertEquals(3, JoueurBiosphere7.voisines(coord3, 14).length);
     }
 
     @Test
