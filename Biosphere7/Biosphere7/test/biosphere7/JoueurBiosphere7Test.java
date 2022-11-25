@@ -16,9 +16,9 @@ public class JoueurBiosphere7Test {
      */
     @Test
     public void testActionsPossibles() {
-        //testActionsPossibles_niveau1();
+        testActionsPossibles_niveau1();
         //testActionsPossibles_niveau2();
-        //testActionsPossibles_niveau3();
+        testActionsPossibles_niveau3();
         //testActionsPossibles_niveau4();
         testActionsPossibles_niveau5();
     }
