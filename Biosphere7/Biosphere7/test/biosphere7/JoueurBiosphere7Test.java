@@ -130,7 +130,7 @@ public class JoueurBiosphere7Test {
                 = new ActionsPossibles(actionsPossiblesDepuisPlateau);
         // on peut afficher toutes les actions possibles calculées :
         actionsPossibles.afficher();
-        // on vérifie que toute les cases occuper on une action possible 
+        // on vérifie que les cases voisines influe sur l'action possible 
         assertTrue(actionsPossibles.contient("PaM,8,4"));
         assertTrue(actionsPossibles.contient("PbN,8,4"));
         assertTrue(actionsPossibles.contient("PdH,9,4"));
@@ -168,7 +168,7 @@ public class JoueurBiosphere7Test {
                 = new ActionsPossibles(actionsPossiblesDepuisPlateau);
         // on peut afficher toutes les actions possibles calculées :
         actionsPossibles.afficher();
-        // on vérifie que toute les cases occuper on une action possible 
+        // on vérifie que les cases voisines influe sur l'action possible 
         assertTrue(actionsPossibles.contient("PaM,7,4"));
         assertTrue(actionsPossibles.contient("PbN,7,4"));
         assertTrue(actionsPossibles.contient("PdH,8,4"));
@@ -177,7 +177,7 @@ public class JoueurBiosphere7Test {
         assertTrue(actionsPossibles.contient("PfH,7,4"));
         //la vitalité d'une case sans voisin
         assertTrue(actionsPossibles.contient("PhL,7,4"));
-        //la vitalité de la plante voisine est pris en compte
+        //la vitalité de la plante rouge voisine est pris en compte
         assertTrue(actionsPossibles.contient("PhI,8,4"));
         String[] actionsPossiblesDepuisPlateau2
                 = joueur.actionsPossibles(plateau, 'B', 5);
