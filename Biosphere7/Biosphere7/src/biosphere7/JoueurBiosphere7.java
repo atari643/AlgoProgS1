@@ -36,9 +36,9 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                     Coordonnees[] v = voisines(coord, 14);
                     for (int i = 0; i < v.length; i++) {
                         if (plateau[v[i].ligne][v[i].colonne].plantePresente()) {
-                            if (couleurJoueur=='B'){
+                            if (couleurJoueur=='B' && plateau[v[i].ligne][v[i].colonne].couleur=='B'){
                                 vitalites.vitalitesBleu+=1;}
-                            else if (couleurJoueur=='R')
+                            else if (couleurJoueur=='R' && plateau[v[i].ligne][v[i].colonne].couleur=='R')
                                 vitalites.vitalitesRouge+=1;
                         }
                     }
