@@ -19,7 +19,8 @@ public class JoueurBiosphere7Test {
         //testActionsPossibles_niveau1();
         //testActionsPossibles_niveau2();
         //testActionsPossibles_niveau3();
-        testActionsPossibles_niveau4();
+        //testActionsPossibles_niveau4();
+        testActionsPossibles_niveau5();
     }
 
     /**
@@ -110,7 +111,6 @@ public class JoueurBiosphere7Test {
         assertTrue(actionsPossibles.contient("CfI,7,3"));
         assertTrue(actionsPossibles.contient("ChJ,6,3"));
         assertTrue(actionsPossibles.contient("ChH,4,4"));
-        // nombre correct d'actions possibles :
         assertTrue(actionsPossibles.contient("PhL,7,4"));
         assertEquals(Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES,
                 actionsPossiblesDepuisPlateau.length);
@@ -137,7 +137,7 @@ public class JoueurBiosphere7Test {
         assertTrue(actionsPossibles.contient("PdJ,9,4"));
         assertTrue(actionsPossibles.contient("PfJ,9,4"));
         assertTrue(actionsPossibles.contient("PfH,9,4"));
-        // nombre correct d'actions possibles :
+        //la vitalité d'une case sans voisin
         assertTrue(actionsPossibles.contient("PhL,7,4"));
         String[] actionsPossiblesDepuisPlateau2
                 = joueur.actionsPossibles(plateau, 'B', 4);
@@ -150,6 +150,45 @@ public class JoueurBiosphere7Test {
         assertTrue(actionsPossibles2.contient("PdJ,6,7"));
         assertTrue(actionsPossibles2.contient("PfJ,6,7"));
         assertTrue(actionsPossibles2.contient("PfH,6,7"));
+        assertTrue(actionsPossibles2.contient("PhL,6,5"));
+        assertEquals(Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES,
+                actionsPossiblesDepuisPlateau.length);
+    }
+    /**
+     * Test de la fonction actionsPossibles, au niveau 5
+     */
+    public void testActionsPossibles_niveau5() {
+        JoueurBiosphere7 joueur = new JoueurBiosphere7();
+        // plateau, couleur et niveau
+        Case[][] plateau = Utils.plateauDepuisTexte(PLATEAU_NIVEAU3);
+        // on lance actionsPossibles
+        String[] actionsPossiblesDepuisPlateau
+                = joueur.actionsPossibles(plateau, 'R', 5);
+        ActionsPossibles actionsPossibles
+                = new ActionsPossibles(actionsPossiblesDepuisPlateau);
+        // on peut afficher toutes les actions possibles calculées :
+        actionsPossibles.afficher();
+        // on vérifie que toute les cases occuper on une action possible 
+        assertTrue(actionsPossibles.contient("PaM,7,4"));
+        assertTrue(actionsPossibles.contient("PbN,7,4"));
+        assertTrue(actionsPossibles.contient("PdH,8,4"));
+        assertTrue(actionsPossibles.contient("PdJ,9,4"));
+        assertTrue(actionsPossibles.contient("PfJ,8,4"));
+        assertTrue(actionsPossibles.contient("PfH,7,4"));
+        //la vitalité d'une case sans voisin
+        assertTrue(actionsPossibles.contient("PhL,7,4"));
+        String[] actionsPossiblesDepuisPlateau2
+                = joueur.actionsPossibles(plateau, 'B', 5);
+        ActionsPossibles actionsPossibles2
+                = new ActionsPossibles(actionsPossiblesDepuisPlateau2);
+        actionsPossibles2.afficher();
+        assertTrue(actionsPossibles2.contient("PaM,6,6"));
+        assertTrue(actionsPossibles2.contient("PbN,6,6"));
+        assertTrue(actionsPossibles2.contient("PdH,6,6"));
+        assertTrue(actionsPossibles2.contient("PdJ,6,5"));
+        assertTrue(actionsPossibles2.contient("PfJ,6,6"));
+        assertTrue(actionsPossibles2.contient("PfH,6,7"));
+        //la vitalité d'une case sans voisin
         assertTrue(actionsPossibles2.contient("PhL,6,5"));
         assertEquals(Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES,
                 actionsPossiblesDepuisPlateau.length);
@@ -309,7 +348,7 @@ public class JoueurBiosphere7Test {
             + "n|   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n";
     /**
-     * Un plateau pour tester le niveau 3.
+     * Un plateau pour tester le niveau 3-4-5.
      */
     final String PLATEAU_NIVEAU3
             = "   A   B   C   D   E   F   G   H   I   J   K   L   M   N \n"
