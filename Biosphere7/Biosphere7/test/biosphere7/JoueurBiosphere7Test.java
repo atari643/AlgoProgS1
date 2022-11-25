@@ -16,9 +16,9 @@ public class JoueurBiosphere7Test {
      */
     @Test
     public void testActionsPossibles() {
-        testActionsPossibles_niveau1();
+        //testActionsPossibles_niveau1();
         //testActionsPossibles_niveau2();
-        testActionsPossibles_niveau3();
+        //testActionsPossibles_niveau3();
         //testActionsPossibles_niveau4();
         testActionsPossibles_niveau5();
     }
@@ -177,6 +177,8 @@ public class JoueurBiosphere7Test {
         assertTrue(actionsPossibles.contient("PfH,7,4"));
         //la vitalité d'une case sans voisin
         assertTrue(actionsPossibles.contient("PhL,7,4"));
+        //la vitalité de la plante voisine est pris en compte
+        assertTrue(actionsPossibles.contient("PhI,8,4"));
         String[] actionsPossiblesDepuisPlateau2
                 = joueur.actionsPossibles(plateau, 'B', 5);
         ActionsPossibles actionsPossibles2
@@ -190,6 +192,8 @@ public class JoueurBiosphere7Test {
         assertTrue(actionsPossibles2.contient("PfH,6,7"));
         //la vitalité d'une case sans voisin
         assertTrue(actionsPossibles2.contient("PhL,6,5"));
+        //La plante rouge de vitalite 2 n'est pas pris en compte 
+        assertFalse(actionsPossibles2.contient("PhI,8,4"));
         assertEquals(Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES,
                 actionsPossiblesDepuisPlateau.length);
     }
