@@ -37,14 +37,16 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                     int compteur = 0;
                     for (int i = 0; i < v.length; i++) {
                         if (plateau[v[i].ligne][v[i].colonne].plantePresente()) {
-                            compteur+=1;
-                            if (couleurJoueur=='B' && plateau[v[i].ligne][v[i].colonne].couleur=='B'){
-                                vitalites.vitalitesBleu+=1;}
-                            else if (couleurJoueur=='R' && plateau[v[i].ligne][v[i].colonne].couleur=='R')
-                                vitalites.vitalitesRouge+=1;
+                            compteur += 1;
+                            boolean t = avoir3Voisines(coord, 14, plateau);
+                            if (couleurJoueur == 'B' && plateau[v[i].ligne][v[i].colonne].couleur == 'B') {
+                                vitalites.vitalitesBleu += 1;
+                            } else if (couleurJoueur == 'R' && plateau[v[i].ligne][v[i].colonne].couleur == 'R') {
+                                vitalites.vitalitesRouge += 1;
+                            }
                         }
                     }
-                    if (compteur < 4){
+                    if (compteur < 4) {
                         ajoutActionPommier(coord, actions, vitalites, couleurJoueur);
                     }
                     vitalites = vitalitesPlateau(plateau);
@@ -56,10 +58,21 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         System.out.println("actionsPossibles : fin");
         return actions.nettoyer();
     }
-    static boolean avoir3Voisines(Coordonnees[] coord, int taille, Case[][] plateau){
-        return false;
+
+    static boolean avoir3Voisines(Coordonnees coord, int taille, Case[][] plateau) {
+        int compteur = 0;
+        Coordonnees[] nCoord = voisines(coord, taille);
+        if (nCoord.length == 3) {
+            for (int n = 0; n < 3; n++) {
+                if (plateau[nCoord[n].ligne][nCoord[n].colonne].plantePresente()) {
+                    compteur += 1;
+
+                }
+            }
+        }
+        return compteur == 3;
     }
-    
+
     /**
      * Retourne les coordonnées de toutes les cases voisines.
      *
@@ -190,6 +203,6 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                 + (vitaliterR) + ","
                 + (vitaliterB);
         actions.ajouterAction(action);
-        
+
     }
 }

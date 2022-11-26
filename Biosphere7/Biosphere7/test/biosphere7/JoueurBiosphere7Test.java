@@ -232,7 +232,7 @@ public class JoueurBiosphere7Test {
         Coordonnees v = new Coordonnees(2,3);
         Case[][] plateau = Utils.plateauDepuisTexte(PLATEAU_NIVEAU6);
         Coordonnees[] n = JoueurBiosphere7.voisines(v, 14);
-        assertTrue(JoueurBiosphere7.avoir3Voisines(n, 14, plateau));
+        assertTrue({},JoueurBiosphere7.avoir3Voisines(n, 14, plateau));
         Coordonnees v2 = new Coordonnees(2,5);
         Coordonnees[] n2 = JoueurBiosphere7.voisines(v2, 14);
         assertTrue(JoueurBiosphere7.avoir3Voisines(n2, 14, plateau));
