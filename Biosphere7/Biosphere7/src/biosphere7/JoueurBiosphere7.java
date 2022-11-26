@@ -56,8 +56,8 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         System.out.println("actionsPossibles : fin");
         return actions.nettoyer();
     }
-    Vitalites avoir4Voisines(Coordonnees[] coord, int taille, Case[][] plateau, Vitalites vitalite){
-        
+    static boolean avoir3Voisines(Coordonnees[] coord, int taille, Case[][] plateau){
+        return false;
     }
     
     /**
