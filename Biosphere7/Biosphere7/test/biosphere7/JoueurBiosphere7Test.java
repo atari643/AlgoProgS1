@@ -222,9 +222,9 @@ public class JoueurBiosphere7Test {
                 = new ActionsPossibles(actionsPossiblesDepuisPlateau2);
         actionsPossibles2.afficher();
         assertTrue(actionsPossibles2.contient("PaA,12,13"));
-        assertTrue(actionsPossibles2.contient("PcE,9,12"));
+        assertTrue(actionsPossibles2.contient("PcE,10,12"));
         assertFalse(actionsPossibles2.contient("PeI,12,15"));
-        assertEquals(Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES - 3,
+        assertEquals(Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES - 1,
                 actionsPossiblesDepuisPlateau.length);
     }
     @Test
