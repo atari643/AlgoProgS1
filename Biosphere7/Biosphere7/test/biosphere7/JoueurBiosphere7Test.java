@@ -213,18 +213,18 @@ public class JoueurBiosphere7Test {
                 = new ActionsPossibles(actionsPossiblesDepuisPlateau);
         // on peut afficher toutes les actions possibles calculées :
         actionsPossibles.afficher(); 
-        assertTrue(actionsPossibles.contient("PaA,13,11"));
-        assertTrue(actionsPossibles.contient("PcE,12,9"));
-        assertFalse(actionsPossibles.contient("PeI,15,11"));
+        assertTrue(actionsPossibles.contient("PaA,13,12"));
+        assertTrue(actionsPossibles.contient("PcE,12,10"));
+        assertFalse(actionsPossibles.contient("PeI,15,12"));
         String[] actionsPossiblesDepuisPlateau2
                 = joueur.actionsPossibles(plateau, 'B', 6);
         ActionsPossibles actionsPossibles2
                 = new ActionsPossibles(actionsPossiblesDepuisPlateau2);
         actionsPossibles2.afficher();
-        assertTrue(actionsPossibles2.contient("PaA,12,12"));
-        assertTrue(actionsPossibles2.contient("PcE,9,11"));
-        assertFalse(actionsPossibles2.contient("PeI,12,14"));
-        assertEquals(Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES,
+        assertTrue(actionsPossibles2.contient("PaA,12,13"));
+        assertTrue(actionsPossibles2.contient("PcE,9,12"));
+        assertFalse(actionsPossibles2.contient("PeI,12,15"));
+        assertEquals(Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES - 3,
                 actionsPossiblesDepuisPlateau.length);
     }
 

@@ -34,15 +34,19 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                 Coordonnees coord = new Coordonnees(lig, col);
                 if (plateau[coord.ligne][coord.colonne].plantePresente() == false) {
                     Coordonnees[] v = voisines(coord, 14);
+                    int compteur = 0;
                     for (int i = 0; i < v.length; i++) {
                         if (plateau[v[i].ligne][v[i].colonne].plantePresente()) {
+                            compteur+=1;
                             if (couleurJoueur=='B' && plateau[v[i].ligne][v[i].colonne].couleur=='B'){
                                 vitalites.vitalitesBleu+=1;}
                             else if (couleurJoueur=='R' && plateau[v[i].ligne][v[i].colonne].couleur=='R')
                                 vitalites.vitalitesRouge+=1;
                         }
                     }
-                    ajoutActionPommier(coord, actions, vitalites, couleurJoueur);
+                    if (compteur < 4){
+                        ajoutActionPommier(coord, actions, vitalites, couleurJoueur);
+                    }
                     vitalites = vitalitesPlateau(plateau);
                 } else if (plateau[coord.ligne][coord.colonne].plantePresente()) {
                     ajoutActionCouper(coord, actions, vitalites, plateau[lig][col].couleur, plateau);
@@ -51,6 +55,9 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         }
         System.out.println("actionsPossibles : fin");
         return actions.nettoyer();
+    }
+    Vitalites avoir4Voisines(Coordonnees[] coord, int taille, Case[][] plateau, Vitalites vitalite){
+        
     }
     
     /**
