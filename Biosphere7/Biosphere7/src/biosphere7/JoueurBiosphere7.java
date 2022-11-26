@@ -39,13 +39,17 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                         if (plateau[v[i].ligne][v[i].colonne].plantePresente()) {
                             compteur += 1;
                             boolean t = avoir3Voisines(v[i], 14, plateau);
-                            if (couleurJoueur == 'B' && plateau[v[i].ligne][v[i].colonne].couleur == 'B') {
-                                vitalites.vitalitesBleu += 1;
+                            if (plateau[v[i].ligne][v[i].colonne].couleur == 'B') {
+                                if (couleurJoueur == 'B'){
+                                    vitalites.vitalitesBleu += 1;
+                                }
                                 if(t){
                                     vitalites.vitalitesBleu-=plateau[v[i].ligne][v[i].colonne].vitalite;
                                 }
-                            } else if (couleurJoueur == 'R' && plateau[v[i].ligne][v[i].colonne].couleur == 'R') {
-                                vitalites.vitalitesRouge += 1;
+                            } else if (plateau[v[i].ligne][v[i].colonne].couleur == 'R') {
+                                if (couleurJoueur == 'R'){
+                                    vitalites.vitalitesRouge += 1;
+                                }
                                 if(t){
                                     vitalites.vitalitesRouge-=plateau[v[i].ligne][v[i].colonne].vitalite;
                                 }
