@@ -228,20 +228,16 @@ public class JoueurBiosphere7Test {
                 actionsPossiblesDepuisPlateau.length);
     }
     @Test
-    public void testAvoir3voisines(){
+    public void testAvoirUniquement3voisines(){
         Coordonnees v = new Coordonnees(2,3);
         Case[][] plateau = Utils.plateauDepuisTexte(PLATEAU_NIVEAU6);
-        Coordonnees[] n = JoueurBiosphere7.voisines(v, 14);
-        assertTrue({},JoueurBiosphere7.avoir3Voisines(n, 14, plateau));
+        assertTrue(JoueurBiosphere7.avoir3Voisines(v, 14, plateau));
         Coordonnees v2 = new Coordonnees(2,5);
-        Coordonnees[] n2 = JoueurBiosphere7.voisines(v2, 14);
-        assertTrue(JoueurBiosphere7.avoir3Voisines(n2, 14, plateau));
+        assertTrue(JoueurBiosphere7.avoir3Voisines(v2, 14, plateau));
         Coordonnees v3 = new Coordonnees(5,8);
-        Coordonnees[] n3 = JoueurBiosphere7.voisines(v3, 14);
-        assertFalse(JoueurBiosphere7.avoir3Voisines(n3, 14, plateau));
+        assertFalse(JoueurBiosphere7.avoir3Voisines(v3, 14, plateau));
         Coordonnees v4 = new Coordonnees(4,8);
-        Coordonnees[] n4 = JoueurBiosphere7.voisines(v4, 14);
-        assertTrue(JoueurBiosphere7.avoir3Voisines(n4, 14, plateau));
+        assertFalse(JoueurBiosphere7.avoir3Voisines(v4, 14, plateau));
     }
 
     /**

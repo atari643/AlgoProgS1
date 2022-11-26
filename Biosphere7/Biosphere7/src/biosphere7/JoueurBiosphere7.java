@@ -38,11 +38,17 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                     for (int i = 0; i < v.length; i++) {
                         if (plateau[v[i].ligne][v[i].colonne].plantePresente()) {
                             compteur += 1;
-                            boolean t = avoir3Voisines(coord, 14, plateau);
+                            boolean t = avoir3Voisines(v[i], 14, plateau);
                             if (couleurJoueur == 'B' && plateau[v[i].ligne][v[i].colonne].couleur == 'B') {
                                 vitalites.vitalitesBleu += 1;
+                                if(t){
+                                    vitalites.vitalitesBleu-=plateau[v[i].ligne][v[i].colonne].vitalite;
+                                }
                             } else if (couleurJoueur == 'R' && plateau[v[i].ligne][v[i].colonne].couleur == 'R') {
                                 vitalites.vitalitesRouge += 1;
+                                if(t){
+                                    vitalites.vitalitesRouge-=plateau[v[i].ligne][v[i].colonne].vitalite;
+                                }
                             }
                         }
                     }
@@ -62,11 +68,10 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
     static boolean avoir3Voisines(Coordonnees coord, int taille, Case[][] plateau) {
         int compteur = 0;
         Coordonnees[] nCoord = voisines(coord, taille);
-        if (nCoord.length == 3) {
-            for (int n = 0; n < 3; n++) {
+        if (nCoord.length == 4) {
+            for (int n = 0; n < 4; n++) {
                 if (plateau[nCoord[n].ligne][nCoord[n].colonne].plantePresente()) {
                     compteur += 1;
-
                 }
             }
         }
