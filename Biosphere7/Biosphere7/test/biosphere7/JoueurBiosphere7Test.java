@@ -208,37 +208,22 @@ public class JoueurBiosphere7Test {
         Case[][] plateau = Utils.plateauDepuisTexte(PLATEAU_NIVEAU6);
         // on lance actionsPossibles
         String[] actionsPossiblesDepuisPlateau
-                = joueur.actionsPossibles(plateau, 'R', 5);
+                = joueur.actionsPossibles(plateau, 'R', 6);
         ActionsPossibles actionsPossibles
                 = new ActionsPossibles(actionsPossiblesDepuisPlateau);
         // on peut afficher toutes les actions possibles calculées :
-        actionsPossibles.afficher();
-        // on vérifie que les cases voisines influe sur l'action possible 
-        assertTrue(actionsPossibles.contient("PaM,7,4"));
-        assertTrue(actionsPossibles.contient("PbN,7,4"));
-        assertTrue(actionsPossibles.contient("PdH,8,4"));
-        assertTrue(actionsPossibles.contient("PdJ,9,4"));
-        assertTrue(actionsPossibles.contient("PfJ,8,4"));
-        assertTrue(actionsPossibles.contient("PfH,7,4"));
-        //la vitalité d'une case sans voisin
-        assertTrue(actionsPossibles.contient("PhL,7,4"));
-        //la vitalité de la plante rouge voisine est pris en compte
-        assertTrue(actionsPossibles.contient("PhI,8,4"));
+        actionsPossibles.afficher(); 
+        assertTrue(actionsPossibles.contient("PaA,13,11"));
+        assertTrue(actionsPossibles.contient("PcE,12,9"));
+        assertFalse(actionsPossibles.contient("PeI,15,11"));
         String[] actionsPossiblesDepuisPlateau2
-                = joueur.actionsPossibles(plateau, 'B', 5);
+                = joueur.actionsPossibles(plateau, 'B', 6);
         ActionsPossibles actionsPossibles2
                 = new ActionsPossibles(actionsPossiblesDepuisPlateau2);
         actionsPossibles2.afficher();
-        assertTrue(actionsPossibles2.contient("PaM,6,6"));
-        assertTrue(actionsPossibles2.contient("PbN,6,6"));
-        assertTrue(actionsPossibles2.contient("PdH,6,6"));
-        assertTrue(actionsPossibles2.contient("PdJ,6,5"));
-        assertTrue(actionsPossibles2.contient("PfJ,6,6"));
-        assertTrue(actionsPossibles2.contient("PfH,6,7"));
-        //la vitalité d'une case sans voisin
-        assertTrue(actionsPossibles2.contient("PhL,6,5"));
-        //La plante rouge de vitalite 2 n'est pas pris en compte 
-        assertFalse(actionsPossibles2.contient("PhI,8,4"));
+        assertTrue(actionsPossibles2.contient("PaA,12,12"));
+        assertTrue(actionsPossibles2.contient("PcE,9,11"));
+        assertFalse(actionsPossibles2.contient("PeI,12,14"));
         assertEquals(Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES,
                 actionsPossiblesDepuisPlateau.length);
     }
@@ -438,11 +423,11 @@ public class JoueurBiosphere7Test {
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
             + "a|   |   |   |   |   |   |   |   |   |   |   |   |   |PB1|\n"
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
-            + "b|   |   |   |PB2|   |PR3|   |   |   |   |   |   |   |   |\n"
+            + "b|   |   |   |PB2|   |PR1|   |   |   |   |   |   |   |   |\n"
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
-            + "c|   |   |PB1|PR2|   |PB3|PR2|   |   |   |   |   |   |   |\n"
+            + "c|   |   |PB1|PR2|   |PB2|PB1|   |   |   |   |   |   |   |\n"
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
-            + "d|   |   |   |PR1|   |PR2|   |   |PR1|   |   |   |   |   |\n"
+            + "d|   |   |   |PR2|   |PR1|   |   |PR1|   |   |   |   |   |\n"
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
             + "e|   |   |   |   |   |   |   |PB1|   |PR1|   |   |   |   |\n"
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
@@ -450,11 +435,11 @@ public class JoueurBiosphere7Test {
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
             + "g|   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
-            + "h|   |   |   |   |   |   |   |PR2|   |PB1|   |   |   |   |\n"
+            + "h|PB1|   |   |   |   |   |   |PR2|   |PB1|   |   |   |   |\n"
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
-            + "i|   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
+            + "i|   |PB1|   |   |   |   |   |   |   |   |   |   |   |   |\n"
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
-            + "j|   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
+            + "j|PR1|   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
             + "k|   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
