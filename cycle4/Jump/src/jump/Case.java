@@ -59,6 +59,7 @@ public class Case {
      * 
      * @return représentation texte d'une case
      */
+    @Override
     public String toString() {
         return "" + contenu;
     }

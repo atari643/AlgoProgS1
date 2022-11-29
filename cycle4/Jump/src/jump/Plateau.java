@@ -473,16 +473,18 @@ class Plateau {
      * 
      * @return représentation graphique du plateau
      */
+    @Override
     public String toString() {
-        String texte = contourHoriz() + System.lineSeparator();
+        StringBuilder textBuilder = new StringBuilder();
+        textBuilder.append(contourHoriz()).append(System.lineSeparator());
         for (int ligne = 0; ligne < hauteur; ligne++) {
-            texte += "|";
+            textBuilder.append("|");
             for (int colonne = 0; colonne < largeur; colonne++) {
-                texte += cases[ligne][colonne].toString();
+                textBuilder.append(cases[ligne][colonne].toString());
             }
-            texte += "|" + System.lineSeparator();
+            textBuilder.append("|").append(System.lineSeparator());
         }
-        texte += contourHoriz() + System.lineSeparator();
-        return texte;
+        textBuilder.append(contourHoriz()).append(System.lineSeparator());
+        return textBuilder.toString();
     }
 }
