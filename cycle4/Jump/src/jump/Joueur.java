@@ -84,7 +84,18 @@ class Joueur {
      * @return vrai ssi le nom du joueur est correct
      */
     boolean nomCorrect() {
-        return true;
+        boolean caract = false;
+        if(!nom.isEmpty()){
+            char initial = caracterePlateau();
+            if (initial>='A' && initial<='Z' 
+                    && !nom.contains(Plateau.SEPARATEUR) 
+                    && !nom.contains(Joueur.SEPARATEUR) 
+                    && !nom.contains(Partie.SEPARATEUR))
+                caract = true;
+
+            
+        }
+        return caract;
     }
 
     /**
