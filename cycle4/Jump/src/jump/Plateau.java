@@ -464,7 +464,15 @@ class Plateau {
     int nbPlateformesLigne(int ligne) {
         String texteLigne = serialiserLigne(ligne, false).toString();
         int nbPlateformes = 0;
-        // ...
+        if (!texteLigne.isEmpty()){
+            int equal=texteLigne.indexOf('=', 0);
+            int space=texteLigne.indexOf(' ', 0);
+            while (equal!=-1 && space!=-1){
+                nbPlateformes+=1;
+                space=texteLigne.indexOf(' ', equal);
+                equal=texteLigne.indexOf('=', space);
+            } 
+        }
         return nbPlateformes;
     }
 
