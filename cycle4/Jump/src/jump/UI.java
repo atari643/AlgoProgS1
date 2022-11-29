@@ -128,8 +128,7 @@ class UI {
      * @return la ligne affichée pour ce joueur
      */
     static String ligneJoueur(Joueur joueur) {
-        return " " + carStatutJoueur(joueur) + "  " + joueur.nom + " | " 
-                + joueur.score + System.lineSeparator();
+        return String.format(" %s  %s |   %d ", carStatutJoueur(joueur), joueur.nom, joueur.score);
     }
 
     /**
