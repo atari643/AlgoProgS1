@@ -65,7 +65,11 @@ class Joueur {
      * @return le nom tronqué
      */
     static String tronquerNom(String unNom) {
-        return ""; // TODO
+        String nomJoueur = unNom;
+        if (!nomJoueur.isEmpty() && nomJoueur.length()>10){
+            nomJoueur = unNom.substring(0, 10);
+        }
+        return nomJoueur; // TODO
     }
 
     /**
