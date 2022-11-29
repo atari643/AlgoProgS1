@@ -152,7 +152,7 @@ class Partie {
 
     /**
      * Placer un nouveau joueur sur la plateforme du milieu.
-     * 
+     *
      * @param joueur le joueur à ajouter
      */
     void placerJoueurAGauche(Joueur joueur) {
@@ -197,15 +197,19 @@ class Partie {
      * @return l'indice du joueur, ou -1 s'il n'est pas présent.
      */
     int trouverJoueur(String nomJoueur) {
-        boolean trouve = false;
-        int i = 0;
         int res = -1;
-        while (!trouve && i < nbJoueurs) {
-            if (joueurs[i].nom.equals(nomJoueur)) {
-                trouve = true;
-                res = i;
+        if (!nomJoueur.isEmpty()) {
+            int i = 0;
+            char initialNomJoueur = nomJoueur.charAt(0);
+            while (res == -1 && i < nbJoueurs) {
+                if (!joueurs[i].nom.isEmpty()) {
+                    char initialJoueur = joueurs[i].nom.charAt(0);
+                    if (initialNomJoueur == initialJoueur) {
+                        res = i;
+                    }
+                    i++;
+                }
             }
-            i++;
         }
         return res;
     }
@@ -428,7 +432,7 @@ class Partie {
     boolean restaurer() {
         // lecture du fichier
         String contenu = null;
-        try (Scanner scanner = new Scanner(new File(FICHIER_SAUVEGARDE))) {
+        try ( Scanner scanner = new Scanner(new File(FICHIER_SAUVEGARDE))) {
             if (scanner.hasNextLine()) {
                 contenu = scanner.nextLine();
             }
@@ -509,20 +513,20 @@ class Partie {
      */
     void sauverScores() {
     }
-    
+
     /**
      * Nombre de parties jouées par un joueur donné dans le fichier de scores.
-     * 
+     *
      * @param nomJoueur nom du joueur
      * @return nombre de parties jouées par ce joueur
      */
     static int nombrePartiesJouees(String nomJoueur) {
         return 0;
     }
-    
+
     /**
      * Sauvegarde des 10 meilleurs scores dans le fichier de scores.
      */
     void sauverTopScores() {
-    }    
+    }
 }
