@@ -473,12 +473,12 @@ class Plateau {
      * 
      * @return représentation graphique du plateau
      */
-    public String afficher() {
+    public String toString() {
         String texte = contourHoriz() + System.lineSeparator();
         for (int ligne = 0; ligne < hauteur; ligne++) {
             texte += "|";
             for (int colonne = 0; colonne < largeur; colonne++) {
-                texte += cases[ligne][colonne].afficher();
+                texte += cases[ligne][colonne].toString();
             }
             texte += "|" + System.lineSeparator();
         }

@@ -65,7 +65,7 @@ class UI {
      */
     static String vueGlobale(Partie partie) {
         // on calcule les 2 parties : gauche (plateau) et droite (scores)
-        String partieGauche = partie.plateau.afficher();
+        String partieGauche = partie.plateau.toString();
         String partieDroite = partieDroite(partie);
         // on fusionne ces 2 parties
         StringBuilder vue = new StringBuilder();

@@ -59,7 +59,7 @@ public class Case {
      * 
      * @return représentation texte d'une case
      */
-    public String afficher() {
+    public String toString() {
         return "" + contenu;
     }
 }
