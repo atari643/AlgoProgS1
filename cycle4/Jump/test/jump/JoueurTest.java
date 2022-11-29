@@ -76,4 +76,13 @@ public class JoueurTest {
         boba.score = 14;
         assertEquals("Boba Fett!14", boba.ligneFichierScore());
     }
+    @Test
+    public void testTronquerNom(){
+        Joueur fell = new Joueur("Fell michel");
+        assertEquals("Fell miche", Joueur.tronquerNom(fell.nom));
+        Joueur jackson = new Joueur("jackson");
+        assertEquals("jackson", Joueur.tronquerNom(jackson.nom));
+        Joueur ulysse = new Joueur("");
+        assertEquals("", Joueur.tronquerNom(ulysse.nom));
+    }
 }
