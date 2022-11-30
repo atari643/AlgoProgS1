@@ -21,7 +21,8 @@ public class JoueurBiosphere7Test {
         //testActionsPossibles_niveau3();
         //testActionsPossibles_niveau4();
         //testActionsPossibles_niveau5();
-        testActionsPossibles_niveau6();
+        //testActionsPossibles_niveau6();
+        testActionsPossibles_niveau7();
     }
 
     /**
@@ -225,6 +226,50 @@ public class JoueurBiosphere7Test {
         assertTrue(actionsPossibles2.contient("PcE,10,12"));
         assertFalse(actionsPossibles2.contient("PeI,12,15"));
         assertEquals(Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES - 1,
+                actionsPossiblesDepuisPlateau.length);
+    }
+    /**
+     * Test de la fonction actionsPossibles, au niveau 7
+     */
+    public void testActionsPossibles_niveau7() {
+        JoueurBiosphere7 joueur = new JoueurBiosphere7();
+        // plateau, couleur et niveau
+        Case[][] plateau = Utils.plateauDepuisTexte(PLATEAU_NIVEAU7);
+        // on lance actionsPossibles
+        String[] actionsPossiblesDepuisPlateau
+                = joueur.actionsPossibles(plateau, 'R', 7);
+        ActionsPossibles actionsPossibles
+                = new ActionsPossibles(actionsPossiblesDepuisPlateau);
+        // on peut afficher toutes les actions possibles calculées :
+        actionsPossibles.afficher(); 
+        assertTrue(actionsPossibles.contient("PaA,27,17"));
+        assertTrue(actionsPossibles.contient("SaA,27,17"));
+        assertTrue(actionsPossibles.contient("BaA,27,17"));
+        assertTrue(actionsPossibles.contient("DaA,27,17"));
+        assertTrue(actionsPossibles.contient("TaA,27,17"));
+        assertTrue(actionsPossibles.contient("HaA,27,17"));
+        assertTrue(actionsPossibles.contient("BmA,29,17"));
+        assertTrue(actionsPossibles.contient("FjJ,28,17"));
+        assertTrue(actionsPossibles.contient("FmH,26,20"));
+        assertFalse(actionsPossibles.contient("ShE,27,17"));
+        assertFalse(actionsPossibles.contient("FjJ,29,17"));
+        String[] actionsPossiblesDepuisPlateau2
+                = joueur.actionsPossibles(plateau, 'B', 7);
+        ActionsPossibles actionsPossibles2
+                = new ActionsPossibles(actionsPossiblesDepuisPlateau2);
+        actionsPossibles2.afficher();
+        assertTrue(actionsPossibles.contient("PaA,26,18"));
+        assertTrue(actionsPossibles.contient("SaA,26,18"));
+        assertTrue(actionsPossibles.contient("BaA,26,18"));
+        assertTrue(actionsPossibles.contient("DaA,26,18"));
+        assertTrue(actionsPossibles.contient("TaA,26,18"));
+        assertTrue(actionsPossibles.contient("HaA,26,18"));
+        assertTrue(actionsPossibles.contient("BmA,26,18"));
+        assertTrue(actionsPossibles.contient("FjJ,28,17"));
+        assertTrue(actionsPossibles.contient("FmH,26,20"));
+        assertFalse(actionsPossibles.contient("ShE,27,17"));
+        assertFalse(actionsPossibles.contient("FjJ,29,17"));
+        assertEquals(Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES - 2,
                 actionsPossiblesDepuisPlateau.length);
     }
     @Test
@@ -461,4 +506,38 @@ public class JoueurBiosphere7Test {
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
             + "n|   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n";
-}
+/**
+     * Un plateau pour tester le niveau 6.
+     */
+    final String PLATEAU_NIVEAU7
+            = "   A   B   C   D   E   F   G   H   I   J   K   L   M   N \n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "a|   |   |   |   |   |   |   |   |   |   |   |   |   |PB1|\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "b|   |   |   |PB2|   |PR1|   |   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "c|   |   |PB1|PR2|   |PB2|PB1|   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "d|   |   |   |PR2|   |PR1|   |   |PR1|   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "e|   |   |   |   |   |   |   |PB1|   |PR1|   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "f|PR1|   |   |   |   |   |   |   |PB1|   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "g|   |   |   |   |TR1|   |   |   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "h|PB1|   |   |DB1|   |SB1|   |PR2|   |PB1|   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "i|   |PB1|   |   |HR2|   |   |   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "j|PR1|   |   |   |   |DB1|   |   |   |TR7|   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "k|   |   |   |   |   |   |TR1|   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "l|PR1|   |   |   |BB1|   |   |   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "m|   |   |   |   |   |   |   |HB1|   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "n|SR1|   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n";
+        }
