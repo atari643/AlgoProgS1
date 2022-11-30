@@ -19,6 +19,7 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
      * @param niveau le niveau de la partie à jouer
      * @return l'ensemble des actions possibles
      */
+    
     @Override
     public String[] actionsPossibles(Case[][] plateau, char couleurJoueur, int niveau) {
         // afficher l'heure de lancement
@@ -57,7 +58,8 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                         }
                     }
                     if (compteur < 4) {
-                        ajoutActionPommier(coord, actions, vitalites, couleurJoueur);
+                        for (Plante p : Plante.values()){
+                            ajoutAction(coord, actions, vitalites, couleurJoueur, p);}
                     }
                     vitalites = vitalitesPlateau(plateau);
                 } else if (plateau[coord.ligne][coord.colonne].plantePresente()) {
@@ -68,7 +70,13 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         System.out.println("actionsPossibles : fin");
         return actions.nettoyer();
     }
-
+    /**
+     * Fonction qui vérifie qu'un case est uniquement 3 voisins
+     * @param coord de la case
+     * @param taille taille du plateau
+     * @param plateau plateau de jeu
+     * @return vrai ssi la case à exactement 3 voisin sinon faux
+     */
     static boolean avoir3Voisines(Coordonnees coord, int taille, Case[][] plateau) {
         int compteur = 0;
         Coordonnees[] nCoord = voisines(coord, taille);
@@ -136,8 +144,8 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
      * l'action
      * @param couleur la couleur du pommier à ajouter
      */
-    void ajoutActionPommier(Coordonnees coord, ActionsPossibles actions,
-            Vitalites vitalites, char couleur) {
+    void ajoutAction(Coordonnees coord, ActionsPossibles actions,
+            Vitalites vitalites, char couleur, Plante p) {
         int vitaliterR = 0;
         int vitaliterB = 0;
         if (couleur == 'R') {
@@ -145,12 +153,44 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         } else if (couleur == 'B') {
             vitaliterB += 1;
         }
-        String action = "P" + coord.carLigne() + coord.carColonne() + ","
+        String action = initiale(p) + coord.carLigne() + coord.carColonne() + ","
                 + (vitalites.vitalitesRouge + vitaliterR) + ","
                 + (vitalites.vitalitesBleu + vitaliterB);
         actions.ajouterAction(action);
     }
-
+    
+    /**
+     * Donne les initiale de chaque plante
+     *
+     * @return l'initiale de la plante
+     */
+    String initiale(Plante plante) {
+        String letter = " ";
+        switch (plante) {
+            case POMMIER:
+                letter = "P";
+                break;
+            case SUREAU:
+                letter = "S";
+                break;
+            case FRANBOISIER:
+                letter = "B";
+                break;
+            case HARICOTS:
+                letter = "H";
+                break;
+            case POMMESDETERRE:
+                letter = "D";
+                break;
+            case TOMATES:
+                letter = "T";
+                break;
+            default:
+                letter = "?";
+                break;
+        }
+        return letter;
+    }
     /**
      * Renvoie les coordonnées de la case suivante, en suivant une direction
      * donnée.

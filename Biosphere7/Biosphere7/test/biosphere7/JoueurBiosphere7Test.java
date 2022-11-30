@@ -258,17 +258,17 @@ public class JoueurBiosphere7Test {
         ActionsPossibles actionsPossibles2
                 = new ActionsPossibles(actionsPossiblesDepuisPlateau2);
         actionsPossibles2.afficher();
-        assertTrue(actionsPossibles.contient("PaA,26,18"));
-        assertTrue(actionsPossibles.contient("SaA,26,18"));
-        assertTrue(actionsPossibles.contient("BaA,26,18"));
-        assertTrue(actionsPossibles.contient("DaA,26,18"));
-        assertTrue(actionsPossibles.contient("TaA,26,18"));
-        assertTrue(actionsPossibles.contient("HaA,26,18"));
-        assertTrue(actionsPossibles.contient("BmA,26,18"));
-        assertTrue(actionsPossibles.contient("FjJ,28,17"));
-        assertTrue(actionsPossibles.contient("FmH,26,20"));
-        assertFalse(actionsPossibles.contient("ShE,27,17"));
-        assertFalse(actionsPossibles.contient("FjJ,29,17"));
+        assertTrue(actionsPossibles2.contient("PaA,26,18"));
+        assertTrue(actionsPossibles2.contient("SaA,26,18"));
+        assertTrue(actionsPossibles2.contient("BaA,26,18"));
+        assertTrue(actionsPossibles2.contient("DaA,26,18"));
+        assertTrue(actionsPossibles2.contient("TaA,26,18"));
+        assertTrue(actionsPossibles2.contient("HaA,26,18"));
+        assertTrue(actionsPossibles2.contient("BmA,26,18"));
+        assertTrue(actionsPossibles2.contient("FjJ,28,17"));
+        assertTrue(actionsPossibles2.contient("FmH,26,20"));
+        assertFalse(actionsPossibles2.contient("ShE,27,17"));
+        assertFalse(actionsPossibles2.contient("FjJ,29,17"));
         assertEquals(Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES - 2,
                 actionsPossiblesDepuisPlateau.length);
     }
@@ -286,10 +286,10 @@ public class JoueurBiosphere7Test {
     }
 
     /**
-     * Test de la fonction ajoutActionPommier.
+     * Test de la fonction ajoutAction.
      */
     @Test
-    public void testAjoutActionPommier() {
+    public void testAjoutAction() {
         JoueurBiosphere7 joueur = new JoueurBiosphere7();
         ActionsPossibles actions = new ActionsPossibles();
         Vitalites vitalites = new Vitalites(0, 0);
@@ -297,7 +297,7 @@ public class JoueurBiosphere7Test {
         assertEquals(0, actions.nbActions);
         // on crée le tableau d'actions et on en ajoute une
         joueur.ajoutActionPommier(Coordonnees.depuisCars('f', 'D'), actions,
-                vitalites, Case.CAR_ROUGE);
+                vitalites, Case.CAR_ROUGE, Plante.POMMIER);
         // l'action est devenue possible
         assertTrue(actions.contient("PfD,1,0"));
         // une action possible mais qui n'a pas encore été ajoutée
@@ -306,7 +306,7 @@ public class JoueurBiosphere7Test {
         assertEquals(1, actions.nbActions);
         // ajout d'une deuxième action possible
         joueur.ajoutActionPommier(Coordonnees.depuisCars('b', 'H'), actions,
-                vitalites, Case.CAR_ROUGE);
+                vitalites, Case.CAR_ROUGE, Plante.POMMIER);
         // l'action a bien été ajoutée
         assertTrue(actions.contient("PbH,1,0"));
         // désormais, deux actions possibles
@@ -538,6 +538,6 @@ public class JoueurBiosphere7Test {
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
             + "m|   |   |   |   |   |   |   |HB1|   |   |   |   |   |   |\n"
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
-            + "n|SR1|   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
+            + "n|SR1|   |   |   |   |   |   |   |SR1|   |   |   |   |   |\n"
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n";
         }
