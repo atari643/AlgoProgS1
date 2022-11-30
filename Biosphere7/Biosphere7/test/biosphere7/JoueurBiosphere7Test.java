@@ -269,7 +269,7 @@ public class JoueurBiosphere7Test {
         assertTrue(actionsPossibles2.contient("FmH,26,20"));
         assertFalse(actionsPossibles2.contient("ShE,27,17"));
         assertFalse(actionsPossibles2.contient("FjJ,29,17"));
-        assertEquals(Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES - 2,
+        assertEquals(Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES * 6,
                 actionsPossiblesDepuisPlateau.length);
     }
     @Test
@@ -284,6 +284,8 @@ public class JoueurBiosphere7Test {
         Coordonnees v4 = new Coordonnees(4,8);
         assertFalse(JoueurBiosphere7.avoir3Voisines(v4, 14, plateau));
     }
+    
+    
 
     /**
      * Test de la fonction ajoutAction.
@@ -296,7 +298,7 @@ public class JoueurBiosphere7Test {
         // pour l'instant pas d'action possible
         assertEquals(0, actions.nbActions);
         // on crée le tableau d'actions et on en ajoute une
-        joueur.ajoutActionPommier(Coordonnees.depuisCars('f', 'D'), actions,
+        joueur.ajoutAction(Coordonnees.depuisCars('f', 'D'), actions,
                 vitalites, Case.CAR_ROUGE, Plante.POMMIER);
         // l'action est devenue possible
         assertTrue(actions.contient("PfD,1,0"));
@@ -305,12 +307,18 @@ public class JoueurBiosphere7Test {
         // pour l'instant une seule action possible
         assertEquals(1, actions.nbActions);
         // ajout d'une deuxième action possible
-        joueur.ajoutActionPommier(Coordonnees.depuisCars('b', 'H'), actions,
+        joueur.ajoutAction(Coordonnees.depuisCars('b', 'H'), actions,
                 vitalites, Case.CAR_ROUGE, Plante.POMMIER);
         // l'action a bien été ajoutée
         assertTrue(actions.contient("PbH,1,0"));
         // désormais, deux actions possibles
         assertEquals(2, actions.nbActions);
+        joueur.ajoutAction(Coordonnees.depuisCars('a', 'A'), actions,
+                vitalites, Case.CAR_ROUGE, Plante.FRANBOISIER);
+        // l'action a bien été ajoutée
+        assertTrue(actions.contient("BaA,1,0"));
+        // désormais, deux actions possibles
+        assertEquals(3, actions.nbActions);
     }
 
     @Test

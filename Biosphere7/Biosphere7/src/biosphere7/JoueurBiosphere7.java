@@ -19,7 +19,6 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
      * @param niveau le niveau de la partie à jouer
      * @return l'ensemble des actions possibles
      */
-    
     @Override
     public String[] actionsPossibles(Case[][] plateau, char couleurJoueur, int niveau) {
         // afficher l'heure de lancement
@@ -29,7 +28,7 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         ActionsPossibles actions = new ActionsPossibles();
         // calculer les vitalités sur le plateau initial
         Vitalites vitalites = vitalitesPlateau(plateau);
-        // ajout des actions "planter pommier"
+        // ajout des actions "planter une plante"
         for (int lig = 0; lig < Coordonnees.NB_LIGNES; lig++) {
             for (int col = 0; col < Coordonnees.NB_COLONNES; col++) {
                 Coordonnees coord = new Coordonnees(lig, col);
@@ -41,37 +40,41 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                             compteur += 1;
                             boolean t = avoir3Voisines(v[i], 14, plateau);
                             if (plateau[v[i].ligne][v[i].colonne].couleur == 'B') {
-                                if (couleurJoueur == 'B'){
+                                if (couleurJoueur == 'B') {
                                     vitalites.vitalitesBleu += 1;
                                 }
-                                if(t){
-                                    vitalites.vitalitesBleu-=plateau[v[i].ligne][v[i].colonne].vitalite;
+                                if (t) {
+                                    vitalites.vitalitesBleu -= plateau[v[i].ligne][v[i].colonne].vitalite;
                                 }
                             } else if (plateau[v[i].ligne][v[i].colonne].couleur == 'R') {
-                                if (couleurJoueur == 'R'){
+                                if (couleurJoueur == 'R') {
                                     vitalites.vitalitesRouge += 1;
                                 }
-                                if(t){
-                                    vitalites.vitalitesRouge-=plateau[v[i].ligne][v[i].colonne].vitalite;
+                                if (t) {
+                                    vitalites.vitalitesRouge -= plateau[v[i].ligne][v[i].colonne].vitalite;
                                 }
                             }
                         }
                     }
                     if (compteur < 4) {
-                        for (Plante p : Plante.values()){
-                            ajoutAction(coord, actions, vitalites, couleurJoueur, p);}
+                        for (Plante p : Plante.values()) {
+                            ajoutAction(coord, actions, vitalites, couleurJoueur, p);
+                        }
                     }
                     vitalites = vitalitesPlateau(plateau);
                 } else if (plateau[coord.ligne][coord.colonne].plantePresente()) {
                     ajoutActionCouper(coord, actions, vitalites, plateau[lig][col].couleur, plateau);
+                    ajoutActionFertiliser(coord, actions, vitalites, plateau);
                 }
             }
         }
         System.out.println("actionsPossibles : fin");
         return actions.nettoyer();
     }
+
     /**
      * Fonction qui vérifie qu'un case est uniquement 3 voisins
+     *
      * @param coord de la case
      * @param taille taille du plateau
      * @param plateau plateau de jeu
@@ -135,14 +138,15 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
     }
 
     /**
-     * Ajout d'une action de plantation de pommier dans l'ensemble des actions
+     * Ajout d'une action de plantation de Plante dans l'ensemble des actions
      * possibles.
      *
-     * @param coord coordonnées de la case où planter le pommier
+     * @param coord coordonnées de la case où planter les différent plante
      * @param actions l'ensemble des actions possibles (en construction)
      * @param vitalites la somme des vitalités sur le plateau avant de jouer
      * l'action
-     * @param couleur la couleur du pommier à ajouter
+     * @param couleur la couleur de la plante à ajouter
+     * @param p l'espèce de la plante
      */
     void ajoutAction(Coordonnees coord, ActionsPossibles actions,
             Vitalites vitalites, char couleur, Plante p) {
@@ -153,44 +157,46 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         } else if (couleur == 'B') {
             vitaliterB += 1;
         }
-        String action = initiale(p) + coord.carLigne() + coord.carColonne() + ","
+        String action = ""+initiale(p) + coord.carLigne() + coord.carColonne() + ","
                 + (vitalites.vitalitesRouge + vitaliterR) + ","
                 + (vitalites.vitalitesBleu + vitaliterB);
         actions.ajouterAction(action);
     }
-    
+
     /**
      * Donne les initiale de chaque plante
      *
+     * @param plante l'espèce de la plante
      * @return l'initiale de la plante
      */
-    String initiale(Plante plante) {
-        String letter = " ";
+    char initiale(Plante plante) {
+        char letter = ' ';
         switch (plante) {
             case POMMIER:
-                letter = "P";
+                letter = 'P';
                 break;
             case SUREAU:
-                letter = "S";
+                letter = 'S';
                 break;
             case FRANBOISIER:
-                letter = "B";
+                letter = 'B';
                 break;
             case HARICOTS:
-                letter = "H";
+                letter = 'H';
                 break;
             case POMMESDETERRE:
-                letter = "D";
+                letter = 'D';
                 break;
             case TOMATES:
-                letter = "T";
+                letter = 'T';
                 break;
             default:
-                letter = "?";
+                letter = '?';
                 break;
         }
         return letter;
     }
+
     /**
      * Renvoie les coordonnées de la case suivante, en suivant une direction
      * donnée.
@@ -212,6 +218,34 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
      */
     static boolean estDansPlateau(Coordonnees coord, int taille) {
         return coord.ligne < taille && coord.ligne >= 0 && coord.colonne < taille && coord.colonne >= 0; // TODO
+    }
+
+    void ajoutActionFertiliser(Coordonnees coord, ActionsPossibles actions,
+            Vitalites vitalites, Case[][] plateau) {
+        int vitaliterR = vitalites.vitalitesRouge;
+        int vitaliterB = vitalites.vitalitesBleu;
+        int valeurAjouter = 0;
+
+        if (plateau[coord.ligne][coord.colonne].espece == 'P' || plateau[coord.ligne][coord.colonne].espece == 'S') {
+            valeurAjouter = 1;
+        } else if (plateau[coord.ligne][coord.colonne].espece == 'B') {
+            valeurAjouter = 2;
+        } else {
+            valeurAjouter = 3;
+        }
+        if (plateau[coord.ligne][coord.colonne].vitalite + valeurAjouter >= 9) {
+            valeurAjouter = 9 - plateau[coord.ligne][coord.colonne].vitalite;
+        }
+        if (plateau[coord.ligne][coord.colonne].couleur == 'R') {
+            vitaliterR += valeurAjouter;
+        } else {
+            vitaliterB += valeurAjouter;
+        }
+        String action = "F" + coord.carLigne() + coord.carColonne() + ","
+                + (vitaliterR) + ","
+                + (vitaliterB);
+        actions.ajouterAction(action);
+
     }
 
     /**
