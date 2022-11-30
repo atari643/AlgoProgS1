@@ -274,7 +274,6 @@ public class JoueurBiosphere7Test {
         int nombreDifferentActionParCaseRemplie = 2;
         int nombreDeCaseVide = 2;
         int nombreActionTotal = ((Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES - nombreDePlanteSurPlateau-nombreDeCaseVide)*nombreDifferentActionParCaseVide+nombreDePlanteSurPlateau*nombreDifferentActionParCaseRemplie);
-        
         assertEquals(nombreActionTotal,
                 actionsPossiblesDepuisPlateau.length);
     }
@@ -325,6 +324,31 @@ public class JoueurBiosphere7Test {
         assertTrue(actions.contient("BaA,1,0"));
         // désormais, deux actions possibles
         assertEquals(3, actions.nbActions);
+    }
+    
+    /**
+     * Test de la fonction ajoutAction.
+     */
+    @Test
+    public void testAjoutActionFertiliser() {
+        JoueurBiosphere7 joueur = new JoueurBiosphere7();
+        ActionsPossibles actions = new ActionsPossibles();
+        Vitalites vitalites = new Vitalites(0, 0);
+        Case[][] plateau = Utils.plateauDepuisTexte(PLATEAU_NIVEAU7);
+        assertEquals(0, actions.nbActions);
+        
+        joueur.ajoutActionFertiliser(Coordonnees.depuisCars('a', 'N'), actions,
+                vitalites, plateau);
+        assertTrue(actions.contient("FaN,0,1"));
+        assertFalse(actions.contient("FaA,1,0"));
+        assertEquals(1, actions.nbActions);
+        joueur.ajoutActionFertiliser(Coordonnees.depuisCars('l', 'E'), actions,
+                vitalites, plateau);
+        assertTrue(actions.contient("FlE,0,2"));
+        assertEquals(2, actions.nbActions);
+        joueur.ajoutActionFertiliser(Coordonnees.depuisCars('h', 'D'), actions,
+                vitalites, plateau);
+        assertTrue(actions.contient("FhD,0,3"));
     }
 
     @Test

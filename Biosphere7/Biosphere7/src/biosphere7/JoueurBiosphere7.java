@@ -220,19 +220,31 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
     static boolean estDansPlateau(Coordonnees coord, int taille) {
         return coord.ligne < taille && coord.ligne >= 0 && coord.colonne < taille && coord.colonne >= 0; // TODO
     }
-
+    /**
+     * Fonction qui ajoute une action de fertiliter à une plante 
+     * @param coord coordonnées de la case où fertiliser la plante
+     * @param actions l'ensemble des actions possibles (en construction)
+     * @param vitalites la somme des vitalités sur le plateau avant de jouer
+     * l'action
+     * @param plateau l'ensemble des cases du plateau de jeu
+     */
     void ajoutActionFertiliser(Coordonnees coord, ActionsPossibles actions,
             Vitalites vitalites, Case[][] plateau) {
         int vitaliterR = vitalites.vitalitesRouge;
         int vitaliterB = vitalites.vitalitesBleu;
         int valeurAjouter = 0;
 
-        if (plateau[coord.ligne][coord.colonne].espece == 'P' || plateau[coord.ligne][coord.colonne].espece == 'S') {
-            valeurAjouter = 1;
-        } else if (plateau[coord.ligne][coord.colonne].espece == 'B') {
-            valeurAjouter = 2;
-        } else {
-            valeurAjouter = 3;
+        switch (plateau[coord.ligne][coord.colonne].espece) {
+            case 'P':
+            case 'S':
+                valeurAjouter = 1;
+                break;
+            case 'B':
+                valeurAjouter = 2;
+                break;
+            default:
+                valeurAjouter = 3;
+                break;
         }
         if (plateau[coord.ligne][coord.colonne].vitalite + valeurAjouter >= 9) {
             valeurAjouter = 9 - plateau[coord.ligne][coord.colonne].vitalite;
