@@ -61,7 +61,6 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                             ajoutAction(coord, actions, vitalites, couleurJoueur, p);
                         }
                     }
-                    vitalites = vitalitesPlateau(plateau);
                 } else if (plateau[coord.ligne][coord.colonne].plantePresente()) {
                     ajoutActionCouper(coord, actions, vitalites, plateau[lig][col].couleur, plateau);
                     ajoutActionFertiliser(coord, actions, vitalites, plateau);
