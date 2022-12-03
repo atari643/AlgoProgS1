@@ -34,56 +34,69 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                 Coordonnees coord = new Coordonnees(lig, col);
                 Coordonnees[] v = voisines(coord, 14);
                 int compteur = 0;
-                for (int i = 0; i < v.length; i++) {
-                    if (plateau[v[i].ligne][v[i].colonne].plantePresente()) {
-                        compteur += 1;
+                if (plateau[coord.ligne][coord.colonne].plantePresente() == false) {
+                    for (int i = 0; i < v.length; i++) {
+                        if (plateau[v[i].ligne][v[i].colonne].plantePresente()) {
+                            compteur += 1;
+                            boolean t = avoir3Voisines(v[i], 14, plateau);
+                            if (plateau[v[i].ligne][v[i].colonne].couleur == 'B') {
+                                if (couleurJoueur == 'B') {
+                                    vitalites.vitalitesBleu += 1;
+                                }
+                                if (t) {
+                                    vitalites.vitalitesBleu -= plateau[v[i].ligne][v[i].colonne].vitalite;
+                                }
+                            } else if (plateau[v[i].ligne][v[i].colonne].couleur == 'R') {
+                                if (couleurJoueur == 'R') {
+                                    vitalites.vitalitesRouge += 1;
+                                }
+                                if (t) {
+                                    vitalites.vitalitesRouge -= plateau[v[i].ligne][v[i].colonne].vitalite;
+                                }
+                            }
+                        }
                     }
-                    if (plateau[coord.ligne][coord.colonne].plantePresente() == false) {
-                        boolean t = avoir3Voisines(v[i], 14, plateau);
-                        if (plateau[v[i].ligne][v[i].colonne].couleur == 'B') {
-                            if (couleurJoueur == 'B') {
-                                vitalites.vitalitesBleu += 1;
-                            }
-                            if (t) {
-                                vitalites.vitalitesBleu -= plateau[v[i].ligne][v[i].colonne].vitalite;
-                            }
-                        } else if (plateau[v[i].ligne][v[i].colonne].couleur == 'R') {
-                            if (couleurJoueur == 'R') {
-                                vitalites.vitalitesRouge += 1;
-                            }
-                            if (t) {
-                                vitalites.vitalitesRouge -= plateau[v[i].ligne][v[i].colonne].vitalite;
-                            }
+                    if (compteur < 4) {
+                        for (Plante p : Plante.values()) {
+                            ajoutAction(coord, actions, vitalites, couleurJoueur, p);
                         }
-                        if (compteur < 4) {
-                            for (Plante p : Plante.values()) {
-                                ajoutAction(coord, actions, vitalites, couleurJoueur, p);
-                            }
+                    }
+                    vitalites = vitalitesPlateau(plateau);
+                } else if (plateau[coord.ligne][coord.colonne].plantePresente()) {
+                    ajoutActionCouper(coord, actions, vitalites, plateau[lig][col].couleur, plateau);
+                    ajoutActionFertiliser(coord, actions, vitalites, plateau);
+                    for (int i = 0; i < v.length; i++) {
+                        if (plateau[v[i].ligne][v[i].colonne].plantePresente()) {
+                            compteur += 1;
                         }
-                        vitalites = vitalitesPlateau(plateau);
-                    } else if (plateau[coord.ligne][coord.colonne].plantePresente()) {
-                        ajoutActionCouper(coord, actions, vitalites, plateau[lig][col].couleur, plateau);
-                        ajoutActionFertiliser(coord, actions, vitalites, plateau);
-                        if (compteur > 0) {
-                            ajoutActionDisséminer(coord, actions, vitalites, couleurJoueur, plateau, v, compteur);
+                    }
+                        switch (plateau[coord.ligne][coord.colonne].espece) {
+                            case 'H':
+                            case 'T':
+                                if (minimum1voisinDeMemeEspece(coord, plateau, v)) {
+                                    ajoutActionDisséminer(coord, actions, vitalites, couleurJoueur, plateau, v, compteur);
+                                }
+                                break;
+                            default:
+                                ajoutActionDisséminer(coord, actions, vitalites, couleurJoueur, plateau, v, compteur);
+                                break;
                         }
+
                     }
                     vitalites = vitalitesPlateau(plateau);
                 }
             }
+            System.out.println("actionsPossibles : fin");
+            return actions.nettoyer();
         }
-        System.out.println("actionsPossibles : fin");
-        return actions.nettoyer();
-    }
-
-    /**
-     * Fonction qui vérifie qu'un case est uniquement 3 voisins
-     *
-     * @param coord de la case
-     * @param taille taille du plateau
-     * @param plateau plateau de jeu
-     * @return vrai ssi la case à exactement 3 voisin sinon faux
-     */
+        /**
+         * Fonction qui vérifie qu'un case est uniquement 3 voisins
+         *
+         * @param coord de la case
+         * @param taille taille du plateau
+         * @param plateau plateau de jeu
+         * @return vrai ssi la case à exactement 3 voisin sinon faux
+         */
     static boolean avoir3Voisines(Coordonnees coord, int taille, Case[][] plateau) {
         int compteur = 0;
         Coordonnees[] nCoord = voisines(coord, taille);
@@ -266,16 +279,40 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
 
     }
 
+    /**
+     * Fonction qui permet de connaitre la plante avec la plus petite vitalitée
+     * de ces voisines
+     *
+     * @param plateau plateau de jeux
+     * @param coord coordonnée de la case
+     * @param voisine L'ensemble de ces voisines
+     * @return la vitalite de la plante la plus petite
+     */
     static int minimumVitalite(Case[][] plateau, Coordonnees coord, Coordonnees[] voisine) {
         int minimum = plateau[coord.ligne][coord.colonne].vitalite;
         char espece = plateau[coord.ligne][coord.colonne].espece;
+        int compteur = 0;
         for (int i = 0; i < voisine.length; i++) {
             if (plateau[voisine[i].ligne][voisine[i].colonne].vitalite < minimum
                     && plateau[voisine[i].ligne][voisine[i].colonne].espece == espece) {
                 minimum = plateau[voisine[i].ligne][voisine[i].colonne].vitalite;
+                compteur += 1;
             }
         }
         return minimum;
+    }
+
+    static boolean minimum1voisinDeMemeEspece(Coordonnees coord, Case[][] plateau, Coordonnees[] voisine) {
+        int compteur = 0;
+        boolean statue = false;
+        char espece = plateau[coord.ligne][coord.colonne].espece;
+        while (compteur<voisine.length && !statue) {
+            if (plateau[voisine[compteur].ligne][voisine[compteur].colonne].espece == espece) {
+                statue = true;
+            }
+            compteur++;
+        }
+        return statue;
     }
 
     /**
@@ -294,7 +331,7 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         int vitaliterR = vitalites.vitalitesRouge;
         int vitaliterB = vitalites.vitalitesBleu;
         int valeurAjouter = 0;
-        int voisinVide=voisine.length-nbVoisin;
+        int voisinVide = voisine.length-nbVoisin;
         switch (plateau[coord.ligne][coord.colonne].espece) {
             case 'H':
             case 'T':
@@ -304,12 +341,12 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                 valeurAjouter = 1;
                 break;
         }
+
         valeurAjouter *= voisinVide;
-        if (couleurJ=='R'){
-            vitaliterR+=valeurAjouter;
-        }
-        else if (couleurJ=='B'){
-            vitaliterB+=valeurAjouter;
+        if (couleurJ == 'R') {
+            vitaliterR += valeurAjouter;
+        } else if (couleurJ == 'B') {
+            vitaliterB += valeurAjouter;
         }
         String action = "I" + coord.carLigne() + coord.carColonne() + ","
                 + (vitaliterR) + ","

@@ -316,10 +316,11 @@ public class JoueurBiosphere7Test {
         assertFalse(actionsPossibles2.contient("IiE,40,32"));
         assertFalse(actionsPossibles2.contient("IbA,40,23"));
         int nombreDifferentActionParCaseVide = 6;
-        int nombreDePlanteSurPlateau = 37;
+        int nombreDePlanteSurPlateau = 36;
         int nombreDifferentActionParCaseRemplie = 3;
         int nombreDeCaseVide = 2;
-        int nombreActionTotal = ((Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES - nombreDePlanteSurPlateau-nombreDeCaseVide)*nombreDifferentActionParCaseVide+nombreDePlanteSurPlateau*nombreDifferentActionParCaseRemplie);
+        int nombreDeLegumeIsole=5;
+        int nombreActionTotal = ((Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES - nombreDePlanteSurPlateau-nombreDeCaseVide)*nombreDifferentActionParCaseVide+nombreDePlanteSurPlateau*nombreDifferentActionParCaseRemplie - nombreDeLegumeIsole);
         assertEquals(nombreActionTotal,
                 actionsPossiblesDepuisPlateau.length);
     }
