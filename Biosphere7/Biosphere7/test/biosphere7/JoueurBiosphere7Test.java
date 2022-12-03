@@ -325,6 +325,25 @@ public class JoueurBiosphere7Test {
                 actionsPossiblesDepuisPlateau.length);
     }
     @Test
+    public void testMinimum1Espèce(){
+        Coordonnees v = new Coordonnees(4, 5);
+        Case[][] plateau = Utils.plateauDepuisTexte(PLATEAU_NIVEAU8);
+        Coordonnees[] voisine = JoueurBiosphere7.voisines(v, 14);
+        assertTrue(JoueurBiosphere7.minimum1voisinDeMemeEspece(v, plateau, voisine));
+        Coordonnees v2 = new Coordonnees(0, 0);
+        Coordonnees[] voisine2 = JoueurBiosphere7.voisines(v, 14);
+        assertFalse(JoueurBiosphere7.minimum1voisinDeMemeEspece(v2, plateau,voisine2));
+        Coordonnees v3 = new Coordonnees(0, 13);
+        Coordonnees[] voisine3 = JoueurBiosphere7.voisines(v3, 14);
+        assertFalse(JoueurBiosphere7.minimum1voisinDeMemeEspece(v3, plateau,voisine3));
+        Coordonnees v4 = new Coordonnees(2, 3);
+        Coordonnees[] voisine4 = JoueurBiosphere7.voisines(v4, 14);
+        assertTrue(JoueurBiosphere7.minimum1voisinDeMemeEspece(v4, plateau,voisine4));
+        Coordonnees v5 = new Coordonnees(9, 9);
+        Coordonnees[] voisine5 = JoueurBiosphere7.voisines(v5, 14);
+        assertFalse(JoueurBiosphere7.minimum1voisinDeMemeEspece(v5, plateau,voisine5));
+    }
+    @Test
     public void testMinimumVitalite(){
         Coordonnees v = new Coordonnees(4, 5);
         Case[][] plateau = Utils.plateauDepuisTexte(PLATEAU_NIVEAU8);

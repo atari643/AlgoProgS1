@@ -301,7 +301,13 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         }
         return minimum;
     }
-
+    /**
+     * Fonction qui vérifie sur une plante à au moins 1 voisin de même espèce
+     * @param coord la case 
+     * @param plateau le jeu
+     * @param voisine la liste des voisin
+     * @return vrai ssi il y a au moins 1 voisin de même espèce sinon faux
+     */
     static boolean minimum1voisinDeMemeEspece(Coordonnees coord, Case[][] plateau, Coordonnees[] voisine) {
         int compteur = 0;
         boolean statue = false;
