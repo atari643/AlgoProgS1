@@ -32,41 +32,44 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         for (int lig = 0; lig < Coordonnees.NB_LIGNES; lig++) {
             for (int col = 0; col < Coordonnees.NB_COLONNES; col++) {
                 Coordonnees coord = new Coordonnees(lig, col);
-                if (plateau[coord.ligne][coord.colonne].plantePresente() == false) {
-                    Coordonnees[] v = voisines(coord, 14);
-                    int compteur = 0;
-                    for (int i = 0; i < v.length; i++) {
-                        if (plateau[v[i].ligne][v[i].colonne].plantePresente()) {
-                            compteur += 1;
-                            boolean t = avoir3Voisines(v[i], 14, plateau);
-                            if (plateau[v[i].ligne][v[i].colonne].couleur == 'B') {
-                                if (couleurJoueur == 'B') {
-                                    vitalites.vitalitesBleu += 1;
-                                }
-                                if (t) {
-                                    vitalites.vitalitesBleu -= plateau[v[i].ligne][v[i].colonne].vitalite;
-                                }
-                            } else if (plateau[v[i].ligne][v[i].colonne].couleur == 'R') {
-                                if (couleurJoueur == 'R') {
-                                    vitalites.vitalitesRouge += 1;
-                                }
-                                if (t) {
-                                    vitalites.vitalitesRouge -= plateau[v[i].ligne][v[i].colonne].vitalite;
-                                }
+                Coordonnees[] v = voisines(coord, 14);
+                int compteur = 0;
+                for (int i = 0; i < v.length; i++) {
+                    if (plateau[v[i].ligne][v[i].colonne].plantePresente()) {
+                        compteur += 1;
+                    }
+                    if (plateau[coord.ligne][coord.colonne].plantePresente() == false) {
+                        boolean t = avoir3Voisines(v[i], 14, plateau);
+                        if (plateau[v[i].ligne][v[i].colonne].couleur == 'B') {
+                            if (couleurJoueur == 'B') {
+                                vitalites.vitalitesBleu += 1;
+                            }
+                            if (t) {
+                                vitalites.vitalitesBleu -= plateau[v[i].ligne][v[i].colonne].vitalite;
+                            }
+                        } else if (plateau[v[i].ligne][v[i].colonne].couleur == 'R') {
+                            if (couleurJoueur == 'R') {
+                                vitalites.vitalitesRouge += 1;
+                            }
+                            if (t) {
+                                vitalites.vitalitesRouge -= plateau[v[i].ligne][v[i].colonne].vitalite;
                             }
                         }
-                    }
-                    if (compteur < 4) {
-                        for (Plante p : Plante.values()) {
-                            ajoutAction(coord, actions, vitalites, couleurJoueur, p);
+                        if (compteur < 4) {
+                            for (Plante p : Plante.values()) {
+                                ajoutAction(coord, actions, vitalites, couleurJoueur, p);
+                            }
+                        }
+                        vitalites = vitalitesPlateau(plateau);
+                    } else if (plateau[coord.ligne][coord.colonne].plantePresente()) {
+                        ajoutActionCouper(coord, actions, vitalites, plateau[lig][col].couleur, plateau);
+                        ajoutActionFertiliser(coord, actions, vitalites, plateau);
+                        if (compteur > 0) {
+                            ajoutActionDisséminer(coord, actions, vitalites, couleurJoueur, plateau, v, compteur);
                         }
                     }
                     vitalites = vitalitesPlateau(plateau);
-                } else if (plateau[coord.ligne][coord.colonne].plantePresente()) {
-                    ajoutActionCouper(coord, actions, vitalites, plateau[lig][col].couleur, plateau);
-                    ajoutActionFertiliser(coord, actions, vitalites, plateau);
                 }
-                vitalites = vitalitesPlateau(plateau);
             }
         }
         System.out.println("actionsPossibles : fin");
@@ -158,7 +161,7 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         } else if (couleur == 'B') {
             vitaliterB += 1;
         }
-        String action = ""+initiale(p) + coord.carLigne() + coord.carColonne() + ","
+        String action = "" + initiale(p) + coord.carLigne() + coord.carColonne() + ","
                 + (vitalites.vitalitesRouge + vitaliterR) + ","
                 + (vitalites.vitalitesBleu + vitaliterB);
         actions.ajouterAction(action);
@@ -220,8 +223,10 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
     static boolean estDansPlateau(Coordonnees coord, int taille) {
         return coord.ligne < taille && coord.ligne >= 0 && coord.colonne < taille && coord.colonne >= 0; // TODO
     }
+
     /**
-     * Fonction qui ajoute une action de fertiliter à une plante 
+     * Fonction qui ajoute une action de fertiliter à une plante
+     *
      * @param coord coordonnées de la case où fertiliser la plante
      * @param actions l'ensemble des actions possibles (en construction)
      * @param vitalites la somme des vitalités sur le plateau avant de jouer
@@ -255,6 +260,58 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
             vitaliterB += valeurAjouter;
         }
         String action = "F" + coord.carLigne() + coord.carColonne() + ","
+                + (vitaliterR) + ","
+                + (vitaliterB);
+        actions.ajouterAction(action);
+
+    }
+
+    static int minimumVitalite(Case[][] plateau, Coordonnees coord, Coordonnees[] voisine) {
+        int minimum = plateau[coord.ligne][coord.colonne].vitalite;
+        char espece = plateau[coord.ligne][coord.colonne].espece;
+        for (int i = 0; i < voisine.length; i++) {
+            if (plateau[voisine[i].ligne][voisine[i].colonne].vitalite < minimum
+                    && plateau[voisine[i].ligne][voisine[i].colonne].espece == espece) {
+                minimum = plateau[voisine[i].ligne][voisine[i].colonne].vitalite;
+            }
+        }
+        return minimum;
+    }
+
+    /**
+     * Fonction qui ajoute une action de Disséminer à une plante
+     *
+     * @param coord coordonnées de la case où Disséminer la plante
+     * @param actions l'ensemble des actions possibles (en construction)
+     * @param vitalites la somme des vitalités sur le plateau avant de jouer
+     * l'action
+     * @param couleurJ la couleur du joueur actif
+     * @param voisine le nombre de voisin de la plante
+     * @param plateau l'ensemble des cases du plateau de jeu
+     */
+    void ajoutActionDisséminer(Coordonnees coord, ActionsPossibles actions,
+            Vitalites vitalites, char couleurJ, Case[][] plateau, Coordonnees[] voisine, int nbVoisin) {
+        int vitaliterR = vitalites.vitalitesRouge;
+        int vitaliterB = vitalites.vitalitesBleu;
+        int valeurAjouter = 0;
+        int voisinVide=voisine.length-nbVoisin;
+        switch (plateau[coord.ligne][coord.colonne].espece) {
+            case 'H':
+            case 'T':
+                valeurAjouter = minimumVitalite(plateau, coord, voisine);
+                break;
+            default:
+                valeurAjouter = 1;
+                break;
+        }
+        valeurAjouter *= voisinVide;
+        if (couleurJ=='R'){
+            vitaliterR+=valeurAjouter;
+        }
+        else if (couleurJ=='B'){
+            vitaliterB+=valeurAjouter;
+        }
+        String action = "I" + coord.carLigne() + coord.carColonne() + ","
                 + (vitaliterR) + ","
                 + (vitaliterB);
         actions.ajouterAction(action);
