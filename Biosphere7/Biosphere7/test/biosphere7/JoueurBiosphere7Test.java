@@ -324,6 +324,26 @@ public class JoueurBiosphere7Test {
                 actionsPossiblesDepuisPlateau.length);
     }
     @Test
+    public void testMinimumVitalite(){
+        Coordonnees v = new Coordonnees(4, 5);
+        Case[][] plateau = Utils.plateauDepuisTexte(PLATEAU_NIVEAU8);
+        Coordonnees[] voisine = JoueurBiosphere7.voisines(v, 14);
+        assertEquals(2,JoueurBiosphere7.minimumVitalite(plateau, v, voisine));
+        Coordonnees v2 = new Coordonnees(0, 0);
+        Coordonnees[] voisine2 = JoueurBiosphere7.voisines(v, 14);
+        assertEquals(0,JoueurBiosphere7.minimumVitalite(plateau, v2, voisine2));
+        Coordonnees v3 = new Coordonnees(0, 13);
+        Coordonnees[] voisine3 = JoueurBiosphere7.voisines(v3, 14);
+        assertEquals(1,JoueurBiosphere7.minimumVitalite(plateau, v3, voisine3));
+        Coordonnees v4 = new Coordonnees(2, 3);
+        Coordonnees[] voisine4 = JoueurBiosphere7.voisines(v4, 14);
+        assertEquals(1,JoueurBiosphere7.minimumVitalite(plateau, v4, voisine4));
+        Coordonnees v5 = new Coordonnees(9, 9);
+        Coordonnees[] voisine5 = JoueurBiosphere7.voisines(v5, 14);
+        assertEquals(7,JoueurBiosphere7.minimumVitalite(plateau, v5, voisine5));
+
+    }
+    @Test
     public void testAvoirUniquement3voisines(){
         Coordonnees v = new Coordonnees(2,3);
         Case[][] plateau = Utils.plateauDepuisTexte(PLATEAU_NIVEAU6);
