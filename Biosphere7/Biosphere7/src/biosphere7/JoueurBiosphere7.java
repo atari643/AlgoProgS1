@@ -62,6 +62,10 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                         }
                     }
                 } else if (plateau[coord.ligne][coord.colonne].plantePresente()) {
+                    if (niveau == 9){
+                        ajouterOmbre(coord, vitalites, plateau, actions);
+                    }
+                    else{
                     ajoutActionCouper(coord, actions, vitalites, plateau[lig][col].couleur, plateau);
                     ajoutActionFertiliser(coord, actions, vitalites, plateau);
                     for (int i = 0; i < v.length; i++) {
@@ -82,6 +86,7 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                         }
 
                     }
+                }
                     vitalites = vitalitesPlateau(plateau);
                 }
             }
@@ -399,5 +404,30 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                 + (vitaliterB);
         actions.ajouterAction(action);
 
+    }
+
+    static Vitalites ajouterOmbre(Coordonnees coord, Vitalites vitalites, Case[][] plateau, ActionsPossibles actions) {
+        int vitaliterR = vitalites.vitalitesRouge;
+        int vitaliterB = vitalites.vitalitesBleu;
+        for(int i = 0; i<plateau.length; ++i){
+            for (int y = 0; y<plateau[0].length; ++y){
+                if (plateau[coord.ligne][coord.colonne].espece == 'S' || plateau[coord.ligne][coord.colonne].espece == 'P'){
+                Coordonnees c = coord;
+                int vitalitePlante = plateau[coord.ligne][coord.colonne].vitalite;
+            while (c.ligne>0 && c.ligne<vitalitePlante){
+                int compteur = 0;
+                if (plateau[suivante(c, Direction.NORD).ligne][suivante(c, Direction.NORD).colonne].plantePresente()){
+                    vitaliterR=vitalitePlante-
+
+                }
+                else{
+                    compteur+=1;
+                }
+                
+            }
+        }
+                }
+            }
+        return new Vitalites(vitaliterR, vitaliterB);
     }
 }

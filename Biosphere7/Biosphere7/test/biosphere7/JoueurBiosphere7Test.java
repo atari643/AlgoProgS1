@@ -24,7 +24,7 @@ public class JoueurBiosphere7Test {
         //testActionsPossibles_niveau6();
         //testActionsPossibles_niveau7();
         //testActionsPossibles_niveau8();
-        //testActionsPossibles_niveau9();
+        testActionsPossibles_niveau9();
     }
 
     /**
@@ -325,6 +325,31 @@ public class JoueurBiosphere7Test {
         int nombreDeCaseVide = 2;
         int nombreDeLegumeIsole = 5;
         int nombreActionTotal = ((Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES - nombreDePlanteSurPlateau - nombreDeCaseVide) * nombreDifferentActionParCaseVide + nombreDePlanteSurPlateau * nombreDifferentActionParCaseRemplie - nombreDeLegumeIsole);
+        assertEquals(nombreActionTotal,
+                actionsPossiblesDepuisPlateau.length);
+    }
+    /**
+     * Test de la fonction actionsPossibles, au niveau 8
+     */
+    public void testActionsPossibles_niveau9() {
+        JoueurBiosphere7 joueur = new JoueurBiosphere7();
+        // plateau, couleur et niveau
+        Case[][] plateau = Utils.plateauDepuisTexte(PLATEAU_NIVEAU9);
+        // on lance actionsPossibles
+        String[] actionsPossiblesDepuisPlateau
+                = joueur.actionsPossibles(plateau, 'R', 9);
+        ActionsPossibles actionsPossibles
+                = new ActionsPossibles(actionsPossiblesDepuisPlateau);
+        // on peut afficher toutes les actions possibles calculées :
+        actionsPossibles.afficher();
+        assertTrue(actionsPossibles.contient("O,16,22"));
+        String[] actionsPossiblesDepuisPlateau2
+                = joueur.actionsPossibles(plateau, 'B', 9);
+        ActionsPossibles actionsPossibles2
+                = new ActionsPossibles(actionsPossiblesDepuisPlateau2);
+        actionsPossibles2.afficher();
+        assertTrue(actionsPossibles2.contient("O,16,22"));
+        int nombreActionTotal = 1;
         assertEquals(nombreActionTotal,
                 actionsPossiblesDepuisPlateau.length);
     }
