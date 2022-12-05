@@ -418,7 +418,6 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                 int compteur = 0;
                 if (plateau[suivante(c, Direction.NORD).ligne][suivante(c, Direction.NORD).colonne].plantePresente()){
                     vitaliterR=vitalitePlante-
-
                 }
                 else{
                     compteur+=1;
