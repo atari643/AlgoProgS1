@@ -23,7 +23,8 @@ public class JoueurBiosphere7Test {
         //testActionsPossibles_niveau5();
         //testActionsPossibles_niveau6();
         //testActionsPossibles_niveau7();
-        testActionsPossibles_niveau8();
+        //testActionsPossibles_niveau8();
+        testActionsPossibles_niveau9();
     }
 
     /**
@@ -157,6 +158,7 @@ public class JoueurBiosphere7Test {
         assertEquals(Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES,
                 actionsPossiblesDepuisPlateau.length);
     }
+
     /**
      * Test de la fonction actionsPossibles, au niveau 5
      */
@@ -200,7 +202,7 @@ public class JoueurBiosphere7Test {
         assertEquals(Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES,
                 actionsPossiblesDepuisPlateau.length);
     }
-    
+
     /**
      * Test de la fonction actionsPossibles, au niveau 6
      */
@@ -214,7 +216,7 @@ public class JoueurBiosphere7Test {
         ActionsPossibles actionsPossibles
                 = new ActionsPossibles(actionsPossiblesDepuisPlateau);
         // on peut afficher toutes les actions possibles calculées :
-        actionsPossibles.afficher(); 
+        actionsPossibles.afficher();
         assertTrue(actionsPossibles.contient("PaA,13,12"));
         assertTrue(actionsPossibles.contient("PcE,12,10"));
         assertFalse(actionsPossibles.contient("PeI,15,12"));
@@ -229,6 +231,7 @@ public class JoueurBiosphere7Test {
         assertEquals(Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES - 1,
                 actionsPossiblesDepuisPlateau.length);
     }
+
     /**
      * Test de la fonction actionsPossibles, au niveau 7
      */
@@ -242,7 +245,7 @@ public class JoueurBiosphere7Test {
         ActionsPossibles actionsPossibles
                 = new ActionsPossibles(actionsPossiblesDepuisPlateau);
         // on peut afficher toutes les actions possibles calculées :
-        actionsPossibles.afficher(); 
+        actionsPossibles.afficher();
         assertTrue(actionsPossibles.contient("PaA,27,17"));
         assertTrue(actionsPossibles.contient("SaA,27,17"));
         assertTrue(actionsPossibles.contient("BaA,27,17"));
@@ -274,11 +277,12 @@ public class JoueurBiosphere7Test {
         int nombreDePlanteSurPlateau = 31;
         int nombreDifferentActionParCaseRemplie = 2;
         int nombreDeCaseVide = 2;
-        int nombreActionTotal = ((Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES - nombreDePlanteSurPlateau-nombreDeCaseVide)*nombreDifferentActionParCaseVide+nombreDePlanteSurPlateau*nombreDifferentActionParCaseRemplie);
+        int nombreActionTotal = ((Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES - nombreDePlanteSurPlateau - nombreDeCaseVide) * nombreDifferentActionParCaseVide + nombreDePlanteSurPlateau * nombreDifferentActionParCaseRemplie);
         assertEquals(nombreActionTotal,
                 actionsPossiblesDepuisPlateau.length);
     }
-        /**
+
+    /**
      * Test de la fonction actionsPossibles, au niveau 8
      */
     public void testActionsPossibles_niveau8() {
@@ -291,7 +295,7 @@ public class JoueurBiosphere7Test {
         ActionsPossibles actionsPossibles
                 = new ActionsPossibles(actionsPossiblesDepuisPlateau);
         // on peut afficher toutes les actions possibles calculées :
-        actionsPossibles.afficher(); 
+        actionsPossibles.afficher();
         assertTrue(actionsPossibles.contient("PaA,41,23"));
         assertTrue(actionsPossibles.contient("IeF,44,23"));
         assertTrue(actionsPossibles.contient("IeE,49,23"));
@@ -319,65 +323,65 @@ public class JoueurBiosphere7Test {
         int nombreDePlanteSurPlateau = 36;
         int nombreDifferentActionParCaseRemplie = 3;
         int nombreDeCaseVide = 2;
-        int nombreDeLegumeIsole=5;
-        int nombreActionTotal = ((Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES - nombreDePlanteSurPlateau-nombreDeCaseVide)*nombreDifferentActionParCaseVide+nombreDePlanteSurPlateau*nombreDifferentActionParCaseRemplie - nombreDeLegumeIsole);
+        int nombreDeLegumeIsole = 5;
+        int nombreActionTotal = ((Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES - nombreDePlanteSurPlateau - nombreDeCaseVide) * nombreDifferentActionParCaseVide + nombreDePlanteSurPlateau * nombreDifferentActionParCaseRemplie - nombreDeLegumeIsole);
         assertEquals(nombreActionTotal,
                 actionsPossiblesDepuisPlateau.length);
     }
+
     @Test
-    public void testMinimum1Espèce(){
+    public void testMinimum1Espèce() {
         Coordonnees v = new Coordonnees(4, 5);
         Case[][] plateau = Utils.plateauDepuisTexte(PLATEAU_NIVEAU8);
         Coordonnees[] voisine = JoueurBiosphere7.voisines(v, 14);
         assertTrue(JoueurBiosphere7.minimum1voisinDeMemeEspece(v, plateau, voisine));
         Coordonnees v2 = new Coordonnees(0, 0);
         Coordonnees[] voisine2 = JoueurBiosphere7.voisines(v, 14);
-        assertFalse(JoueurBiosphere7.minimum1voisinDeMemeEspece(v2, plateau,voisine2));
+        assertFalse(JoueurBiosphere7.minimum1voisinDeMemeEspece(v2, plateau, voisine2));
         Coordonnees v3 = new Coordonnees(0, 13);
         Coordonnees[] voisine3 = JoueurBiosphere7.voisines(v3, 14);
-        assertFalse(JoueurBiosphere7.minimum1voisinDeMemeEspece(v3, plateau,voisine3));
+        assertFalse(JoueurBiosphere7.minimum1voisinDeMemeEspece(v3, plateau, voisine3));
         Coordonnees v4 = new Coordonnees(2, 3);
         Coordonnees[] voisine4 = JoueurBiosphere7.voisines(v4, 14);
-        assertTrue(JoueurBiosphere7.minimum1voisinDeMemeEspece(v4, plateau,voisine4));
+        assertTrue(JoueurBiosphere7.minimum1voisinDeMemeEspece(v4, plateau, voisine4));
         Coordonnees v5 = new Coordonnees(9, 9);
         Coordonnees[] voisine5 = JoueurBiosphere7.voisines(v5, 14);
-        assertFalse(JoueurBiosphere7.minimum1voisinDeMemeEspece(v5, plateau,voisine5));
+        assertFalse(JoueurBiosphere7.minimum1voisinDeMemeEspece(v5, plateau, voisine5));
     }
+
     @Test
-    public void testMinimumVitalite(){
+    public void testMinimumVitalite() {
         Coordonnees v = new Coordonnees(4, 5);
         Case[][] plateau = Utils.plateauDepuisTexte(PLATEAU_NIVEAU8);
         Coordonnees[] voisine = JoueurBiosphere7.voisines(v, 14);
-        assertEquals(2,JoueurBiosphere7.minimumVitalite(plateau, v, voisine));
+        assertEquals(2, JoueurBiosphere7.minimumVitalite(plateau, v, voisine));
         Coordonnees v2 = new Coordonnees(0, 0);
         Coordonnees[] voisine2 = JoueurBiosphere7.voisines(v, 14);
-        assertEquals(0,JoueurBiosphere7.minimumVitalite(plateau, v2, voisine2));
+        assertEquals(0, JoueurBiosphere7.minimumVitalite(plateau, v2, voisine2));
         Coordonnees v3 = new Coordonnees(0, 13);
         Coordonnees[] voisine3 = JoueurBiosphere7.voisines(v3, 14);
-        assertEquals(1,JoueurBiosphere7.minimumVitalite(plateau, v3, voisine3));
+        assertEquals(1, JoueurBiosphere7.minimumVitalite(plateau, v3, voisine3));
         Coordonnees v4 = new Coordonnees(2, 3);
         Coordonnees[] voisine4 = JoueurBiosphere7.voisines(v4, 14);
-        assertEquals(1,JoueurBiosphere7.minimumVitalite(plateau, v4, voisine4));
+        assertEquals(1, JoueurBiosphere7.minimumVitalite(plateau, v4, voisine4));
         Coordonnees v5 = new Coordonnees(9, 9);
         Coordonnees[] voisine5 = JoueurBiosphere7.voisines(v5, 14);
-        assertEquals(7,JoueurBiosphere7.minimumVitalite(plateau, v5, voisine5));
+        assertEquals(7, JoueurBiosphere7.minimumVitalite(plateau, v5, voisine5));
 
     }
+
     @Test
-    public void testAvoirUniquement3voisines(){
-        Coordonnees v = new Coordonnees(2,3);
+    public void testAvoirUniquement3voisines() {
+        Coordonnees v = new Coordonnees(2, 3);
         Case[][] plateau = Utils.plateauDepuisTexte(PLATEAU_NIVEAU6);
         assertTrue(JoueurBiosphere7.avoir3Voisines(v, 14, plateau));
-        Coordonnees v2 = new Coordonnees(2,5);
+        Coordonnees v2 = new Coordonnees(2, 5);
         assertTrue(JoueurBiosphere7.avoir3Voisines(v2, 14, plateau));
-        Coordonnees v3 = new Coordonnees(5,8);
+        Coordonnees v3 = new Coordonnees(5, 8);
         assertFalse(JoueurBiosphere7.avoir3Voisines(v3, 14, plateau));
-        Coordonnees v4 = new Coordonnees(4,8);
+        Coordonnees v4 = new Coordonnees(4, 8);
         assertFalse(JoueurBiosphere7.avoir3Voisines(v4, 14, plateau));
     }
-    
-    
-    
 
     /**
      * Test de la fonction ajoutAction.
@@ -412,7 +416,7 @@ public class JoueurBiosphere7Test {
         // désormais, deux actions possibles
         assertEquals(3, actions.nbActions);
     }
-    
+
     /**
      * Test de la fonction ajoutAction.
      */
@@ -423,7 +427,7 @@ public class JoueurBiosphere7Test {
         Vitalites vitalites = new Vitalites(0, 0);
         Case[][] plateau = Utils.plateauDepuisTexte(PLATEAU_NIVEAU7);
         assertEquals(0, actions.nbActions);
-        
+
         joueur.ajoutActionFertiliser(Coordonnees.depuisCars('a', 'N'), actions,
                 vitalites, plateau);
         assertTrue(actions.contient("FaN,0,1"));
@@ -453,7 +457,7 @@ public class JoueurBiosphere7Test {
         assertTrue(JoueurBiosphere7.estDansPlateau(new Coordonnees(0, 1), 2));
         assertFalse(JoueurBiosphere7.estDansPlateau(new Coordonnees(0, 1), 1));
     }
-    
+
     @Test
     public void testCasesVoisines() {
         Coordonnees coord = new Coordonnees(0, 0);
@@ -665,7 +669,7 @@ public class JoueurBiosphere7Test {
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
             + "n|SR1|   |   |   |   |   |   |   |SR1|   |   |   |   |   |\n"
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n";
-     
+
     /* Un plateau pour tester le niveau 8.
      */
     final String PLATEAU_NIVEAU8
@@ -699,6 +703,38 @@ public class JoueurBiosphere7Test {
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
             + "n|SR1|   |   |   |   |   |   |   |SR1|   |   |   |   |   |\n"
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n";
-    
-    
-        }
+    /* Un plateau pour tester le niveau 9.
+     */
+    final String PLATEAU_NIVEAU9
+            = "   A   B   C   D   E   F   G   H   I   J   K   L   M   N \n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "a|   |   |   |SB1|   |   |   |   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "b|   |   |   |HR2|   |   |   |   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "c|PR1|   |   |SR1|   |   |   |   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "d|   |   |   |   |BR1|   |   |   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "e|   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "f|   |   |   |PR2|HB1|   |   |   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "g|   |   |   |DB8|   |   |   |   |PB1|   |DR1|   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "h|   |   |   |   |   |   |TR1|   |   |   |TB1|   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "i|   |   |   |PR5|   |   |   |   |   |   |   |   |BR1|   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "j|   |   |HB1|   |   |   |   |   |BB4|   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "k|   |   |   |   |   |   |   |   |PR3|   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "l|   |   |   |   |   |   |   |   |SR4|   |   |PR1|   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "m|   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "n|   |   |   |   |   |HB1|   |   |SB8|   |   |   |   |DB1|\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n";
+
+}
