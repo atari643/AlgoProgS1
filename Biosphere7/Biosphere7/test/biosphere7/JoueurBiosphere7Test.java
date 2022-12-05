@@ -24,7 +24,7 @@ public class JoueurBiosphere7Test {
         //testActionsPossibles_niveau6();
         //testActionsPossibles_niveau7();
         //testActionsPossibles_niveau8();
-        testActionsPossibles_niveau9();
+        //testActionsPossibles_niveau9();
     }
 
     /**
@@ -328,7 +328,6 @@ public class JoueurBiosphere7Test {
         assertEquals(nombreActionTotal,
                 actionsPossiblesDepuisPlateau.length);
     }
-
     @Test
     public void testMinimum1Espèce() {
         Coordonnees v = new Coordonnees(4, 5);
