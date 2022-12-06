@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="info-107-02x" name="jump.PartieTest" skipped="0" tests="1" time="0.22" timestamp="2022-11-29T10:34:21">
+<testsuite errors="0" failures="1" hostname="info-107-02x" name="jump.PartieTest" skipped="0" tests="1" time="0.576" timestamp="2022-12-06T11:03:45">
   <properties>
     <property name="libs.spring-framework300.classpath" value="/mnt/raddix/opt/netbeans/platform/modules/org-apache-commons-logging.jar:/mnt/raddix/opt/netbeans/java/modules/ext/cglib-2.2.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-3.0/spring-aop-3.2.18.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-3.0/spring-aspects-3.2.18.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-3.0/spring-beans-3.2.18.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-3.0/spring-context-3.2.18.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-3.0/spring-context-support-3.2.18.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-3.0/spring-core-3.2.18.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-3.0/spring-expression-3.2.18.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-3.0/spring-instrument-3.2.18.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-3.0/spring-instrument-tomcat-3.2.18.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-3.0/spring-jdbc-3.2.18.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-3.0/spring-jms-3.2.18.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-3.0/spring-orm-3.2.18.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-3.0/spring-oxm-3.2.18.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-3.0/spring-struts-3.2.18.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-3.0/spring-test-3.2.18.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-3.0/spring-tx-3.2.18.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-3.0/spring-web-3.2.18.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-3.0/spring-webmvc-3.2.18.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-3.0/spring-webmvc-portlet-3.2.18.RELEASE.jar" />
     <property name="javac.test.classpath" value=":build/classes:/mnt/raddix/opt/netbeans/platform/modules/ext/junit-4.13.2.jar:/mnt/raddix/opt/netbeans/platform/modules/ext/hamcrest-core-1.3.jar" />
     <property name="java.specification.version" value="11" />
-    <property name="libs.spring-framework500.classpath" value="/mnt/raddix/opt/netbeans/platform/modules/org-apache-commons-logging.jar:/mnt/raddix/opt/netbeans/java/modules/ext/cglib-2.2.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-aop-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-aspects-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-beans-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-context-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-context-indexer-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-context-support-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-core-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-expression-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-instrument-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-jcl-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-jdbc-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-jms-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-messaging-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-orm-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-oxm-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-test-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-tx-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-web-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-webflux-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-webmvc-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-websocket-5.2.9.RELEASE.jar" />
     <property name="jar.index.metainf" value="false" />
-    <property name="libs.spring-framework400.classpath" value="/mnt/raddix/opt/netbeans/platform/modules/org-apache-commons-logging.jar:/mnt/raddix/opt/netbeans/java/modules/ext/cglib-2.2.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-aop-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-aspects-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-beans-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-context-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-context-support-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-core-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-expression-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-instrument-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-instrument-tomcat-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-jdbc-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-jms-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-messaging-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-orm-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-oxm-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-test-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-tx-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-web-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-webmvc-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-webmvc-portlet-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-websocket-4.3.29.RELEASE.jar" />
+    <property name="libs.spring-framework500.classpath" value="/mnt/raddix/opt/netbeans/platform/modules/org-apache-commons-logging.jar:/mnt/raddix/opt/netbeans/java/modules/ext/cglib-2.2.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-aop-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-aspects-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-beans-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-context-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-context-indexer-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-context-support-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-core-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-expression-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-instrument-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-jcl-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-jdbc-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-jms-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-messaging-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-orm-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-oxm-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-test-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-tx-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-web-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-webflux-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-webmvc-5.2.9.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-websocket-5.2.9.RELEASE.jar" />
     <property name="libs.spring-webmvc4.0.javadoc" value="" />
+    <property name="libs.spring-framework400.classpath" value="/mnt/raddix/opt/netbeans/platform/modules/org-apache-commons-logging.jar:/mnt/raddix/opt/netbeans/java/modules/ext/cglib-2.2.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-aop-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-aspects-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-beans-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-context-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-context-support-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-core-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-expression-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-instrument-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-instrument-tomcat-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-jdbc-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-jms-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-messaging-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-orm-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-oxm-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-test-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-tx-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-web-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-webmvc-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-webmvc-portlet-4.3.29.RELEASE.jar:/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-websocket-4.3.29.RELEASE.jar" />
     <property name="test.binaryincludes" value="&lt;nothing&gt;" />
     <property name="debug-transport" value="dt_socket" />
+    <property name="do.jlink" value="false" />
     <property name="libs.javaee-web-api-8.0.src" value="" />
     <property name="java.vendor.url" value="https://ubuntu.com/" />
     <property name="debug.modulepath" value="" />
@@ -17,15 +18,15 @@
     <property name="libs.eclipselink.javadoc" value="/mnt/raddix/opt/netbeans/java/modules/ext/docs/javax.persistence-2.2.1-doc.zip" />
     <property name="libs.JWSAntTasks.javadoc" value="" />
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-11-openjdk-amd64/lib" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner jump.PartieTest methods=testTrouverJoueur skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/media/qartigala/BD9C-5E26/moodle/algo_prog/R1.01_AlgoProg/TP/AlgoProgS1/cycle4/Jump/build/test/results/TEST-jump.PartieTest.xml crashfile=/media/qartigala/BD9C-5E26/moodle/algo_prog/R1.01_AlgoProg/TP/AlgoProgS1/cycle4/Jump/build/junitvmwatcher10674190031404298207.properties propsfile=/media/qartigala/BD9C-5E26/moodle/algo_prog/R1.01_AlgoProg/TP/AlgoProgS1/cycle4/Jump/build/junit2014983282692241666.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner jump.PartieTest methods=testnombrePartiesJouees skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/media/qartigala/BD9C-5E26/moodle/algo_prog/R1.01_AlgoProg/TP/AlgoProgS1/cycle4/Jump/build/test/results/TEST-jump.PartieTest.xml crashfile=/media/qartigala/BD9C-5E26/moodle/algo_prog/R1.01_AlgoProg/TP/AlgoProgS1/cycle4/Jump/build/junitvmwatcher9403842522369966558.properties propsfile=/media/qartigala/BD9C-5E26/moodle/algo_prog/R1.01_AlgoProg/TP/AlgoProgS1/cycle4/Jump/build/junit9876413038880616604.properties" />
     <property name="jdk.debug" value="release" />
     <property name="libs.spring-framework300.src" value="" />
     <property name="javadoc.use" value="true" />
     <property name="javadoc.notree" value="false" />
     <property name="basedir" value="/media/qartigala/BD9C-5E26/moodle/algo_prog/R1.01_AlgoProg/TP/AlgoProgS1/cycle4/Jump" />
     <property name="application.vendor" value="ogauwin" />
-    <property name="java.specification.name" value="Java Platform API Specification" />
     <property name="java.vm.specification.vendor" value="Oracle Corporation" />
+    <property name="java.specification.name" value="Java Platform API Specification" />
     <property name="libs.jsf20.classpath" value="/mnt/raddix/opt/netbeans/enterprise/modules/ext/jsf-2_2/javax.faces.jar" />
     <property name="netbeans.extbrowser.manual_chrome_plugin_install" value="yes" />
     <property name="libs.spring-framework500.javadoc" value="" />
@@ -38,10 +39,10 @@
     <property name="libs.JAXB-ENDORSED.javadoc" value="" />
     <property name="sun.java2d.noddraw" value="true" />
     <property name="sun.zip.disableMemoryMapping" value="true" />
-    <property name="jnidispatch.path" value="/mnt/roost/users/qartigala/.cache/JNA/temp/jna5066510466909433910.tmp" />
+    <property name="jnidispatch.path" value="/mnt/roost/users/qartigala/.cache/JNA/temp/jna3842850605262213826.tmp" />
+    <property name="libs.jsp-compilation.javadoc" value="" />
     <property name="libs.primefaces.javadoc" value="" />
     <property name="libs.jsf12.src" value="" />
-    <property name="libs.jsp-compilation.javadoc" value="" />
     <property name="libs.groovy-all.maven-pom" value="" />
     <property name="libs.restapi.src" value="" />
     <property name="libs.junit_5.javadoc" value="/mnt/raddix/opt/netbeans/platform/docs/junit-jupiter-api-5.6.0-javadoc.jar:/mnt/raddix/opt/netbeans/platform/docs/junit-jupiter-params-5.6.0-javadoc.jar:/mnt/raddix/opt/netbeans/platform/docs/junit-jupiter-engine-5.6.0-javadoc.jar" />
@@ -51,20 +52,21 @@
     <property name="libs.jakartaee-api-8.0.javadoc" value="/mnt/raddix/opt/netbeans/enterprise/docs/jakartaee8-doc-api.jar" />
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification" />
     <property name="buildfile" value="nbbuild.xml" />
-    <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib" />
     <property name="libs.hamcrest.src" value="" />
+    <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib" />
     <property name="java.vendor" value="Ubuntu" />
     <property name="libs.testng.javadoc" value="/mnt/raddix/opt/netbeans/platform/docs/testng-6.13.1-javadoc.jar" />
     <property name="libs.groovy-all.src" value="" />
     <property name="meta.inf.dir" value="src/META-INF" />
     <property name="run.upgrademodulepath" value="" />
+    <property name="compile.on.save" value="false" />
     <property name="libs.testng.maven-pom" value="" />
     <property name="jlink.additionalparam" value="" />
     <property name="org.openide.version" value="deprecated" />
     <property name="run.classpath" value=":build/classes" />
     <property name="libs.jaxb.src" value="" />
-    <property name="sun.awt.enableExtraMouseButtons" value="true" />
     <property name="test.src.dir" value="test" />
+    <property name="sun.awt.enableExtraMouseButtons" value="true" />
     <property name="org.openide.major.version" value="IDE/1" />
     <property name="libs.spring-framework300.javadoc" value="" />
     <property name="ap.proc.none.internal" value="" />
@@ -73,8 +75,8 @@
     <property name="jar.index" value="false" />
     <property name="libs.jpa20-persistence.classpath" value="/mnt/raddix/opt/netbeans/java/modules/ext/eclipselink/javax.persistence-2.2.1.jar" />
     <property name="java.vm.specification.version" value="11" />
-    <property name="libs.junit_5.classpath" value="/mnt/raddix/opt/netbeans/platform/modules/ext/junit-jupiter-api-5.6.0.jar:/mnt/raddix/opt/netbeans/platform/modules/ext/junit-jupiter-params-5.6.0.jar:/mnt/raddix/opt/netbeans/platform/modules/ext/junit-jupiter-engine-5.6.0.jar" />
     <property name="libs.eclipselinkmodelgen.javadoc" value="" />
+    <property name="libs.junit_5.classpath" value="/mnt/raddix/opt/netbeans/platform/modules/ext/junit-jupiter-api-5.6.0.jar:/mnt/raddix/opt/netbeans/platform/modules/ext/junit-jupiter-params-5.6.0.jar:/mnt/raddix/opt/netbeans/platform/modules/ext/junit-jupiter-engine-5.6.0.jar" />
     <property name="javadoc.noindex" value="false" />
     <property name="javadoc.private" value="false" />
     <property name="libs.spring-webmvc4.0.maven-pom" value="" />
@@ -83,8 +85,8 @@
     <property name="libs.eclipselinkmodelgen.maven-pom" value="" />
     <property name="have.sources" value="true" />
     <property name="annotation.processing.processors.list" value="" />
-    <property name="javac.deprecation" value="false" />
     <property name="jlink.launcher" value="true" />
+    <property name="javac.deprecation" value="false" />
     <property name="build.generated.sources.dir" value="build/generated-sources" />
     <property name="plugin.manager.check.updates" value="false" />
     <property name="netbeans.autoupdate.language" value="fr" />
@@ -96,12 +98,12 @@
     <property name="libs.spring-webmvc4.0.classpath" value="/mnt/raddix/opt/netbeans/java/modules/ext/spring-4/spring-webmvc-4.3.29.RELEASE.jar" />
     <property name="modules.supported.internal" value="true" />
     <property name="libs.javaee-endorsed-api-7.0.javadoc" value="/mnt/raddix/opt/netbeans/enterprise/docs/javaee-doc-api.jar" />
-    <property name="os.version" value="5.15.0-53-generic" />
+    <property name="os.version" value="5.15.0-56-generic" />
     <property name="netbeans.home" value="/mnt/raddix/opt/netbeans/platform" />
     <property name="libs.CopyLibs.javadoc" value="" />
     <property name="debug-transport-by-os" value="dt_socket" />
-    <property name="libs.javaee-api-8.0.javadoc" value="/mnt/raddix/opt/netbeans/enterprise/docs/javaee-doc-api.jar" />
     <property name="libs.jsf20.src" value="" />
+    <property name="libs.javaee-api-8.0.javadoc" value="/mnt/raddix/opt/netbeans/enterprise/docs/javaee-doc-api.jar" />
     <property name="java.vm.name" value="OpenJDK 64-Bit Server VM" />
     <property name="unnamed.module.internal" value="true" />
     <property name="libs.jstl.javadoc" value="/mnt/raddix/opt/netbeans/enterprise/docs/javaee-doc-api.jar" />
@@ -134,12 +136,12 @@
     <property name="netbeans.productversion" value="Apache NetBeans IDE 13" />
     <property name="mkdist.disabled" value="false" />
     <property name="libs.javaee-web-api-6.0.javadoc" value="/mnt/raddix/opt/netbeans/enterprise/docs/javaee-doc-api.jar" />
-    <property name="libs.javaee-api-7.0.maven-pom" value="" />
     <property name="libs.groovy-all.classpath" value="/mnt/raddix/opt/netbeans/groovy/modules/ext/groovy-3.0.8.jar:/mnt/raddix/opt/netbeans/groovy/modules/ext/groovy-ant-3.0.8.jar" />
+    <property name="libs.javaee-api-7.0.maven-pom" value="" />
     <property name="libs.absolutelayout.javadoc" value="" />
     <property name="module.build.classes.dir" value="build/classes" />
-    <property name="annotation.processing.processor.options" value="" />
     <property name="libs.jaxb.maven-pom" value="" />
+    <property name="annotation.processing.processor.options" value="" />
     <property name="libs.javaee-api-6.0.maven-pom" value="" />
     <property name="dist.dir" value="dist" />
     <property name="build.dir" value="build" />
@@ -159,16 +161,16 @@
     <property name="javac.processorpath" value="" />
     <property name="libs.javaee-api-6.0.javadoc" value="/mnt/raddix/opt/netbeans/enterprise/docs/javaee-doc-api.jar" />
     <property name="libs.JWSAntTasks.maven-pom" value="" />
-    <property name="javac.upgrademodulepath" value="" />
     <property name="run.modulepath" value="" />
+    <property name="javac.upgrademodulepath" value="" />
     <property name="do.archive+manifest.available" value="true" />
     <property name="apple.laf.useScreenMenuBar" value="true" />
-    <property name="sun.java.launcher" value="SUN_STANDARD" />
     <property name="user.country" value="FR" />
+    <property name="sun.java.launcher" value="SUN_STANDARD" />
     <property name="libs.jakartaee-api-9.0.maven-pom" value="" />
-    <property name="ant.file.type.Jump-impl" value="file" />
-    <property name="libs.restapi.javadoc" value="" />
     <property name="libs.jpa20-persistence.src" value="" />
+    <property name="libs.restapi.javadoc" value="" />
+    <property name="ant.file.type.Jump-impl" value="file" />
     <property name="endorsed.classpath" value="" />
     <property name="javac.test.sourcepath" value="/media/qartigala/BD9C-5E26/moodle/algo_prog/R1.01_AlgoProg/TP/AlgoProgS1/cycle4/Jump/build/empty" />
     <property name="libs.spring-webmvc3.0.maven-pom" value="" />
@@ -183,11 +185,12 @@
     <property name="netbeans.hash.code" value="unique=0e2d59c4c-e38a-428f-a178-fda119ec0fa7_390b1760-9ca0-43c8-acb4-e19ef6fedeaa" />
     <property name="libs.jsp-compilation-syscp.maven-pom" value="" />
     <property name="libs.jstl.src" value="" />
+    <property name="jlink.strip" value="false" />
     <property name="netbeans.running.environment" value="gnome" />
     <property name="libs.spring-webmvc3.0.classpath" value="/mnt/raddix/opt/netbeans/java/modules/ext/spring-3.0/spring-webmvc-3.2.18.RELEASE.jar" />
     <property name="java.runtime.name" value="OpenJDK Runtime Environment" />
-    <property name="libs.jaxb.javadoc" value="/mnt/raddix/opt/netbeans/ide/docs/jaxb-api-doc.jar" />
     <property name="manifest.available" value="true" />
+    <property name="libs.jaxb.javadoc" value="/mnt/raddix/opt/netbeans/ide/docs/jaxb-api-doc.jar" />
     <property name="libs.spring-framework500.maven-pom" value="" />
     <property name="run.jvmargs.ide" value="" />
     <property name="ant.core.lib" value="/mnt/raddix/opt/netbeans/extide/ant/lib/ant.jar" />
@@ -202,7 +205,7 @@
     <property name="libs.jsp-compilation-syscp.classpath" value="/mnt/raddix/opt/netbeans/extide/ant/lib/ant.jar:/mnt/raddix/opt/netbeans/enterprise/modules/ext/servlet3.1-jsp2.3-api.jar:/mnt/raddix/opt/netbeans/enterprise/modules/ext/glassfish-jspparser-4.0.jar:/mnt/raddix/opt/netbeans/enterprise/modules/ext/jstl-impl.jar:/mnt/raddix/opt/netbeans/enterprise/modules/ext/jsf-2_2/javax.faces.jar" />
     <property name="libs.jsp-compilation.classpath" value="/mnt/raddix/opt/netbeans/extide/ant/lib/ant.jar:/mnt/raddix/opt/netbeans/enterprise/modules/ext/servlet3.1-jsp2.3-api.jar:/mnt/raddix/opt/netbeans/enterprise/modules/ext/glassfish-jspparser-4.0.jar:/mnt/raddix/opt/netbeans/enterprise/modules/ext/jsf-2_2/javax.faces.jar:/mnt/raddix/opt/netbeans/enterprise/modules/ext/jstl-api.jar:/mnt/raddix/opt/netbeans/extide/ant/lib/ant-launcher.jar" />
     <property name="libs.javaee-api-6.0.classpath" value="/mnt/raddix/opt/netbeans/enterprise/modules/ext/javaee-api-6.0.jar" />
-    <property name="javac.includesfile.binary" value="/media/qartigala/BD9C-5E26/moodle/algo_prog/R1.01_AlgoProg/TP/AlgoProgS1/cycle4/Jump/null1356658739" />
+    <property name="javac.includesfile.binary" value="/media/qartigala/BD9C-5E26/moodle/algo_prog/R1.01_AlgoProg/TP/AlgoProgS1/cycle4/Jump/null740544988" />
     <property name="libs.javaee-api-7.0.classpath" value="/mnt/raddix/opt/netbeans/enterprise/modules/ext/javaee-api-7.0.jar" />
     <property name="sun.cpu.isalist" value="" />
     <property name="libs.restapi.maven-pom" value="" />
@@ -210,21 +213,21 @@
     <property name="do.depend" value="false" />
     <property name="sun.arch.data.model" value="64" />
     <property name="libs.jakartaee-web-api-9.0.maven-pom" value="" />
-    <property name="libs.javaee-endorsed-api-7.0.src" value="" />
     <property name="sun.font.fontmanager" value="sun.awt.X11FontManager" />
+    <property name="libs.javaee-endorsed-api-7.0.src" value="" />
     <property name="annotation.processing.enabled" value="true" />
     <property name="libs.junit_5.src" value="/mnt/raddix/opt/netbeans/platform/docs/junit-jupiter-api-5.6.0-sources.jar:/mnt/raddix/opt/netbeans/platform/docs/junit-jupiter-params-5.6.0-sources.jar:/mnt/raddix/opt/netbeans/platform/docs/junit-jupiter-engine-5.6.0-sources.jar" />
     <property name="libs.jaxb.classpath" value="/mnt/raddix/opt/netbeans/ide/modules/ext/jaxb/jaxb-impl.jar:/mnt/raddix/opt/netbeans/ide/modules/ext/jaxb/jaxb-xjc.jar:/mnt/raddix/opt/netbeans/ide/modules/ext/jaxb/activation.jar:/mnt/raddix/opt/netbeans/ide/modules/ext/jaxb/api/jaxb-api.jar" />
     <property name="libs.javaee-api-8.0.classpath" value="/mnt/raddix/opt/netbeans/enterprise/modules/ext/javaee-api-8.0.jar" />
     <property name="libs.CopyLibs.src" value="" />
     <property name="platforms.JDK_11.home" value="/usr/lib/jvm/java-11-openjdk-amd64" />
-    <property name="javac.source" value="11" />
     <property name="java.specification.vendor" value="Oracle Corporation" />
+    <property name="javac.source" value="11" />
     <property name="java.version.date" value="2022-10-18" />
     <property name="java.home" value="/usr/lib/jvm/java-11-openjdk-amd64" />
-    <property name="work.dir" value="/media/qartigala/BD9C-5E26/moodle/algo_prog/R1.01_AlgoProg/TP/AlgoProgS1/cycle4/Jump" />
-    <property name="javac.test.compilerargs" value="" />
+    <property name="work.dir" value="/media/qartigala/BD9C-5E26/moodle/algo_prog/R1.01_AlgoProg/TP/AlgoProgS1/cycle4/Run" />
     <property name="jna.boot.library.name" value="jnidispatch-nb" />
+    <property name="javac.test.compilerargs" value="" />
     <property name="libs.PostgreSQLDriver.classpath" value="/mnt/raddix/opt/netbeans/ide/modules/ext/postgresql-42.2.16.jar" />
     <property name="libs.graaljs.javadoc" value="" />
     <property name="libs.spring-webmvc3.0.javadoc" value="" />
@@ -254,8 +257,8 @@
     <property name="manifest.file" value="manifest.mf" />
     <property name="sun.io.unicode.encoding" value="UnicodeLittle" />
     <property name="libs.struts.javadoc" value="/mnt/raddix/opt/netbeans/enterprise/docs/struts-1.3.10-javadoc.zip" />
-    <property name="sun.desktop" value="gnome" />
     <property name="default.javac.source" value="11" />
+    <property name="sun.desktop" value="gnome" />
     <property name="libs.javaee-web-api-8.0.javadoc" value="/mnt/raddix/opt/netbeans/enterprise/docs/javaee-doc-api.jar" />
     <property name="netbeans.dynamic.classpath" value="/mnt/raddix/opt/netbeans/platform/core/asm-9.2.jar:/mnt/raddix/opt/netbeans/platform/core/org-netbeans-libs-asm.jar:/mnt/raddix/opt/netbeans/platform/core/core.jar:/mnt/raddix/opt/netbeans/platform/core/core-base.jar:/mnt/raddix/opt/netbeans/platform/core/asm-tree-9.2.jar:/mnt/raddix/opt/netbeans/platform/core/org-openide-filesystems.jar:/mnt/raddix/opt/netbeans/platform/core/asm-commons-9.2.jar:/mnt/raddix/opt/netbeans/platform/core/org-openide-filesystems-compat8.jar:/mnt/raddix/opt/netbeans/nb/core/org-netbeans-upgrader.jar:/mnt/raddix/opt/netbeans/nb/core/locale/core_nb.jar" />
     <property name="libs.eclipselinkmodelgen.classpath" value="/mnt/raddix/opt/netbeans/java/modules/ext/eclipselink/org.eclipse.persistence.jpa.modelgen.processor-2.7.9.jar" />
@@ -265,8 +268,8 @@
     <property name="endorsed.classpath.cmd.line.arg" value="" />
     <property name="libs.jpa20-persistence.maven-pom" value="" />
     <property name="build.sysclasspath" value="ignore" />
-    <property name="libs.CopyLibs.maven-pom" value="" />
     <property name="os.name" value="Linux" />
+    <property name="libs.CopyLibs.maven-pom" value="" />
     <property name="libs.jakartaee-api-8.0.maven-pom" value="" />
     <property name="jdkBug6558476" value="false" />
     <property name="http.nonProxyHosts" value="localhost|127.0.0.1|info-107-02x" />
@@ -277,8 +280,8 @@
     <property name="jar.compress" value="false" />
     <property name="libs.javaee-api-7.0.javadoc" value="/mnt/raddix/opt/netbeans/enterprise/docs/javaee-doc-api.jar" />
     <property name="libs.spring-webmvc5.0.src" value="" />
-    <property name="libs.jsf20.maven-pom" value="" />
     <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment" />
+    <property name="libs.jsf20.maven-pom" value="" />
     <property name="libs.restlib.classpath" value="/mnt/raddix/opt/netbeans/enterprise/modules/ext/jersey2/jakarta.annotation-api-1.3.5.jar:/mnt/raddix/opt/netbeans/enterprise/modules/ext/jersey2/jakarta.persistence-api-2.2.3.jar:/mnt/raddix/opt/netbeans/enterprise/modules/ext/jersey2/jakarta.servlet-api-4.0.4.jar:/mnt/raddix/opt/netbeans/enterprise/modules/ext/jersey2/jakarta.validation-api-2.0.2.jar:/mnt/raddix/opt/netbeans/enterprise/modules/ext/jersey2/jakarta.xml.bind-api-2.3.3.jar:/mnt/raddix/opt/netbeans/enterprise/modules/ext/jersey2/jersey-client-2.34.jar:/mnt/raddix/opt/netbeans/enterprise/modules/ext/jersey2/jersey-common-2.34.jar:/mnt/raddix/opt/netbeans/enterprise/modules/ext/jersey2/jersey-server-2.34.jar:/mnt/raddix/opt/netbeans/enterprise/modules/ext/jersey2/jersey-entity-filtering-2.34.jar:/mnt/raddix/opt/netbeans/enterprise/modules/ext/jersey2/jersey-hk2-2.34.jar:/mnt/raddix/opt/netbeans/enterprise/modules/ext/jersey2/jersey-media-moxy-2.34.jar:/mnt/raddix/opt/netbeans/enterprise/modules/ext/jersey2/jersey-container-servlet-2.34.jar:/mnt/raddix/opt/netbeans/enterprise/modules/ext/jersey2/jersey-container-servlet-core-2.34.jar:/mnt/raddix/opt/netbeans/enterprise/modules/ext/jersey2/hk2-api-2.6.1.jar:/mnt/raddix/opt/netbeans/enterprise/modules/ext/jersey2/hk2-locator-2.6.1.jar:/mnt/raddix/opt/netbeans/enterprise/modules/ext/jersey2/hk2-utils-2.6.1.jar:/mnt/raddix/opt/netbeans/enterprise/modules/ext/jersey2/jakarta.inject-2.6.1.jar:/mnt/raddix/opt/netbeans/enterprise/modules/ext/jersey2/aopalliance-repackaged-2.6.1.jar:/mnt/raddix/opt/netbeans/enterprise/modules/ext/jersey2/osgi.core-8.0.0.jar:/mnt/raddix/opt/netbeans/enterprise/modules/ext/jersey2/osgi-resource-locator-1.0.3.jar:/mnt/raddix/opt/netbeans/java/modules/ext/eclipselink/org.eclipse.persistence.core-2.7.9.jar:/mnt/raddix/opt/netbeans/java/modules/ext/eclipselink/org.eclipse.persistence.asm-9.1.0.jar:/mnt/raddix/opt/netbeans/java/modules/ext/eclipselink/org.eclipse.persistence.antlr-2.7.9.jar:/mnt/raddix/opt/netbeans/java/modules/ext/eclipselink/org.eclipse.persistence.jpa-2.7.9.jar:/mnt/raddix/opt/netbeans/java/modules/ext/eclipselink/org.eclipse.persistence.jpa.jpql-2.7.9.jar:/mnt/raddix/opt/netbeans/java/modules/ext/eclipselink/org.eclipse.persistence.moxy-2.7.9.jar" />
     <property name="libs.jakartaee-web-api-8.0.javadoc" value="/mnt/raddix/opt/netbeans/enterprise/docs/jakartaee8-doc-api.jar" />
     <property name="apple.awt.graphics.UseQuartz" value="true" />
@@ -298,8 +301,9 @@
     <property name="module.name" value="" />
     <property name="libs.spring-webmvc5.0.javadoc" value="" />
     <property name="libs.jsf12.classpath" value="/mnt/raddix/opt/netbeans/enterprise/modules/ext/jsf-1_2/jsf-api.jar:/mnt/raddix/opt/netbeans/enterprise/modules/ext/jsf-1_2/jsf-impl.jar" />
-    <property name="libs.spring-framework400.javadoc" value="" />
     <property name="libs.hamcrest.javadoc" value="" />
+    <property name="libs.spring-framework400.javadoc" value="" />
+    <property name="do.jar" value="true" />
     <property name="java.vm.info" value="mixed mode, sharing" />
     <property name="libs.primefaces.classpath" value="/mnt/raddix/opt/netbeans/enterprise/modules/ext/primefaces/primefaces-5.0.jar" />
     <property name="libs.jaxws21.maven-pom" value="" />
@@ -311,11 +315,11 @@
     <property name="ant.project.default-target" value="default" />
     <property name="debug.classpath" value=":build/classes" />
     <property name="excludes" value="" />
-    <property name="libs.javaee-api-7.0.src" value="" />
     <property name="ant.file.type.Jump" value="file" />
+    <property name="libs.javaee-api-7.0.src" value="" />
     <property name="sun.jnu.encoding" value="UTF-8" />
-    <property name="run.test.jvmargs" value="" />
     <property name="libs.junit_4.javadoc" value="/mnt/raddix/opt/netbeans/platform/docs/junit-4.13.2-javadoc.jar" />
+    <property name="run.test.jvmargs" value="" />
     <property name="libs.spring-webmvc4.0.src" value="" />
     <property name="sun.java2d.dpiaware" value="true" />
     <property name="main.class.available" value="true" />
@@ -329,9 +333,9 @@
     <property name="line.separator" value="&#xa;" />
     <property name="javadoc.additionalparam" value="" />
     <property name="libs.spring-webmvc5.0.classpath" value="/mnt/raddix/opt/netbeans/java/modules/ext/spring-5/spring-webmvc-5.2.9.RELEASE.jar" />
-    <property name="test.method" value="testTrouverJoueur" />
-    <property name="libs.restlib.maven-pom" value="" />
+    <property name="test.method" value="testnombrePartiesJouees" />
     <property name="javac.debug" value="true" />
+    <property name="libs.restlib.maven-pom" value="" />
     <property name="libs.testng.classpath" value="/mnt/raddix/opt/netbeans/platform/modules/ext/testng-6.14.3.jar:/mnt/raddix/opt/netbeans/platform/modules/ext/jcommander-1.78.jar" />
     <property name="libs.jsp-compiler.src" value="" />
     <property name="user.name" value="qartigala" />
@@ -350,18 +354,18 @@
     <property name="libs.JWSAntTasks.src" value="" />
     <property name="libs.spring-webmvc3.0.src" value="" />
     <property name="ant.home" value="/mnt/raddix/opt/netbeans/extide/ant" />
+    <property name="debug.test.classpath" value=":build/classes:/mnt/raddix/opt/netbeans/platform/modules/ext/junit-4.13.2.jar:/mnt/raddix/opt/netbeans/platform/modules/ext/hamcrest-core-1.3.jar:build/test/classes" />
     <property name="have.tests" value="true" />
     <property name="javac.external.vm" value="true" />
-    <property name="debug.test.classpath" value=":build/classes:/mnt/raddix/opt/netbeans/platform/modules/ext/junit-4.13.2.jar:/mnt/raddix/opt/netbeans/platform/modules/ext/hamcrest-core-1.3.jar:build/test/classes" />
     <property name="testng.debug.mode" value="" />
     <property name="javac.target" value="11" />
     <property name="ant.version" value="Apache Ant(TM) version 1.10.8 compiled on May 10 2020" />
     <property name="libs.absolutelayout.maven-pom" value="" />
     <property name="java.failonerror" value="true" />
-    <property name="libs.spring-framework500.src" value="" />
     <property name="javac.modulepath" value="" />
-    <property name="libs.javaee-api-6.0.src" value="" />
+    <property name="libs.spring-framework500.src" value="" />
     <property name="user.properties.file" value="/mnt/roost/users/qartigala/.netbeans/13/build.properties" />
+    <property name="libs.javaee-api-6.0.src" value="" />
     <property name="javac.includes" value="jump/PartieTest.java" />
     <property name="netbeans.autoupdate.country" value="FR" />
     <property name="java.class.path" value="/media/qartigala/BD9C-5E26/moodle/algo_prog/R1.01_AlgoProg/TP/AlgoProgS1/cycle4/Jump/build/classes:/mnt/raddix/opt/netbeans/platform/modules/ext/junit-4.13.2.jar:/mnt/raddix/opt/netbeans/platform/modules/ext/hamcrest-core-1.3.jar:/media/qartigala/BD9C-5E26/moodle/algo_prog/R1.01_AlgoProg/TP/AlgoProgS1/cycle4/Jump/build/test/classes:/mnt/raddix/opt/netbeans/extide/ant/lib/ant-launcher.jar:/mnt/raddix/opt/netbeans/extide/ant/lib/ant.jar:/mnt/raddix/opt/netbeans/extide/ant/lib/ant-junit.jar:/mnt/raddix/opt/netbeans/extide/ant/lib/ant-junit4.jar" />
@@ -375,12 +379,12 @@
     <property name="libs.jstl.maven-pom" value="" />
     <property name="libs.jakartaee-web-api-8.0.src" value="" />
     <property name="sun.cpu.endian" value="little" />
-    <property name="libs.junit_4.src" value="/mnt/raddix/opt/netbeans/platform/docs/junit-4.13.2-sources.jar" />
     <property name="libs.jakartaee-api-9.0.src" value="" />
+    <property name="libs.junit_4.src" value="/mnt/raddix/opt/netbeans/platform/docs/junit-4.13.2-sources.jar" />
     <property name="user.language" value="fr" />
     <property name="copylibs.rebase" value="true" />
-    <property name="libs.javaee-web-api-6.0.src" value="" />
     <property name="maven.defaultProjectBuilder.disableGlobalModelCache" value="true" />
+    <property name="libs.javaee-web-api-6.0.src" value="" />
     <property name="ant.file.Jump" value="/media/qartigala/BD9C-5E26/moodle/algo_prog/R1.01_AlgoProg/TP/AlgoProgS1/cycle4/Jump/nbbuild.xml" />
     <property name="javadoc.nonavbar" value="false" />
     <property name="libs.javaee-api-8.0.src" value="" />
@@ -391,8 +395,8 @@
     <property name="test.binarytestincludes" value="" />
     <property name="libs.junit_4.maven-pom" value="" />
     <property name="libs.spring-webmvc5.0.maven-pom" value="" />
-    <property name="runtime.encoding" value="UTF-8" />
     <property name="libs.jsp-compiler.maven-pom" value="" />
+    <property name="runtime.encoding" value="UTF-8" />
     <property name="jlink.additionalmodules" value="" />
     <property name="libs.jakartaee-web-api-8.0.classpath" value="/mnt/raddix/opt/netbeans/enterprise/modules/ext/jakarta.jakartaee-web-api-8.0.0.jar" />
     <property name="javac.classpath" value="" />
@@ -402,13 +406,13 @@
     <property name="libs.spring-framework300.maven-pom" value="" />
     <property name="ant.project.invoked-targets" value="test-single-method" />
     <property name="libs.jstl.classpath" value="/mnt/raddix/opt/netbeans/enterprise/modules/ext/jstl-impl.jar:/mnt/raddix/opt/netbeans/enterprise/modules/ext/jstl-api.jar" />
-    <property name="ap.cmd.line.internal" value="" />
     <property name="jna.platform.library.path" value="/usr/lib/x86_64-linux-gnu:/lib/x86_64-linux-gnu:/usr/lib64:/lib64:/usr/lib:/lib:/lib/i386-linux-gnu:/lib32:/usr/lib/x86_64-linux-gnu/libfakeroot" />
+    <property name="ap.cmd.line.internal" value="" />
     <property name="libs.PostgreSQLDriver.src" value="" />
     <property name="java.vendor.url.bug" value="https://bugs.launchpad.net/ubuntu/+source/openjdk-lts" />
     <property name="annotation.processing.source.output" value="build/generated-sources/ap-source-output" />
+    <property name="user.dir" value="/media/qartigala/BD9C-5E26/moodle/algo_prog/R1.01_AlgoProg/TP/AlgoProgS1/cycle4/Run" />
     <property name="libs.javaee-endorsed-api-6.0.maven-pom" value="" />
-    <property name="user.dir" value="/media/qartigala/BD9C-5E26/moodle/algo_prog/R1.01_AlgoProg/TP/AlgoProgS1/cycle4/Jump" />
     <property name="platform.java" value="/usr/lib/jvm/java-11-openjdk-amd64/bin/java" />
     <property name="application.args" value="" />
     <property name="org.xml.sax.driver" value="com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser" />
@@ -417,17 +421,24 @@
     <property name="java.vm.version" value="11.0.17+8-post-Ubuntu-1ubuntu222.04" />
     <property name="libs.metro.javadoc" value="/mnt/raddix/opt/netbeans/enterprise/docs/webservices-api-javadoc.jar:/mnt/raddix/opt/netbeans/enterprise/docs/webservices-extra-javadoc.jar:/mnt/raddix/opt/netbeans/enterprise/docs/webservices-extra-api-javadoc.jar:/mnt/raddix/opt/netbeans/enterprise/docs/webservices-rt-javadoc.jar:/mnt/raddix/opt/netbeans/enterprise/docs/webservices-tools-javadoc.jar" />
     <property name="libs.jakartaee-web-api-9.0.src" value="" />
-    <property name="test.class" value="jump.PartieTest" />
     <property name="sun.awt.datatransfer.timeout" value="1000" />
-    <property name="libs.javaee-web-api-7.0.src" value="" />
-    <property name="libs.jsp-compiler.classpath" value="/mnt/raddix/opt/netbeans/enterprise/ant/extra/jspcompile.jar" />
-    <property name="annotation.processing.run.all.processors" value="true" />
+    <property name="test.class" value="jump.PartieTest" />
     <property name="junit.forkmode" value="perTest" />
+    <property name="annotation.processing.run.all.processors" value="true" />
+    <property name="libs.javaee-web-api-7.0.src" value="" />
     <property name="libs.jakartaee-api-8.0.src" value="" />
+    <property name="libs.jsp-compiler.classpath" value="/mnt/raddix/opt/netbeans/enterprise/ant/extra/jspcompile.jar" />
     <property name="file.reference.Jump-test" value="test" />
     <property name="libs.javaee-endorsed-api-6.0.classpath" value="/mnt/raddix/opt/netbeans/enterprise/modules/ext/javaee6-endorsed/javax.annotation.jar:/mnt/raddix/opt/netbeans/enterprise/modules/ext/javaee6-endorsed/jaxb-api-osgi.jar:/mnt/raddix/opt/netbeans/enterprise/modules/ext/javaee6-endorsed/webservices-api-osgi.jar" />
   </properties>
-  <testcase classname="jump.PartieTest" name="testTrouverJoueur" time="0.03" />
+  <testcase classname="jump.PartieTest" name="testnombrePartiesJouees" time="0.391">
+    <failure message="expected:&lt;3&gt; but was:&lt;1&gt;" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: expected:&lt;3&gt; but was:&lt;1&gt;
+	at jump.PartieTest.testnombrePartiesJouees(PartieTest.java:324)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+</failure>
+  </testcase>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

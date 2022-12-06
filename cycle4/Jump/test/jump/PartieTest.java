@@ -202,9 +202,9 @@ public class PartieTest {
         assertEquals(3, partie.trouverJoueur("Boris"));
         assertEquals(-1, partie.trouverJoueur("Mace"));
         assertEquals(0, partie.trouverJoueur("Anakin"));
-        assertEquals(3, partie.trouverJoueur("Boba"));        
+        assertEquals(3, partie.trouverJoueur("Boba"));
     }
-    
+
     @Test
     public void testNouvelleLigneJoueur() {
         Partie partie = partie1();
@@ -300,7 +300,7 @@ public class PartieTest {
         assertEquals(2, partie.joueurs[2].colonne);
         assertEquals(3, partie.joueurs[3].colonne);
     }
-    
+
     static Partie partie1() {
         Partie partie = new Partie();
         partie.plateau = Plateau.deserialiser(PLATEAU3);
@@ -309,6 +309,19 @@ public class PartieTest {
         partie.ajouterJoueur(new Joueur("Igor"));
         partie.ajouterJoueur(new Joueur("Boris"));
         return partie;
+    }
+
+    @Test
+    public void testSauverScore() {
+        partie1().sauverScores();
+    }
+
+    @Test
+    public void testnombrePartiesJouees() {
+        partie1().sauverScores();
+        partie1().sauverScores();
+        partie1().sauverScores();
+        assertEquals(3, Partie.nombrePartiesJouees("Alex"));
     }
 
     final static String SERIAL1 = "1:4:1:"

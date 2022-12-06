@@ -6,6 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Une partie.
@@ -515,18 +517,23 @@ class Partie {
      * Sauvegarde des scores dans le fichier de scores.
      */
     void sauverScores() {
+        PrintWriter fichier = null;
         try {
             FileWriter fileWriter = new FileWriter(FICHIER_SCORES, true);
-            PrintWriter fichier = new PrintWriter(fileWriter);
+            fichier = new PrintWriter(fileWriter);
             for (int i = 0; i < nbJoueurs; ++i) {
                 fichier.println(joueurs[i].ligneFichierScore());
             }
         } catch (FileNotFoundException | ArrayIndexOutOfBoundsException e1) {
             System.out.println("Exception rattrapée : " + e1);
-        } catch (IOException e3) {
-            System.out.println("Excepiton rattrapée: " + e3);
-        } 
-        
+        } catch (IOException e2) {
+            System.out.println("Excepiton rattrapée: " + e2);
+        }finally {
+            if (fichier != null){
+                fichier.close();
+            }
+        }
+
     }
 
     /**
@@ -536,7 +543,18 @@ class Partie {
      * @return nombre de parties jouées par ce joueur
      */
     static int nombrePartiesJouees(String nomJoueur) {
-        return 0;
+        int compteur = 0;
+        try (Scanner scanner = new Scanner(FICHIER_SCORES)){
+            scanner.useDelimiter(Joueur.SEPARATEUR);
+            while(scanner.hasNextLine()){
+                String mot = scanner.nextLine();
+                if (mot.equals(nomJoueur)){
+                    compteur+=1;
+                }
+            }
+        }
+        return compteur;
+        
     }
 
     /**
