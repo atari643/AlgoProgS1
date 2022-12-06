@@ -23,7 +23,7 @@ public class JoueurBiosphere7Test {
         //testActionsPossibles_niveau5();
         //testActionsPossibles_niveau6();
         //testActionsPossibles_niveau7();
-        //testActionsPossibles_niveau8();
+        testActionsPossibles_niveau8();
         testActionsPossibles_niveau9();
     }
 
@@ -349,9 +349,19 @@ public class JoueurBiosphere7Test {
                 = new ActionsPossibles(actionsPossiblesDepuisPlateau2);
         actionsPossibles2.afficher();
         assertTrue(actionsPossibles2.contient("O,16,22"));
-        int nombreActionTotal = 1;
+        int nombreDifferentActionParCaseVide = 6;
+        int nombreDePlanteSurPlateau = 23;
+        int nombreDifferentActionParCaseRemplie = 3;
+        int nombreDeCaseVide = 0;
+        int nombreDeLegumeIsole = 3;
+        int actionOmbre = 1;
+        int nombreActionTotal = ((Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES 
+                - nombreDePlanteSurPlateau - nombreDeCaseVide) * nombreDifferentActionParCaseVide + 
+                nombreDePlanteSurPlateau * nombreDifferentActionParCaseRemplie 
+                - nombreDeLegumeIsole + actionOmbre);
         assertEquals(nombreActionTotal,
                 actionsPossiblesDepuisPlateau.length);
+        
     }
     @Test
     public void testMinimum1Espèce() {
@@ -448,12 +458,14 @@ public class JoueurBiosphere7Test {
         JoueurBiosphere7 joueur = new JoueurBiosphere7();
         ActionsPossibles actions = new ActionsPossibles();
         Vitalites vitalites = new Vitalites(0, 0);
-        Case[][] plateau = Utils.plateauDepuisTexte(PLATEAU_NIVEAU9);
-        assertEquals(0, actions.nbActions);
-        vitalites = new Vitalites(18, 27);
+        Case[][] plateau = Utils.plateauDepuisTexte(PLATEAU_VIDE);
         joueur.ajouterOmbre(vitalites, plateau, actions);
+        assertEquals(0, actions.nbActions);
+        Case[][] plateau2 = Utils.plateauDepuisTexte(PLATEAU_NIVEAU9);
+        vitalites = new Vitalites(23, 27);
+        joueur.ajouterOmbre(vitalites, plateau2, actions);
         assertTrue(actions.contient("O,16,22"));
-        assertEquals(2, actions.nbActions);
+        assertEquals(1, actions.nbActions);
     }
     /**
      * Test de la fonction ajoutAction.
@@ -531,6 +543,31 @@ public class JoueurBiosphere7Test {
         Vitalites vita2 = JoueurBiosphere7.vitalitesPlateau(plateau2);
         assertEquals(2, vita2.vitalitesRouge);
         assertEquals(2, vita2.vitalitesBleu);
+        // plateau : rouge 6, bleu 4
+        Case[][] plateau3 = Utils.plateauDepuisTexte(PLATEAU_NIVEAU3);
+        Vitalites vita3 = JoueurBiosphere7.vitalitesPlateau(plateau3);
+        assertEquals(6, vita3.vitalitesRouge);
+        assertEquals(4, vita3.vitalitesBleu);
+        // plateau : rouge 12, bleu 12
+        Case[][] plateau4 = Utils.plateauDepuisTexte(PLATEAU_NIVEAU6);
+        Vitalites vita4 = JoueurBiosphere7.vitalitesPlateau(plateau4);
+        assertEquals(12, vita4.vitalitesRouge);
+        assertEquals(12, vita4.vitalitesBleu);
+        // plateau : rouge 26, bleu 17
+        Case[][] plateau5 = Utils.plateauDepuisTexte(PLATEAU_NIVEAU7);
+        Vitalites vita5 = JoueurBiosphere7.vitalitesPlateau(plateau5);
+        assertEquals(26, vita5.vitalitesRouge);
+        assertEquals(17, vita5.vitalitesBleu);
+        // plateau : rouge 40, bleu 23
+        Case[][] plateau6 = Utils.plateauDepuisTexte(PLATEAU_NIVEAU8);
+        Vitalites vita6 = JoueurBiosphere7.vitalitesPlateau(plateau6);
+        assertEquals(40, vita6.vitalitesRouge);
+        assertEquals(23, vita6.vitalitesBleu);
+        // plateau : rouge 18, bleu 24
+        Case[][] plateau7 = Utils.plateauDepuisTexte(PLATEAU_NIVEAU9);
+        Vitalites vita7 = JoueurBiosphere7.vitalitesPlateau(plateau7);
+        assertEquals(23, vita7.vitalitesRouge);
+        assertEquals(27, vita7.vitalitesBleu);
     }
 
     /**
