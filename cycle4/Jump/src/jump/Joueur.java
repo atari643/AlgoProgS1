@@ -1,5 +1,7 @@
 package jump;
 
+import java.util.Scanner;
+
 /**
  * Un joueur.
  */
@@ -127,6 +129,8 @@ class Joueur {
      * @return la ligne correspondant à ce joueur dans le fichier de scores
      */
     String ligneFichierScore() {
-        return "";
+        StringBuilder ligneJoueur = new StringBuilder();
+        ligneJoueur.append(nom).append(SEPARATEUR).append(score);
+        return toString();
     }
 }

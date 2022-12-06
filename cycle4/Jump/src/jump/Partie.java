@@ -2,6 +2,9 @@ package jump;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 /**
@@ -512,6 +515,18 @@ class Partie {
      * Sauvegarde des scores dans le fichier de scores.
      */
     void sauverScores() {
+        try {
+            FileWriter fileWriter = new FileWriter(FICHIER_SCORES, true);
+            PrintWriter fichier = new PrintWriter(fileWriter);
+            for (int i = 0; i < nbJoueurs; ++i) {
+                fichier.println(joueurs[i].ligneFichierScore());
+            }
+        } catch (FileNotFoundException | ArrayIndexOutOfBoundsException e1) {
+            System.out.println("Exception rattrapée : " + e1);
+        } catch (IOException e3) {
+            System.out.println("Excepiton rattrapée: " + e3);
+        } 
+        
     }
 
     /**
