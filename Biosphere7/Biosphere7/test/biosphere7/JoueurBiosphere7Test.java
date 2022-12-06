@@ -329,7 +329,7 @@ public class JoueurBiosphere7Test {
                 actionsPossiblesDepuisPlateau.length);
     }
     /**
-     * Test de la fonction actionsPossibles, au niveau 8
+     * Test de la fonction actionsPossibles, au niveau 9
      */
     public void testActionsPossibles_niveau9() {
         JoueurBiosphere7 joueur = new JoueurBiosphere7();
@@ -440,7 +440,21 @@ public class JoueurBiosphere7Test {
         // désormais, deux actions possibles
         assertEquals(3, actions.nbActions);
     }
-
+    /**
+     * Test de la fonction ajoutOmbre.
+     */
+    @Test
+    public void testAjoutOmbre() {
+        JoueurBiosphere7 joueur = new JoueurBiosphere7();
+        ActionsPossibles actions = new ActionsPossibles();
+        Vitalites vitalites = new Vitalites(0, 0);
+        Case[][] plateau = Utils.plateauDepuisTexte(PLATEAU_NIVEAU9);
+        assertEquals(0, actions.nbActions);
+        vitalites = new Vitalites(18, 27);
+        joueur.ajouterOmbre(vitalites, plateau, actions);
+        assertTrue(actions.contient("O,16,22"));
+        assertEquals(2, actions.nbActions);
+    }
     /**
      * Test de la fonction ajoutAction.
      */
