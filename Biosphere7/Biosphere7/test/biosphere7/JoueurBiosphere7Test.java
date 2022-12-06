@@ -23,7 +23,7 @@ public class JoueurBiosphere7Test {
         //testActionsPossibles_niveau5();
         //testActionsPossibles_niveau6();
         //testActionsPossibles_niveau7();
-        testActionsPossibles_niveau8();
+        //testActionsPossibles_niveau8();
         testActionsPossibles_niveau9();
     }
 
@@ -370,7 +370,7 @@ public class JoueurBiosphere7Test {
         Coordonnees[] voisine = JoueurBiosphere7.voisines(v, 14);
         assertTrue(JoueurBiosphere7.minimum1voisinDeMemeEspece(v, plateau, voisine));
         Coordonnees v2 = new Coordonnees(0, 0);
-        Coordonnees[] voisine2 = JoueurBiosphere7.voisines(v, 14);
+        Coordonnees[] voisine2 = JoueurBiosphere7.voisines(v2, 14);
         assertFalse(JoueurBiosphere7.minimum1voisinDeMemeEspece(v2, plateau, voisine2));
         Coordonnees v3 = new Coordonnees(0, 13);
         Coordonnees[] voisine3 = JoueurBiosphere7.voisines(v3, 14);
@@ -461,9 +461,13 @@ public class JoueurBiosphere7Test {
         Case[][] plateau = Utils.plateauDepuisTexte(PLATEAU_VIDE);
         joueur.ajouterOmbre(vitalites, plateau, actions);
         assertEquals(0, actions.nbActions);
-        Case[][] plateau2 = Utils.plateauDepuisTexte(PLATEAU_NIVEAU9);
-        vitalites = new Vitalites(23, 27);
+        Case[][] plateau2 = Utils.plateauDepuisTexte(PLATEAU_NIVEAU2);
+        vitalites = new Vitalites(2, 2);
         joueur.ajouterOmbre(vitalites, plateau2, actions);
+        assertEquals(0, actions.nbActions);
+        Case[][] plateau3 = Utils.plateauDepuisTexte(PLATEAU_NIVEAU9);
+        vitalites = new Vitalites(23, 27);
+        joueur.ajouterOmbre(vitalites, plateau3, actions);
         assertTrue(actions.contient("O,16,22"));
         assertEquals(1, actions.nbActions);
     }

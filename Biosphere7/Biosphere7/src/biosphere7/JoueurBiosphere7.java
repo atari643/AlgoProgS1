@@ -28,9 +28,6 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         ActionsPossibles actions = new ActionsPossibles();
         // calculer les vitalités sur le plateau initial
         Vitalites vitalites = vitalitesPlateau(plateau);
-        if (niveau == 9) {
-            ajouterOmbre(vitalites, plateau, actions);
-        }
         // ajout des actions "planter une plante"
         for (int lig = 0; lig < Coordonnees.NB_LIGNES; lig++) {
             for (int col = 0; col < Coordonnees.NB_COLONNES; col++) {
@@ -86,6 +83,9 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                 }
                 vitalites = vitalitesPlateau(plateau);
             }
+        }
+        if (niveau == 9) {
+            ajouterOmbre(vitalites, plateau, actions);
         }
         System.out.println("actionsPossibles : fin");
         return actions.nettoyer();
@@ -315,12 +315,15 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
     static boolean minimum1voisinDeMemeEspece(Coordonnees coord, Case[][] plateau, Coordonnees[] voisine) {
         int compteur = 0;
         boolean statue = false;
+        boolean checkPlante=plateau[voisine[compteur].ligne][voisine[compteur].colonne].plantePresente();
+        if (checkPlante == true){
         char espece = plateau[coord.ligne][coord.colonne].espece;
         while (compteur < voisine.length && !statue) {
             if (plateau[voisine[compteur].ligne][voisine[compteur].colonne].espece == espece) {
                 statue = true;
             }
             compteur++;
+        }
         }
         return statue;
     }
@@ -407,13 +410,14 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
     }
     /**
      * Fonction qui gère l'ombre de l'entièreté du plateau 
-     * @param vitalites
-     * @param plateau
-     * @param actions 
+     * @param vitalites la vitalité du plateau actuel
+     * @param plateau le plateau de jeu
+     * @param actions l'ensemble des actions possibles (en construction)
      */
     void ajouterOmbre(Vitalites vitalites, Case[][] plateau, ActionsPossibles actions) {
         int vitaliterR = vitalites.vitalitesRouge;
         int vitaliterB = vitalites.vitalitesBleu;
+        int planteNord = 0;
         for (int i = 0; i < plateau.length; ++i) {
             for (int y = 0; y < plateau[0].length; ++y) {
                 if (plateau[i][y].espece == 'S' || plateau[i][y].espece == 'P') {
@@ -421,12 +425,15 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                     int vitalitePlante = plateau[c.ligne][c.colonne].vitalite;
                     int distance = 1;
                     while (c.ligne > 0 && distance < vitalitePlante) {
-                        int planteNord = plateau[suivante(c, Direction.NORD).ligne][suivante(c, Direction.NORD).colonne].vitalite;
-                        if (plateau[suivante(c, Direction.NORD).ligne][suivante(c, Direction.NORD).colonne].plantePresente() && planteNord > 0) {
+                        planteNord = plateau[suivante(c, Direction.NORD).ligne][suivante(c, Direction.NORD).colonne].vitalite;
+                        if (plateau[suivante(c, Direction.NORD).ligne][suivante(c, Direction.NORD).colonne].plantePresente()) {
+                            planteNord -= (int) (vitalitePlante - distance) / 2;
+                            if (planteNord>0){
                             if (plateau[suivante(c, Direction.NORD).ligne][suivante(c, Direction.NORD).colonne].couleur == 'R') {
                                 vitaliterR -= (int) (vitalitePlante - distance) / 2;
                             } else {
                                 vitaliterB -= (int) (vitalitePlante - distance) / 2;
+                            }
                             }
 
                         }
