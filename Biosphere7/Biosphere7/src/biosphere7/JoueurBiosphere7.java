@@ -425,9 +425,8 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                     int vitalitePlante = plateau[c.ligne][c.colonne].vitalite;
                     int distance = 1;
                     while (c.ligne > 0 && distance < vitalitePlante) {
-                        planteNord = plateau[suivante(c, Direction.NORD).ligne][suivante(c, Direction.NORD).colonne].vitalite;
                         if (plateau[suivante(c, Direction.NORD).ligne][suivante(c, Direction.NORD).colonne].plantePresente()) {
-                            planteNord -= (int) (vitalitePlante - distance) / 2;
+                            planteNord = plateau[suivante(c, Direction.NORD).ligne][suivante(c, Direction.NORD).colonne].vitalite;
                             if (planteNord>0){
                             if (plateau[suivante(c, Direction.NORD).ligne][suivante(c, Direction.NORD).colonne].couleur == 'R') {
                                 vitaliterR -= (int) (vitalitePlante - distance) / 2;
@@ -435,7 +434,7 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                                 vitaliterB -= (int) (vitalitePlante - distance) / 2;
                             }
                             }
-
+                            planteNord = plateau[suivante(c, Direction.NORD).ligne][suivante(c, Direction.NORD).colonne].vitalite - (int) (vitalitePlante - distance) / 2;
                         }
                         distance += 1;
                         c = suivante(c, Direction.NORD);
