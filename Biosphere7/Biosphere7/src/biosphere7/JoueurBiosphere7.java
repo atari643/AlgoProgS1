@@ -315,7 +315,7 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
     static boolean minimum1voisinDeMemeEspece(Coordonnees coord, Case[][] plateau, Coordonnees[] voisine) {
         int compteur = 0;
         boolean statue = false;
-        boolean checkPlante=plateau[voisine[compteur].ligne][voisine[compteur].colonne].plantePresente();
+        boolean checkPlante=plateau[coord.ligne][coord.colonne].plantePresente();
         if (checkPlante == true){
         char espece = plateau[coord.ligne][coord.colonne].espece;
         while (compteur < voisine.length && !statue) {

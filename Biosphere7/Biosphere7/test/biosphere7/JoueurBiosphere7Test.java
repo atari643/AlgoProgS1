@@ -23,7 +23,7 @@ public class JoueurBiosphere7Test {
         //testActionsPossibles_niveau5();
         //testActionsPossibles_niveau6();
         //testActionsPossibles_niveau7();
-        //testActionsPossibles_niveau8();
+        testActionsPossibles_niveau8();
         testActionsPossibles_niveau9();
     }
 
@@ -328,6 +328,7 @@ public class JoueurBiosphere7Test {
         assertEquals(nombreActionTotal,
                 actionsPossiblesDepuisPlateau.length);
     }
+
     /**
      * Test de la fonction actionsPossibles, au niveau 9
      */
@@ -343,26 +344,28 @@ public class JoueurBiosphere7Test {
         // on peut afficher toutes les actions possibles calculées :
         actionsPossibles.afficher();
         assertTrue(actionsPossibles.contient("O,16,22"));
+        Case[][] plateau2 = Utils.plateauDepuisTexte(PLATEAU_NIVEAU9_2);
         String[] actionsPossiblesDepuisPlateau2
-                = joueur.actionsPossibles(plateau, 'B', 9);
+                = joueur.actionsPossibles(plateau2, 'B', 9);
         ActionsPossibles actionsPossibles2
                 = new ActionsPossibles(actionsPossiblesDepuisPlateau2);
         actionsPossibles2.afficher();
-        assertTrue(actionsPossibles2.contient("O,16,22"));
+        assertTrue(actionsPossibles2.contient("ImL,15,28"));
         int nombreDifferentActionParCaseVide = 6;
         int nombreDePlanteSurPlateau = 23;
         int nombreDifferentActionParCaseRemplie = 3;
         int nombreDeCaseVide = 0;
         int nombreDeLegumeIsole = 3;
         int actionOmbre = 1;
-        int nombreActionTotal = ((Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES 
-                - nombreDePlanteSurPlateau - nombreDeCaseVide) * nombreDifferentActionParCaseVide + 
-                nombreDePlanteSurPlateau * nombreDifferentActionParCaseRemplie 
+        int nombreActionTotal = ((Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES
+                - nombreDePlanteSurPlateau - nombreDeCaseVide) * nombreDifferentActionParCaseVide
+                + nombreDePlanteSurPlateau * nombreDifferentActionParCaseRemplie
                 - nombreDeLegumeIsole + actionOmbre);
         assertEquals(nombreActionTotal,
                 actionsPossiblesDepuisPlateau.length);
-        
+
     }
+
     @Test
     public void testMinimum1Espèce() {
         Coordonnees v = new Coordonnees(4, 5);
@@ -450,6 +453,7 @@ public class JoueurBiosphere7Test {
         // désormais, deux actions possibles
         assertEquals(3, actions.nbActions);
     }
+
     /**
      * Test de la fonction ajoutOmbre.
      */
@@ -471,6 +475,7 @@ public class JoueurBiosphere7Test {
         assertTrue(actions.contient("O,16,22"));
         assertEquals(1, actions.nbActions);
     }
+
     /**
      * Test de la fonction ajoutAction.
      */
@@ -814,6 +819,40 @@ public class JoueurBiosphere7Test {
             + "m|   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
             + "n|   |   |   |   |   |HB1|   |   |SB8|   |   |   |   |DB1|\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n";
+    
+    /* Un plateau pour tester le niveau 9 particulié.
+     */
+    final String PLATEAU_NIVEAU9_2
+            = "   A   B   C   D   E   F   G   H   I   J   K   L   M   N \n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "a|   |   |   |   |DR2|   |   |   |   |   |   |DR1|   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "b|   |SR1|   |   |DR1|   |   |   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "c|   |   |   |   |   |   |   |   |   |   |   |   |   |DB1|\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "d|   |   |   |   |   |TR1|   |   |   |   |   |   |SR1|   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "e|   |   |BR1|   |   |   |BR1|   |TB2|SB1|PB2|   |   |SB1|\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "f|   |   |   |   |   |SB1|   |   |   |   |   |   |   |DR1|\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "g|   |SR1|   |   |   |   |   |   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "h|   |   |   |   |   |   |   |DR1|   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "i|   |   |   |   |   |   |   |HR2|   |   |   |   |   |BB1|\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "j|   |   |   |   |   |   |   |HB1|   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "k|   |   |PR1|   |   |   |   |   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "l|   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "m|   |   |SB2|   |   |   |   |   |   |   |   |HB2|HB4|   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "n|   |   |TB1|   |   |PB3|   |   |   |   |   |   |   |   |\n"
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n";
 
 }
