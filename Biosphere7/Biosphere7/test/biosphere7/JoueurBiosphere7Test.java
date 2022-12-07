@@ -23,7 +23,7 @@ public class JoueurBiosphere7Test {
         //testActionsPossibles_niveau5();
         //testActionsPossibles_niveau6();
         //testActionsPossibles_niveau7();
-        testActionsPossibles_niveau8();
+        //testActionsPossibles_niveau8();
         testActionsPossibles_niveau9();
     }
 
@@ -351,6 +351,13 @@ public class JoueurBiosphere7Test {
                 = new ActionsPossibles(actionsPossiblesDepuisPlateau2);
         actionsPossibles2.afficher();
         assertTrue(actionsPossibles2.contient("ImL,15,28"));
+        Case[][] plateau3 = Utils.plateauDepuisTexte(PLATEAU_NIVEAU9_3);
+        String[] actionsPossiblesDepuisPlateau3
+                = joueur.actionsPossibles(plateau3, 'B', 9);
+        ActionsPossibles actionsPossibles3
+                = new ActionsPossibles(actionsPossiblesDepuisPlateau3);
+        actionsPossibles3.afficher();
+        assertTrue(actionsPossibles3.contient("O,37,18"));
         int nombreDifferentActionParCaseVide = 6;
         int nombreDePlanteSurPlateau = 23;
         int nombreDifferentActionParCaseRemplie = 3;
@@ -820,7 +827,7 @@ public class JoueurBiosphere7Test {
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
             + "n|   |   |   |   |   |HB1|   |   |SB8|   |   |   |   |DB1|\n"
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n";
-    
+
     /* Un plateau pour tester le niveau 9 particulié.
      */
     final String PLATEAU_NIVEAU9_2
@@ -853,6 +860,40 @@ public class JoueurBiosphere7Test {
             + "m|   |   |SB2|   |   |   |   |   |   |   |   |HB2|HB4|   |\n"
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
             + "n|   |   |TB1|   |   |PB3|   |   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n";
+
+    /* Un plateau pour tester le niveau 9 particulié.
+     */
+    final String PLATEAU_NIVEAU9_3
+            = "   A   B   C   D   E   F   G   H   I   J   K   L   M   N \n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "a|   |   |   |   |   |   |   |   |   |PR1|   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "b|   |   |   |   |   |   |   |   |BB1|   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "c|   |   |   |   |   |   |   |DB1|   |   |   |   |   |DR1|\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "d|   |   |   |   |HB8|   |   |SB4|   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "e|   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "f|   |   |   |   |   |   |SR1|   |   |   |   |HB1|   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "g|   |   |   |   |SR6|   |   |   |   |   |HB1|   |PR1|   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "h|   |   |   |   |   |   |   |   |   |   |   |   |   |TB1|\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "i|   |BR2|HB1|   |   |   |   |   |SR8|   |PB2|   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "j|   |PR1|   |   |PR1|   |   |HR1|SR5|   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "k|   |   |   |   |   |   |   |   |   |   |PR8|   |   |SB1|\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "l|   |   |   |   |   |   |   |   |SR5|   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "m|   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "n|   |   |   |   |   |   |   |HB1|   |SB1|   |   |   |   |\n"
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n";
 
 }
