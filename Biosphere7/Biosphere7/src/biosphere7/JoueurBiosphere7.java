@@ -85,7 +85,6 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
             }
         }
         if (niveau == 9) {
-            System.out.println(vitalites.vitalitesBleu);
             ajouterOmbre(vitalites, plateau, actions);
         }
         System.out.println("actionsPossibles : fin");
@@ -420,29 +419,32 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
     void ajouterOmbre(Vitalites vitalites, Case[][] plateau, ActionsPossibles actions) {
         int vitaliterR = vitalites.vitalitesRouge;
         int vitaliterB = vitalites.vitalitesBleu;
-        int planteNord = 0;
+        int planteSud = 0;
         for (int i = 0; i < plateau.length; ++i) {
             for (int y = 0; y < plateau[0].length; ++y) {
-                if (plateau[i][y].espece == 'S' || plateau[i][y].espece == 'P') {
+                if (plateau[i][y].plantePresente()) {
                     Coordonnees c = new Coordonnees(i, y);
-                    int vitalitePlante = plateau[c.ligne][c.colonne].vitalite;
                     int distance = 0;
-                    while (c.ligne > 0 && distance < vitalitePlante) {
-                        c = suivante(c, Direction.NORD);
+                    double valeurEnlever = 0;
+                    int vitalitePlant=plateau[i][y].vitalite;
+                    while (c.ligne < 13 && vitalitePlant-(int)valeurEnlever>0) {
+                        c = suivante(c, Direction.SUD);
                         distance += 1;
-                        double valeurAjouter = 0;
                         if (plateau[c.ligne][c.colonne].plantePresente()) {
-                            planteNord = plateau[c.ligne][c.colonne].vitalite;
-                            valeurAjouter = ((vitalitePlante - distance) / 2);
-                            if (valeurAjouter > planteNord) {
-                                valeurAjouter = planteNord;
+                            if (plateau[c.ligne][c.colonne].espece == 'P' || plateau[c.ligne][c.colonne].espece == 'S') {
+                                planteSud = plateau[c.ligne][c.colonne].vitalite;
+                                if (distance < planteSud) {
+                                    valeurEnlever = ((planteSud - distance) / 2);
+                                    
+                                    if (plateau[i][y].couleur == 'R') {
+                                        vitaliterR -= (int) valeurEnlever;
+                                    } else if (plateau[i][y].couleur == 'B') {
+                                        vitaliterB -= (int) valeurEnlever;
+                                    }
+                                    vitalitePlant-=valeurEnlever;
+                                }
                             }
-                            if (plateau[c.ligne][c.colonne].couleur == 'R') {
-                                vitaliterR -= (int) valeurAjouter;
-                            } else if (plateau[c.ligne][c.colonne].couleur == 'B') {
-                                vitaliterB -= (int) valeurAjouter;
 
-                            }
                         }
                     }
                 }
