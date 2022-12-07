@@ -426,8 +426,8 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                     Coordonnees c = new Coordonnees(i, y);
                     int distance = 0;
                     double valeurEnlever = 0;
-                    int vitalitePlant=plateau[i][y].vitalite;
-                    while (c.ligne < 13 && vitalitePlant-(int)valeurEnlever>0) {
+                    int vitalitePlant = plateau[i][y].vitalite;
+                    while (c.ligne < 13 && vitalitePlant - (int) valeurEnlever > 0) {
                         c = suivante(c, Direction.SUD);
                         distance += 1;
                         if (plateau[c.ligne][c.colonne].plantePresente()) {
@@ -435,7 +435,7 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                                 planteSud = plateau[c.ligne][c.colonne].vitalite;
                                 if (distance < planteSud) {
                                     valeurEnlever = ((planteSud - distance) / 2);
-                                    if ((int)valeurEnlever > vitalitePlant){
+                                    if ((int) valeurEnlever > vitalitePlant) {
                                         valeurEnlever = vitalitePlant;
                                     }
                                     if (plateau[i][y].couleur == 'R') {
@@ -443,7 +443,9 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                                     } else if (plateau[i][y].couleur == 'B') {
                                         vitaliterB -= (int) valeurEnlever;
                                     }
-                                    vitalitePlant-=valeurEnlever;
+                                    vitalitePlant = plateau[i][y].vitalite - (int) valeurEnlever;
+                                    valeurEnlever = 0;
+
                                 }
                             }
 
