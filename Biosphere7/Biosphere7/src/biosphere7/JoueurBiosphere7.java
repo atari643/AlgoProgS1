@@ -435,7 +435,9 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                                 planteSud = plateau[c.ligne][c.colonne].vitalite;
                                 if (distance < planteSud) {
                                     valeurEnlever = ((planteSud - distance) / 2);
-                                    
+                                    if ((int)valeurEnlever > vitalitePlant){
+                                        valeurEnlever = vitalitePlant;
+                                    }
                                     if (plateau[i][y].couleur == 'R') {
                                         vitaliterR -= (int) valeurEnlever;
                                     } else if (plateau[i][y].couleur == 'B') {
