@@ -234,7 +234,7 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         int vitaliterR = vitalites.vitalitesRouge;
         int vitaliterB = vitalites.vitalitesBleu;
         AdditionSousCondition val = new AdditionSousCondition(vitaliterR, vitaliterB, 1);
-        val.Condition(coord, couleur == 'R');
+        val.Condition(couleur == 'R');
         String action = "" + initiale(p) + coord.carLigne() + coord.carColonne() + ","
                 + (val.VitaliteRouge) + ","
                 + (val.VitaliteBleu);
@@ -409,14 +409,11 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         }
 
         valeurAjouter *= voisinVide;
-        if (couleurJ == 'R') {
-            vitaliterR += valeurAjouter;
-        } else if (couleurJ == 'B') {
-            vitaliterB += valeurAjouter;
-        }
+        AdditionSousCondition val = new AdditionSousCondition(vitaliterR, vitaliterB, valeurAjouter);
+        val.Condition(couleurJ);
         String action = "I" + coord.carLigne() + coord.carColonne() + ","
-                + (vitaliterR) + ","
-                + (vitaliterB);
+                + (val.VitaliteRouge) + ","
+                + (val.VitaliteBleu);
         actions.ajouterAction(action);
 
     }
@@ -435,12 +432,8 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
             Vitalites vitalites, char couleur, Case[][] plateau) {
         int vitaliterR = vitalites.vitalitesRouge;
         int vitaliterB = vitalites.vitalitesBleu;
-
-        if (couleur == 'R') {
-            vitaliterR -= plateau[coord.ligne][coord.colonne].vitalite;
-        } else {
-            vitaliterB -= plateau[coord.ligne][coord.colonne].vitalite;
-        }
+        AdditionSousCondition val = new AdditionSousCondition(vitaliterR, vitaliterB, -plateau[coord.ligne][coord.colonne].vitalite);
+        val.Condition(couleur);
 
         Coordonnees[] v = voisines(coord, 14);
 
@@ -448,16 +441,16 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
             if (plateau[v1.ligne][v1.colonne].plantePresente()) {
                 if (plateau[v1.ligne][v1.colonne].vitalite < 9) {
                     if (plateau[v1.ligne][v1.colonne].couleur == 'R') {
-                        vitaliterR += 1;
+                        val.VitaliteRouge+= 1;
                     } else if (plateau[v1.ligne][v1.colonne].couleur == 'B') {
-                        vitaliterB += 1;
+                        val.VitaliteBleu += 1;
                     }
                 }
             }
         }
         String action = "C" + coord.carLigne() + coord.carColonne() + ","
-                + (vitaliterR) + ","
-                + (vitaliterB);
+                + (val.VitaliteRouge) + ","
+                + (val.VitaliteBleu);
         actions.ajouterAction(action);
 
     }
