@@ -25,8 +25,8 @@ public class JoueurBiosphere7Test {
         //testActionsPossibles_niveau6();
         //testActionsPossibles_niveau7();
         //testActionsPossibles_niveau8();
-        testActionsPossibles_niveau9();
-        //testActionsPossibles_niveau10();
+        //testActionsPossibles_niveau9();
+        testActionsPossibles_niveau10();
     }
 
     /**
