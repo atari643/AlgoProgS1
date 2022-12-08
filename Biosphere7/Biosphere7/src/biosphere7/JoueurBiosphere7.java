@@ -37,60 +37,73 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                 int compteurBleu = 0;
                 int compteurRouge = 0;
                 boolean status = false;
-                for (Coordonnees v1 : v) {
-                    if (plateau[coord.ligne][coord.colonne].plantePresente() == false && plateau[coord.ligne][coord.colonne].nature == 'T') {
-                        if (plateau[v1.ligne][v1.colonne].nature == 'E') {
+                if (plateau[coord.ligne][coord.colonne].plantePresente() == false && plateau[coord.ligne][coord.colonne].nature == 'T') {
+                    for (int i = 0; i < v.length; i++) {
+                        if (plateau[v[i].ligne][v[i].colonne].nature == 'E') {
                             compteur += 1;
-                            if (couleurJoueur == 'B') {
-                                vitalites.vitalitesBleu += 1;
-                            } else {
-                                vitalites.vitalitesRouge += 1;
-                            }
-                        } else if (plateau[v1.ligne][v1.colonne].plantePresente()) {
+                            status = true;
+                        }
+                        if (plateau[v[i].ligne][v[i].colonne].plantePresente()) {
                             compteur += 1;
-                            boolean t = avoir3Voisines(v1, 14, plateau);
-                            if (plateau[v1.ligne][v1.colonne].couleur == 'B') {
+                            boolean t = avoir3Voisines(v[i], 14, plateau);
+                            if (plateau[v[i].ligne][v[i].colonne].couleur == 'B') {
                                 compteurBleu += 1;
                                 if (couleurJoueur == 'B') {
                                     vitalites.vitalitesBleu += 1;
                                 }
                                 if (t) {
-                                    vitalites.vitalitesBleu -= plateau[v1.ligne][v1.colonne].vitalite;
+                                    vitalites.vitalitesBleu -= plateau[v[i].ligne][v[i].colonne].vitalite;
                                 }
-                            } else if (plateau[v1.ligne][v1.colonne].couleur == 'R') {
+                            } else if (plateau[v[i].ligne][v[i].colonne].couleur == 'R') {
                                 compteurRouge += 1;
                                 if (couleurJoueur == 'R') {
                                     vitalites.vitalitesRouge += 1;
                                 }
                                 if (t) {
-                                    vitalites.vitalitesRouge -= plateau[v1.ligne][v1.colonne].vitalite;
+                                    vitalites.vitalitesRouge -= plateau[v[i].ligne][v[i].colonne].vitalite;
                                 }
                             }
                         }
-                    } else if (plateau[coord.ligne][coord.colonne].plantePresente()) {
-                        ajoutActionCouper(coord, actions, vitalites, plateau[lig][col].couleur, plateau);
-                        ajoutActionFertiliser(coord, actions, vitalites, plateau);
-                        if (plateau[v1.ligne][v1.colonne].plantePresente() || plateau[v1.ligne][v1.colonne].nature == 'E') {
-                            compteur += 1;
-                            if (plateau[v1.ligne][v1.colonne].nature == 'E') {
-                                status = true;
-                            }
+                    }
+                    if (status) {
+                        if (couleurJoueur == 'B') {
+                            vitalites.vitalitesBleu += 1;
                         }
-                        ajoutActionRotation(coord, actions, vitalites, plateau, couleurJoueur, compteurRouge, compteurBleu, status);
-                        if (checkEspece(plateau[coord.ligne][coord.colonne].espece)) {
-                            if (minimum1voisinDeMemeEspece(coord, plateau, v)) {
-                                ajoutActionDisséminer(coord, actions, vitalites, couleurJoueur, plateau, v, compteur);
+                        if (couleurJoueur == 'R') {
+                            vitalites.vitalitesRouge += 1;
+                        }
+                    }
+                    if (compteur < 4 || compteur == 4 && status == true) {
+                        for (Plante p : Plante.values()) {
+                            ajoutAction(coord, actions, vitalites, couleurJoueur, p);
+                        }
+                    }
+                } else if (plateau[coord.ligne][coord.colonne].plantePresente()) {
+                    ajoutActionCouper(coord, actions, vitalites, plateau[lig][col].couleur, plateau);
+                    ajoutActionFertiliser(coord, actions, vitalites, plateau);
+                    for (int i = 0; i < v.length; i++) {
+                        if (plateau[v[i].ligne][v[i].colonne].nature == 'E') {
+                            compteur += 1;
+                            status = true;
+                        }
+                        if (plateau[v[i].ligne][v[i].colonne].plantePresente()) {
+                            compteur += 1;
+                            if (plateau[v[i].ligne][v[i].colonne].couleur == 'B') {
+                                compteurBleu += 1;
+                            } else if (plateau[v[i].ligne][v[i].colonne].couleur == 'R') {
+                                compteurRouge += 1;
                             }
 
-                        } else {
-                            ajoutActionDisséminer(coord, actions, vitalites, couleurJoueur, plateau, v, compteur);
                         }
                     }
-                }
-                if (compteur < 4 && plateau[coord.ligne][coord.colonne].plantePresente() == false && plateau[coord.ligne][coord.colonne].nature == 'T') {
-                    for (Plante p : Plante.values()) {
-                        ajoutAction(coord, actions, vitalites, couleurJoueur, p);
+                    if (checkEspece(plateau[coord.ligne][coord.colonne].espece)) {
+                        if (minimum1voisinDeMemeEspece(coord, plateau, v)) {
+                            ajoutActionDisséminer(coord, actions, vitalites, couleurJoueur, plateau, v, compteur);
+                        }
+                    } else {
+                        ajoutActionDisséminer(coord, actions, vitalites, couleurJoueur, plateau, v, compteur);
                     }
+                    ajoutActionRotation(coord, actions, vitalites, plateau, couleurJoueur, compteurRouge, compteurBleu, status);
                 }
                 vitalites = vitalitesPlateau(plateau);
             }
@@ -115,6 +128,7 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                 break;
             default:
                 status = false;
+                break;
         }
         return status;
     }
@@ -551,15 +565,21 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         if (plateau[coord.ligne][coord.colonne].couleur == 'R' && couleurJoueur == 'R') {
             vitaliterR -= plateau[coord.ligne][coord.colonne].vitalite;
             vitaliterR += valeurAjouter + compteurRouge;
+            for (int i = 0; i < tab.length; ++i) {
+                String action = "R" + "" + tab[i] + coord.carLigne() + coord.carColonne() + ","
+                        + (vitaliterR) + ","
+                        + (vitaliterB);
+                actions.ajouterAction(action);
+            }
         } else if (plateau[coord.ligne][coord.colonne].couleur == 'B' && couleurJoueur == 'B') {
             vitaliterB -= plateau[coord.ligne][coord.colonne].vitalite;
             vitaliterB += valeurAjouter + compteurBleu;
-        }
-        for (int i = 0; i < tab.length; ++i) {
-            String action = "R" + "" + tab[i] + coord.carLigne() + coord.carColonne() + ","
-                    + (vitaliterR) + ","
-                    + (vitaliterB);
-            actions.ajouterAction(action);
+            for (int i = 0; i < tab.length; ++i) {
+                String action = "R" + "" + tab[i] + coord.carLigne() + coord.carColonne() + ","
+                        + (vitaliterR) + ","
+                        + (vitaliterB);
+                actions.ajouterAction(action);
+            }
         }
 
     }
