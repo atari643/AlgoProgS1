@@ -11,6 +11,10 @@ import java.util.Date;
 public class JoueurBiosphere7 implements IJoueurBiosphere7 {
 
     /**
+     * Maximum de voisin possible pour une case
+     */
+    final int MAXIMUMVOISINPOSSIBLE=4;
+    /**
      * Cette méthode renvoie, pour un plateau donné et un joueur donné, toutes
      * les actions possibles pour ce joueur.
      *
@@ -33,6 +37,7 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
             for (int col = 0; col < Coordonnees.NB_COLONNES; col++) {
                 Coordonnees coord = new Coordonnees(lig, col);
                 Coordonnees[] v = voisines(coord, 14);
+                
                 int compteur = 0;
                 int compteurBleu = 0;
                 int compteurRouge = 0;
@@ -73,7 +78,7 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                             vitalites.vitalitesRouge += 1;
                         }
                     }
-                    if (compteur < 4 || compteur == 4 && status == true) {
+                    if (compteur < MAXIMUMVOISINPOSSIBLE || compteur == MAXIMUMVOISINPOSSIBLE && status == true) {
                         for (Plante p : Plante.values()) {
                             ajoutAction(coord, actions, vitalites, couleurJoueur, p);
                         }
