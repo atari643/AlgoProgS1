@@ -401,39 +401,30 @@ public class JoueurBiosphere7Test {
                 = new ActionsPossibles(actionsPossiblesDepuisPlateau);
         // on peut afficher toutes les actions possibles calculées :
         actionsPossibles.afficher();
-        assertTrue(actionsPossibles.contient("PaA,21,28"));
-        assertTrue(actionsPossibles.contient("RBaD,21,30"));
-        assertTrue(actionsPossibles.contient("RDaD,21,30"));
-        assertTrue(actionsPossibles.contient("RTaD,21,30"));
-        assertTrue(actionsPossibles.contient("RHaD,21,30"));
-        assertTrue(actionsPossibles.contient("RBnI,21,22"));
-        assertTrue(actionsPossibles.contient("RDnI,21,22"));
-        assertTrue(actionsPossibles.contient("RTnI,21,22"));
-        assertTrue(actionsPossibles.contient("RHnI,21,22"));
-        assertTrue(actionsPossibles.contient("RPnF,21,30"));
-        assertTrue(actionsPossibles.contient("RSnF,21,30"));
-        assertTrue(actionsPossibles.contient("RDnF,21,30"));
+        assertTrue(actionsPossibles.contient("PaA,23,28"));
+        assertTrue(actionsPossibles.contient("RBaD,23,29"));
+        assertTrue(actionsPossibles.contient("RDaD,23,29"));
+        assertTrue(actionsPossibles.contient("RTaD,23,29"));
+        assertFalse(actionsPossibles.contient("RSaD,23,29"));
+        assertFalse(actionsPossibles.contient("RPaD,23,29"));
+        assertTrue(actionsPossibles.contient("RHaD,23,29"));
+        assertTrue(actionsPossibles.contient("RBnI,23,22"));
+        assertTrue(actionsPossibles.contient("RDnI,23,22"));
+        assertTrue(actionsPossibles.contient("RTnI,23,22"));
+        assertTrue(actionsPossibles.contient("RHnI,23,22"));
+        assertTrue(actionsPossibles.contient("RPnF,23,29"));
+        assertTrue(actionsPossibles.contient("RSnF,23,29"));
+        assertFalse(actionsPossibles.contient("RDnF,23,29"));
         String[] actionsPossiblesDepuisPlateau2
                 = joueur.actionsPossibles(plateau, 'R', 10);
         ActionsPossibles actionsPossibles2
                 = new ActionsPossibles(actionsPossiblesDepuisPlateau2);
         // on peut afficher toutes les actions possibles calculées :
         actionsPossibles2.afficher();
-        assertTrue(actionsPossibles2.contient("RSbD,23,27"));
-        assertTrue(actionsPossibles2.contient("RPbD,23,27"));
-        assertTrue(actionsPossibles2.contient("RBbD,23,27"));
-        int nombreDifferentActionParCaseVide = 6;
-        int nombreDePlanteSurPlateau = 23;
-        int nombreDifferentActionParCaseRemplie = 3;
-        int nombreDeCaseVide = 0;
-        int nombreDeLegumeIsole = 3;
-        int actionOmbre = 1;
-        int nombreActionTotal = ((Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES
-                - nombreDePlanteSurPlateau - nombreDeCaseVide) * nombreDifferentActionParCaseVide
-                + nombreDePlanteSurPlateau * nombreDifferentActionParCaseRemplie
-                - nombreDeLegumeIsole + actionOmbre);
-        assertEquals(nombreActionTotal,
-                actionsPossiblesDepuisPlateau.length);
+        assertTrue(actionsPossibles2.contient("RSbD,24,27"));
+        assertTrue(actionsPossibles2.contient("RPbD,24,27"));
+        assertTrue(actionsPossibles2.contient("RBbD,24,27"));
+        
 
     }
     

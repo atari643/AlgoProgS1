@@ -37,25 +37,25 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                 int compteurBleu = 0;
                 int compteurRouge = 0;
                 if (plateau[coord.ligne][coord.colonne].plantePresente() == false) {
-                    for (int i = 0; i < v.length; i++) {
-                        if (plateau[v[i].ligne][v[i].colonne].plantePresente()) {
+                    for (Coordonnees v1 : v) {
+                        if (plateau[v1.ligne][v1.colonne].plantePresente()) {
                             compteur += 1;
-                            boolean t = avoir3Voisines(v[i], 14, plateau);
-                            if (plateau[v[i].ligne][v[i].colonne].couleur == 'B') {
+                            boolean t = avoir3Voisines(v1, 14, plateau);
+                            if (plateau[v1.ligne][v1.colonne].couleur == 'B') {
                                 compteurBleu += 1;
                                 if (couleurJoueur == 'B') {
                                     vitalites.vitalitesBleu += 1;
                                 }
                                 if (t) {
-                                    vitalites.vitalitesBleu -= plateau[v[i].ligne][v[i].colonne].vitalite;
+                                    vitalites.vitalitesBleu -= plateau[v1.ligne][v1.colonne].vitalite;
                                 }
-                            } else if (plateau[v[i].ligne][v[i].colonne].couleur == 'R') {
-                                compteurRouge+=1;
+                            } else if (plateau[v1.ligne][v1.colonne].couleur == 'R') {
+                                compteurRouge += 1;
                                 if (couleurJoueur == 'R') {
                                     vitalites.vitalitesRouge += 1;
                                 }
                                 if (t) {
-                                    vitalites.vitalitesRouge -= plateau[v[i].ligne][v[i].colonne].vitalite;
+                                    vitalites.vitalitesRouge -= plateau[v1.ligne][v1.colonne].vitalite;
                                 }
                             }
                         }
@@ -73,7 +73,7 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                             compteur += 1;
                         }
                     }
-                    ajoutActionRotation(coord, actions, vitalites,plateau, couleurJoueur, compteurRouge, compteurBleu);
+                    ajoutActionRotation(coord, actions, vitalites, plateau, couleurJoueur, compteurRouge, compteurBleu);
                     switch (plateau[coord.ligne][coord.colonne].espece) {
                         case 'H':
                         case 'T':
@@ -465,58 +465,61 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
     }
 
     /**
-     * Fonction qui donne un tableau de l'ensemble des plante pouvant être remplacé
+     * Fonction qui donne un tableau de l'ensemble des plante pouvant être
+     * remplacé
+     *
      * @param p un espèce de plante
      * @param planteActuel l'espèce de la plante actuel
      * @return la liste des plantes pottentielles
      */
-    static char[] listeDesPlantesPouvantRemplacer(char planteActuel){
+    static char[] listeDesPlantesPouvantRemplacer(char planteActuel) {
         char[] plante = new char[5];
         int compteur = 0;
-        switch (planteActuel){
+        switch (planteActuel) {
             case 'P':
             case 'S':
-                plante[0]='B';
-                plante[1]='D';
-                plante[2]='H';
-                plante[3]='T';
+                plante[0] = 'B';
+                plante[1] = 'D';
+                plante[2] = 'H';
+                plante[3] = 'T';
                 compteur = 4;
                 break;
             case 'B':
-                plante[0]='P';
-                plante[1]='S';
-                plante[2]='D';
-                plante[3]='H';
-                plante[4]='T';
+                plante[0] = 'P';
+                plante[1] = 'S';
+                plante[2] = 'D';
+                plante[3] = 'H';
+                plante[4] = 'T';
                 compteur = 5;
                 break;
             default:
-                plante[0]='P';
-                plante[1]='S';
-                plante[2]='B';
-                compteur=3;
+                plante[0] = 'P';
+                plante[1] = 'S';
+                plante[2] = 'B';
+                compteur = 3;
                 break;
-        
-                
-    }
+
+        }
         return Arrays.copyOf(plante, compteur);
     }
+
     void ajoutActionRotation(Coordonnees coord, ActionsPossibles actions, Vitalites vitalites, Case[][] plateau, char couleurJoueur, int compteurRouge, int compteurBleu) {
         int vitaliterR = vitalites.vitalitesRouge;
         int vitaliterB = vitalites.vitalitesBleu;
         char[] tab = listeDesPlantesPouvantRemplacer(plateau[coord.ligne][coord.colonne].espece);
-        if (plateau[coord.ligne][coord.colonne].couleur == 'R') {
-            vitaliterR-=plateau[coord.ligne][coord.colonne].vitalite;
-            vitaliterR += 3+compteurRouge;
-        } else {
-            vitaliterB-=plateau[coord.ligne][coord.colonne].vitalite;
-            vitaliterB += 3+compteurBleu;
+        if (plateau[coord.ligne][coord.colonne].couleur == 'R' && couleurJoueur=='R') {
+            vitaliterR -= plateau[coord.ligne][coord.colonne].vitalite;
+            vitaliterR += 3 + compteurRouge;
+        } else if (plateau[coord.ligne][coord.colonne].couleur == 'B' && couleurJoueur=='B') {
+            vitaliterB -= plateau[coord.ligne][coord.colonne].vitalite;
+            vitaliterB += 3 + compteurBleu;
         }
-        for (int i = 0; i<tab.length; ++i){
-        String action = "R"+""+tab[i] + coord.carLigne() + coord.carColonne() + ","
-                + (vitaliterR) + ","
-                + (vitaliterB);
-        actions.ajouterAction(action);}
+        for (int i = 0; i < tab.length; ++i) {
+            String action = "R" + "" + tab[i] + coord.carLigne() + coord.carColonne() + ","
+                    + (vitaliterR) + ","
+                    + (vitaliterB);
+            actions.ajouterAction(action);
+        }
 
     }
-    }
+}
