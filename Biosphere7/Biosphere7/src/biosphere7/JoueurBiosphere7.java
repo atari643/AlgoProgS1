@@ -67,11 +67,6 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                                 }
                             }
                         }
-                        if (compteur < 4) {
-                            for (Plante p : Plante.values()) {
-                                ajoutAction(coord, actions, vitalites, couleurJoueur, p);
-                            }
-                        }
                     } else if (plateau[coord.ligne][coord.colonne].plantePresente()) {
                         ajoutActionCouper(coord, actions, vitalites, plateau[lig][col].couleur, plateau);
                         ajoutActionFertiliser(coord, actions, vitalites, plateau);
@@ -92,6 +87,11 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                         }
                     }
                 }
+                if (compteur < 4 && plateau[coord.ligne][coord.colonne].plantePresente() == false && plateau[coord.ligne][coord.colonne].nature == 'T') {
+                    for (Plante p : Plante.values()) {
+                        ajoutAction(coord, actions, vitalites, couleurJoueur, p);
+                    }
+                }
                 vitalites = vitalitesPlateau(plateau);
             }
         }
@@ -99,9 +99,11 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         System.out.println("actionsPossibles : fin");
         return actions.nettoyer();
     }
+
     /**
      * fonction qui vérifie l'espèce si la plante est autostérile ou pas
-     * @param espece l'espèce de la plante 
+     *
+     * @param espece l'espèce de la plante
      * @return vrai ssi la plante est autostérile sinon faux
      */
     static boolean checkEspece(char espece) {

@@ -25,8 +25,8 @@ public class JoueurBiosphere7Test {
         //testActionsPossibles_niveau6();
         //testActionsPossibles_niveau7();
         //testActionsPossibles_niveau8();
-        //testActionsPossibles_niveau9();
-        testActionsPossibles_niveau10();
+        testActionsPossibles_niveau9();
+        //testActionsPossibles_niveau10();
     }
 
     /**
@@ -712,6 +712,11 @@ public class JoueurBiosphere7Test {
         Vitalites vita7 = JoueurBiosphere7.vitalitesPlateau(plateau7);
         assertEquals(23, vita7.vitalitesRouge);
         assertEquals(27, vita7.vitalitesBleu);
+         Case[][] plateau8 = Utils.plateauDepuisTexte(PLATEAU_NIVEAU10);
+        Vitalites vita8 = JoueurBiosphere7.vitalitesPlateau(plateau8);
+        // plateau : rouge 17, bleu 37
+        assertEquals(17, vita8.vitalitesRouge);
+        assertEquals(37, vita8.vitalitesBleu);
     }
 
     /**
