@@ -36,7 +36,7 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                 int compteur = 0;
                 int compteurBleu = 0;
                 int compteurRouge = 0;
-                if (plateau[coord.ligne][coord.colonne].plantePresente() == false) {
+                if (plateau[coord.ligne][coord.colonne].plantePresente() == false && plateau[coord.ligne][coord.colonne].nature=='T') {
                     for (Coordonnees v1 : v) {
                         if (plateau[v1.ligne][v1.colonne].plantePresente()) {
                             compteur += 1;
@@ -89,9 +89,7 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                 vitalites = vitalitesPlateau(plateau);
             }
         }
-        if (niveau == 9) {
-            ajouterOmbre(vitalites, plateau, actions);
-        }
+        ajouterOmbre(vitalites, plateau, actions);
         System.out.println("actionsPossibles : fin");
         return actions.nettoyer();
     }

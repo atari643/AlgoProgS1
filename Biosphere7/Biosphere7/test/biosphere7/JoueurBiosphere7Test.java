@@ -427,6 +427,12 @@ public class JoueurBiosphere7Test {
         assertTrue(actionsPossibles2.contient("RSbD,24,27"));
         assertTrue(actionsPossibles2.contient("RPbD,24,27"));
         assertTrue(actionsPossibles2.contient("RBbD,24,27"));
+        Case[][] plateau2 = Utils.plateauDepuisTexte(PLATEAU_NIVEAU10);
+        String[] actionsPossiblesDepuisPlateau3
+                = joueur.actionsPossibles(plateau2, 'R', 10);
+        ActionsPossibles actionsPossibles3
+                = new ActionsPossibles(actionsPossiblesDepuisPlateau3);
+        actionsPossibles3.afficher();
 
     }
 
@@ -438,7 +444,6 @@ public class JoueurBiosphere7Test {
         char planteActuel2 = 'S';
         char[] tab2 = new char[]{'B', 'D', 'H', 'T'};
         assertArrayEquals(tab2, JoueurBiosphere7.listeDesPlantesPouvantRemplacer(planteActuel2));
-
         char planteActuel3 = 'B';
         char[] tab3 = new char[]{'P','S', 'D', 'H', 'T'};
         assertArrayEquals(tab3, JoueurBiosphere7.listeDesPlantesPouvantRemplacer(planteActuel3));
@@ -1021,6 +1026,40 @@ public class JoueurBiosphere7Test {
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
             + "d|   |   |   |   |   |   |   |SB1|   |   |   |   |   |TR1|\n"
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "e|   |   |   |   |BR1|   |   |   |   |   |   |   |   |PR4|\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "f|   |   |   |   |   |   |   |   |   |   |   |   |   |HR1|\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "g|   |   |   |   |   |   |DB1|   |   |   |DB5|   |   |BB1|\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "h|   |   |   |   |   |   |PR1|   |   |   |PB9|   |HB1|   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "i|   |   |   |   |   |   |PR5|   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "j|   |   |   |BR1|   |   |   |   |   |   |SB5|   |   |SB8|\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "k|BB1|   |   |   |   |   |   |PR1|   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "l|   |   |   |   |   |   |BB1|   |PR1|   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "m|   |   |   |   |   |   |   |   |   |   |BB1|   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "n|   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n";
+    
+    /* Un plateau pour tester le niveau 10 (eau)
+     */
+    final String PLATEAU_NIVEAU10
+            = "   A   B   C   D   E   F   G   H   I   J   K   L   M   N \n"
+            + " +E--+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "a|   |   |   |   |PB1|   |   |   |TR1|   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "b|   |   |   |   |SB2|   |   |   |   |   |   |   |   |   |\n"
+            + " +---+E--+---+---+---+---+---+E--+---+---+---+---+---+---+\n"
+            + "c|   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + "d|   |   |   |   |   |   |   |SB1|   |   |   |   |   |TR1|\n"
+            + " +---+---+---+---+---+E--+---+---+---+---+---+---+---+---+\n"
             + "e|   |   |   |   |BR1|   |   |   |   |   |   |   |   |PR4|\n"
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
             + "f|   |   |   |   |   |   |   |   |   |   |   |   |   |HR1|\n"
