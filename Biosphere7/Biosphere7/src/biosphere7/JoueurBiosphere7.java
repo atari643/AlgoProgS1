@@ -76,10 +76,10 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                 } else if (plateau[coord.ligne][coord.colonne].plantePresente()) {
                     ajoutActionCouper(coord, actions, vitalites, plateau[lig][col].couleur, plateau);
                     ajoutActionFertiliser(coord, actions, vitalites, plateau);
-                    for (int i = 0; i < v.length; i++) {
-                        if (plateau[v[i].ligne][v[i].colonne].plantePresente() || plateau[v[i].ligne][v[i].colonne].nature == 'E') {
+                    for (Coordonnees v1 : v) {
+                        if (plateau[v1.ligne][v1.colonne].plantePresente() || plateau[v1.ligne][v1.colonne].nature == 'E') {
                             compteur += 1;
-                            if(plateau[v[i].ligne][v[i].colonne].nature == 'E'){
+                            if (plateau[v1.ligne][v1.colonne].nature == 'E') {
                                 status = true;
                             }
                         }
