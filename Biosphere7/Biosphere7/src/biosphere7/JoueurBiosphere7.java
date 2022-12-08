@@ -34,12 +34,15 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                 Coordonnees coord = new Coordonnees(lig, col);
                 Coordonnees[] v = voisines(coord, 14);
                 int compteur = 0;
+                int compteurBleu = 0;
+                int compteurRouge = 0;
                 if (plateau[coord.ligne][coord.colonne].plantePresente() == false) {
                     for (int i = 0; i < v.length; i++) {
                         if (plateau[v[i].ligne][v[i].colonne].plantePresente()) {
                             compteur += 1;
                             boolean t = avoir3Voisines(v[i], 14, plateau);
                             if (plateau[v[i].ligne][v[i].colonne].couleur == 'B') {
+                                compteurBleu += 1;
                                 if (couleurJoueur == 'B') {
                                     vitalites.vitalitesBleu += 1;
                                 }
@@ -47,6 +50,7 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                                     vitalites.vitalitesBleu -= plateau[v[i].ligne][v[i].colonne].vitalite;
                                 }
                             } else if (plateau[v[i].ligne][v[i].colonne].couleur == 'R') {
+                                compteurRouge+=1;
                                 if (couleurJoueur == 'R') {
                                     vitalites.vitalitesRouge += 1;
                                 }
@@ -69,6 +73,7 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                             compteur += 1;
                         }
                     }
+                    ajoutActionRotation(coord, actions, vitalites,plateau, couleurJoueur, compteurRouge, compteurBleu);
                     switch (plateau[coord.ligne][coord.colonne].espece) {
                         case 'H':
                         case 'T':
@@ -293,12 +298,9 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
     static int minimumVitalite(Case[][] plateau, Coordonnees coord, Coordonnees[] voisine) {
         int minimum = plateau[coord.ligne][coord.colonne].vitalite;
         char espece = plateau[coord.ligne][coord.colonne].espece;
-        int compteur = 0;
-        for (int i = 0; i < voisine.length; i++) {
-            if (plateau[voisine[i].ligne][voisine[i].colonne].vitalite < minimum
-                    && plateau[voisine[i].ligne][voisine[i].colonne].espece == espece) {
-                minimum = plateau[voisine[i].ligne][voisine[i].colonne].vitalite;
-                compteur += 1;
+        for (Coordonnees voisine1 : voisine) {
+            if (plateau[voisine1.ligne][voisine1.colonne].vitalite < minimum && plateau[voisine1.ligne][voisine1.colonne].espece == espece) {
+                minimum = plateau[voisine1.ligne][voisine1.colonne].vitalite;
             }
         }
         return minimum;
@@ -391,12 +393,12 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
 
         Coordonnees[] v = voisines(coord, 14);
 
-        for (int i = 0; i < v.length; i++) {
-            if (plateau[v[i].ligne][v[i].colonne].plantePresente()) {
-                if (plateau[v[i].ligne][v[i].colonne].vitalite < 9) {
-                    if (plateau[v[i].ligne][v[i].colonne].couleur == 'R') {
+        for (Coordonnees v1 : v) {
+            if (plateau[v1.ligne][v1.colonne].plantePresente()) {
+                if (plateau[v1.ligne][v1.colonne].vitalite < 9) {
+                    if (plateau[v1.ligne][v1.colonne].couleur == 'R') {
                         vitaliterR += 1;
-                    } else if (plateau[v[i].ligne][v[i].colonne].couleur == 'B') {
+                    } else if (plateau[v1.ligne][v1.colonne].couleur == 'B') {
                         vitaliterB += 1;
                     }
                 }
@@ -461,4 +463,60 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
             actions.ajouterAction(action);
         }
     }
-}
+
+    /**
+     * Fonction qui donne un tableau de l'ensemble des plante pouvant être remplacé
+     * @param p un espèce de plante
+     * @param planteActuel l'espèce de la plante actuel
+     * @return la liste des plantes pottentielles
+     */
+    static char[] listeDesPlantesPouvantRemplacer(char planteActuel){
+        char[] plante = new char[5];
+        int compteur = 0;
+        switch (planteActuel){
+            case 'P':
+            case 'S':
+                plante[0]='B';
+                plante[1]='D';
+                plante[2]='H';
+                plante[3]='T';
+                compteur = 4;
+                break;
+            case 'B':
+                plante[0]='P';
+                plante[1]='S';
+                plante[2]='D';
+                plante[3]='H';
+                plante[4]='T';
+                compteur = 5;
+                break;
+            default:
+                plante[0]='P';
+                plante[1]='S';
+                plante[2]='B';
+                compteur=3;
+                break;
+        
+                
+    }
+        return Arrays.copyOf(plante, compteur);
+    }
+    void ajoutActionRotation(Coordonnees coord, ActionsPossibles actions, Vitalites vitalites, Case[][] plateau, char couleurJoueur, int compteurRouge, int compteurBleu) {
+        int vitaliterR = vitalites.vitalitesRouge;
+        int vitaliterB = vitalites.vitalitesBleu;
+        char[] tab = listeDesPlantesPouvantRemplacer(plateau[coord.ligne][coord.colonne].espece);
+        if (plateau[coord.ligne][coord.colonne].couleur == 'R') {
+            vitaliterR-=plateau[coord.ligne][coord.colonne].vitalite;
+            vitaliterR += 3+compteurRouge;
+        } else {
+            vitaliterB-=plateau[coord.ligne][coord.colonne].vitalite;
+            vitaliterB += 3+compteurBleu;
+        }
+        for (int i = 0; i<tab.length; ++i){
+        String action = "R"+""+tab[i] + coord.carLigne() + coord.carColonne() + ","
+                + (vitaliterR) + ","
+                + (vitaliterB);
+        actions.ajouterAction(action);}
+
+    }
+    }

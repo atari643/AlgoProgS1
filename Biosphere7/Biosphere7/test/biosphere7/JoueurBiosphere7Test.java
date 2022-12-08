@@ -24,7 +24,8 @@ public class JoueurBiosphere7Test {
         //testActionsPossibles_niveau6();
         //testActionsPossibles_niveau7();
         //testActionsPossibles_niveau8();
-        testActionsPossibles_niveau9();
+        //testActionsPossibles_niveau9();
+        testActionsPossibles_niveau10();
     }
 
     /**
@@ -386,6 +387,56 @@ public class JoueurBiosphere7Test {
                 actionsPossiblesDepuisPlateau.length);
 
     }
+    /**
+     * Test de la fonction actionsPossibles, au niveau 9
+     */
+    public void testActionsPossibles_niveau10() {
+        JoueurBiosphere7 joueur = new JoueurBiosphere7();
+        // plateau, couleur et niveau
+        Case[][] plateau = Utils.plateauDepuisTexte(PLATEAU_NIVEAU9);
+        // on lance actionsPossibles
+        String[] actionsPossiblesDepuisPlateau
+                = joueur.actionsPossibles(plateau, 'B', 10);
+        ActionsPossibles actionsPossibles
+                = new ActionsPossibles(actionsPossiblesDepuisPlateau);
+        // on peut afficher toutes les actions possibles calculées :
+        actionsPossibles.afficher();
+        assertTrue(actionsPossibles.contient("PaA,21,28"));
+        assertTrue(actionsPossibles.contient("RBaD,21,30"));
+        assertTrue(actionsPossibles.contient("RDaD,21,30"));
+        assertTrue(actionsPossibles.contient("RTaD,21,30"));
+        assertTrue(actionsPossibles.contient("RHaD,21,30"));
+        assertTrue(actionsPossibles.contient("RBnI,21,22"));
+        assertTrue(actionsPossibles.contient("RDnI,21,22"));
+        assertTrue(actionsPossibles.contient("RTnI,21,22"));
+        assertTrue(actionsPossibles.contient("RHnI,21,22"));
+        assertTrue(actionsPossibles.contient("RPnF,21,30"));
+        assertTrue(actionsPossibles.contient("RSnF,21,30"));
+        assertTrue(actionsPossibles.contient("RDnF,21,30"));
+        String[] actionsPossiblesDepuisPlateau2
+                = joueur.actionsPossibles(plateau, 'R', 10);
+        ActionsPossibles actionsPossibles2
+                = new ActionsPossibles(actionsPossiblesDepuisPlateau2);
+        // on peut afficher toutes les actions possibles calculées :
+        actionsPossibles2.afficher();
+        assertTrue(actionsPossibles2.contient("RSbD,23,27"));
+        assertTrue(actionsPossibles2.contient("RPbD,23,27"));
+        assertTrue(actionsPossibles2.contient("RBbD,23,27"));
+        int nombreDifferentActionParCaseVide = 6;
+        int nombreDePlanteSurPlateau = 23;
+        int nombreDifferentActionParCaseRemplie = 3;
+        int nombreDeCaseVide = 0;
+        int nombreDeLegumeIsole = 3;
+        int actionOmbre = 1;
+        int nombreActionTotal = ((Coordonnees.NB_LIGNES * Coordonnees.NB_COLONNES
+                - nombreDePlanteSurPlateau - nombreDeCaseVide) * nombreDifferentActionParCaseVide
+                + nombreDePlanteSurPlateau * nombreDifferentActionParCaseRemplie
+                - nombreDeLegumeIsole + actionOmbre);
+        assertEquals(nombreActionTotal,
+                actionsPossiblesDepuisPlateau.length);
+
+    }
+    
 
     @Test
     public void testMinimum1Espèce() {
