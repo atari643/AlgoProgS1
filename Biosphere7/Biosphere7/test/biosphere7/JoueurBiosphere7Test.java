@@ -1,6 +1,5 @@
 package biosphere7;
 
-import org.junit.Assert;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -433,6 +432,41 @@ public class JoueurBiosphere7Test {
         ActionsPossibles actionsPossibles3
                 = new ActionsPossibles(actionsPossiblesDepuisPlateau3);
         actionsPossibles3.afficher();
+        assertTrue(actionsPossibles3.contient("PaB,19,37"));
+        assertTrue(actionsPossibles3.contient("RSeE,20,37"));
+        assertTrue(actionsPossibles3.contient("RPeE,20,37"));
+        assertFalse(actionsPossibles3.contient("PaA,17,37"));
+        assertFalse(actionsPossibles3.contient("Pef,17,37"));
+        assertTrue(actionsPossibles3.contient("IdH,20,37"));
+        String[] actionsPossiblesDepuisPlateau4
+                = joueur.actionsPossibles(plateau2, 'B', 10);
+        ActionsPossibles actionsPossibles4
+                = new ActionsPossibles(actionsPossiblesDepuisPlateau4);
+        actionsPossibles4.afficher();
+        assertTrue(actionsPossibles4.contient("PaB,17,39"));
+    }
+
+    @Test
+    public void testajoutActionDisséminer() {
+        Case[][] plateau = Utils.plateauDepuisTexte(PLATEAU_NIVEAU8);
+        Coordonnees coord = new Coordonnees(4, 5);
+        Coordonnees[] voisine = JoueurBiosphere7.voisines(coord, 14);
+        JoueurBiosphere7 joueur = new JoueurBiosphere7();
+        ActionsPossibles actions = new ActionsPossibles();
+        Vitalites vitalites = new Vitalites(0, 0);
+        assertEquals(0, actions.nbActions);
+        joueur.ajoutActionDisséminer(Coordonnees.depuisCars('e', 'E'), actions,
+                vitalites, 'R', plateau, voisine, 2);
+        actions.afficher();
+        assertTrue(actions.contient("IeE,4,0"));
+        Case[][] plateau2 = Utils.plateauDepuisTexte(PLATEAU_NIVEAU10);
+        ActionsPossibles actions2 = new ActionsPossibles();
+        Coordonnees coord2 = new Coordonnees(3, 7);
+        Coordonnees[] voisine2 = JoueurBiosphere7.voisines(coord2, 14);
+        joueur.ajoutActionDisséminer(Coordonnees.depuisCars('d', 'H'), actions2,
+                vitalites, 'R', plateau2, voisine2, 1);
+        actions2.afficher();
+        assertTrue(actions2.contient("IdH,3,0"));
 
     }
 
@@ -445,7 +479,7 @@ public class JoueurBiosphere7Test {
         char[] tab2 = new char[]{'B', 'D', 'H', 'T'};
         assertArrayEquals(tab2, JoueurBiosphere7.listeDesPlantesPouvantRemplacer(planteActuel2));
         char planteActuel3 = 'B';
-        char[] tab3 = new char[]{'P','S', 'D', 'H', 'T'};
+        char[] tab3 = new char[]{'P', 'S', 'D', 'H', 'T'};
         assertArrayEquals(tab3, JoueurBiosphere7.listeDesPlantesPouvantRemplacer(planteActuel3));
         char planteActuel4 = 'D';
         char[] tab4 = new char[]{'P', 'S', 'B'};
@@ -1046,7 +1080,7 @@ public class JoueurBiosphere7Test {
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
             + "n|   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n";
-    
+
     /* Un plateau pour tester le niveau 10 (eau)
      */
     final String PLATEAU_NIVEAU10

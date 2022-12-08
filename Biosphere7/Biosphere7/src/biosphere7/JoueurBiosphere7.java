@@ -36,9 +36,17 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                 int compteur = 0;
                 int compteurBleu = 0;
                 int compteurRouge = 0;
-                if (plateau[coord.ligne][coord.colonne].plantePresente() == false && plateau[coord.ligne][coord.colonne].nature=='T') {
+                boolean status = false;
+                if (plateau[coord.ligne][coord.colonne].plantePresente() == false && plateau[coord.ligne][coord.colonne].nature == 'T') {
                     for (Coordonnees v1 : v) {
-                        if (plateau[v1.ligne][v1.colonne].plantePresente()) {
+                        if (plateau[v1.ligne][v1.colonne].nature == 'E') {
+                            compteur+=1;
+                            if (couleurJoueur == 'B') {
+                                vitalites.vitalitesBleu += 1;
+                            } else {
+                                vitalites.vitalitesRouge += 1;
+                            }
+                        } else if (plateau[v1.ligne][v1.colonne].plantePresente()) {
                             compteur += 1;
                             boolean t = avoir3Voisines(v1, 14, plateau);
                             if (plateau[v1.ligne][v1.colonne].couleur == 'B') {
@@ -69,11 +77,14 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                     ajoutActionCouper(coord, actions, vitalites, plateau[lig][col].couleur, plateau);
                     ajoutActionFertiliser(coord, actions, vitalites, plateau);
                     for (int i = 0; i < v.length; i++) {
-                        if (plateau[v[i].ligne][v[i].colonne].plantePresente()) {
+                        if (plateau[v[i].ligne][v[i].colonne].plantePresente() || plateau[v[i].ligne][v[i].colonne].nature == 'E') {
                             compteur += 1;
+                            if(plateau[v[i].ligne][v[i].colonne].nature == 'E'){
+                                status = true;
+                            }
                         }
                     }
-                    ajoutActionRotation(coord, actions, vitalites, plateau, couleurJoueur, compteurRouge, compteurBleu);
+                    ajoutActionRotation(coord, actions, vitalites, plateau, couleurJoueur, compteurRouge, compteurBleu, status);
                     switch (plateau[coord.ligne][coord.colonne].espece) {
                         case 'H':
                         case 'T':
@@ -500,8 +511,11 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         }
         return Arrays.copyOf(plante, compteur);
     }
+
     /**
-     * fonction qui perrmet de faire la rotation entre une plante et une autre plante du plateau
+     * fonction qui perrmet de faire la rotation entre une plante et une autre
+     * plante du plateau
+     *
      * @param coord coordonnes de la plante
      * @param vitalites la vitalité du plateau actuel
      * @param plateau le plateau de jeu
@@ -510,16 +524,23 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
      * @param compteurRouge le nombre de voisin rouge
      * @param compteurBleu le nombre de voisin bleu
      */
-    void ajoutActionRotation(Coordonnees coord, ActionsPossibles actions, Vitalites vitalites, Case[][] plateau, char couleurJoueur, int compteurRouge, int compteurBleu) {
+    void ajoutActionRotation(Coordonnees coord, ActionsPossibles actions, Vitalites vitalites, Case[][] plateau, char couleurJoueur, int compteurRouge, int compteurBleu, boolean eau) {
         int vitaliterR = vitalites.vitalitesRouge;
         int vitaliterB = vitalites.vitalitesBleu;
+        int valeurAjouter = 0;
+        if (eau){
+            valeurAjouter=4;
+        }
+        else{
+            valeurAjouter=3;
+        }
         char[] tab = listeDesPlantesPouvantRemplacer(plateau[coord.ligne][coord.colonne].espece);
-        if (plateau[coord.ligne][coord.colonne].couleur == 'R' && couleurJoueur=='R') {
+        if (plateau[coord.ligne][coord.colonne].couleur == 'R' && couleurJoueur == 'R') {
             vitaliterR -= plateau[coord.ligne][coord.colonne].vitalite;
-            vitaliterR += 3 + compteurRouge;
-        } else if (plateau[coord.ligne][coord.colonne].couleur == 'B' && couleurJoueur=='B') {
+            vitaliterR += valeurAjouter + compteurRouge;
+        } else if (plateau[coord.ligne][coord.colonne].couleur == 'B' && couleurJoueur == 'B') {
             vitaliterB -= plateau[coord.ligne][coord.colonne].vitalite;
-            vitaliterB += 3 + compteurBleu;
+            vitaliterB += valeurAjouter + compteurBleu;
         }
         for (int i = 0; i < tab.length; ++i) {
             String action = "R" + "" + tab[i] + coord.carLigne() + coord.carColonne() + ","
