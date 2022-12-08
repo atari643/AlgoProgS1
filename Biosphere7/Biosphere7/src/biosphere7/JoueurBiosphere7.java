@@ -37,10 +37,10 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                 int compteurBleu = 0;
                 int compteurRouge = 0;
                 boolean status = false;
-                if (plateau[coord.ligne][coord.colonne].plantePresente() == false && plateau[coord.ligne][coord.colonne].nature == 'T') {
-                    for (Coordonnees v1 : v) {
+                for (Coordonnees v1 : v) {
+                    if (plateau[coord.ligne][coord.colonne].plantePresente() == false && plateau[coord.ligne][coord.colonne].nature == 'T') {
                         if (plateau[v1.ligne][v1.colonne].nature == 'E') {
-                            compteur+=1;
+                            compteur += 1;
                             if (couleurJoueur == 'B') {
                                 vitalites.vitalitesBleu += 1;
                             } else {
@@ -67,34 +67,29 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                                 }
                             }
                         }
-                    }
-                    if (compteur < 4) {
-                        for (Plante p : Plante.values()) {
-                            ajoutAction(coord, actions, vitalites, couleurJoueur, p);
+                        if (compteur < 4) {
+                            for (Plante p : Plante.values()) {
+                                ajoutAction(coord, actions, vitalites, couleurJoueur, p);
+                            }
                         }
-                    }
-                } else if (plateau[coord.ligne][coord.colonne].plantePresente()) {
-                    ajoutActionCouper(coord, actions, vitalites, plateau[lig][col].couleur, plateau);
-                    ajoutActionFertiliser(coord, actions, vitalites, plateau);
-                    for (Coordonnees v1 : v) {
+                    } else if (plateau[coord.ligne][coord.colonne].plantePresente()) {
+                        ajoutActionCouper(coord, actions, vitalites, plateau[lig][col].couleur, plateau);
+                        ajoutActionFertiliser(coord, actions, vitalites, plateau);
                         if (plateau[v1.ligne][v1.colonne].plantePresente() || plateau[v1.ligne][v1.colonne].nature == 'E') {
                             compteur += 1;
                             if (plateau[v1.ligne][v1.colonne].nature == 'E') {
                                 status = true;
                             }
                         }
-                    }
-                    ajoutActionRotation(coord, actions, vitalites, plateau, couleurJoueur, compteurRouge, compteurBleu, status);
-                    switch (plateau[coord.ligne][coord.colonne].espece) {
-                        case 'H':
-                        case 'T':
+                        ajoutActionRotation(coord, actions, vitalites, plateau, couleurJoueur, compteurRouge, compteurBleu, status);
+                        if (checkEspece(plateau[coord.ligne][coord.colonne].espece)) {
                             if (minimum1voisinDeMemeEspece(coord, plateau, v)) {
                                 ajoutActionDisséminer(coord, actions, vitalites, couleurJoueur, plateau, v, compteur);
                             }
-                            break;
-                        default:
+
+                        } else {
                             ajoutActionDisséminer(coord, actions, vitalites, couleurJoueur, plateau, v, compteur);
-                            break;
+                        }
                     }
                 }
                 vitalites = vitalitesPlateau(plateau);
@@ -103,6 +98,23 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         ajouterOmbre(vitalites, plateau, actions);
         System.out.println("actionsPossibles : fin");
         return actions.nettoyer();
+    }
+    /**
+     * fonction qui vérifie l'espèce si la plante est autostérile ou pas
+     * @param espece l'espèce de la plante 
+     * @return vrai ssi la plante est autostérile sinon faux
+     */
+    static boolean checkEspece(char espece) {
+        boolean status = false;
+        switch (espece) {
+            case 'H':
+            case 'T':
+                status = true;
+                break;
+            default:
+                status = false;
+        }
+        return status;
     }
 
     /**
@@ -528,11 +540,10 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         int vitaliterR = vitalites.vitalitesRouge;
         int vitaliterB = vitalites.vitalitesBleu;
         int valeurAjouter = 0;
-        if (eau){
-            valeurAjouter=4;
-        }
-        else{
-            valeurAjouter=3;
+        if (eau) {
+            valeurAjouter = 4;
+        } else {
+            valeurAjouter = 3;
         }
         char[] tab = listeDesPlantesPouvantRemplacer(plateau[coord.ligne][coord.colonne].espece);
         if (plateau[coord.ligne][coord.colonne].couleur == 'R' && couleurJoueur == 'R') {

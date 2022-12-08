@@ -447,6 +447,15 @@ public class JoueurBiosphere7Test {
     }
 
     @Test
+    public void testCheckEspece(){
+        assertTrue(JoueurBiosphere7.checkEspece('H'));
+        assertTrue(JoueurBiosphere7.checkEspece('T'));
+        assertFalse(JoueurBiosphere7.checkEspece('P'));
+        assertFalse(JoueurBiosphere7.checkEspece('S'));
+        assertFalse(JoueurBiosphere7.checkEspece('D'));
+        assertFalse(JoueurBiosphere7.checkEspece('B'));
+    }
+    @Test
     public void testajoutActionDisséminer() {
         Case[][] plateau = Utils.plateauDepuisTexte(PLATEAU_NIVEAU8);
         Coordonnees coord = new Coordonnees(4, 5);
