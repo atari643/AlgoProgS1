@@ -502,7 +502,16 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         }
         return Arrays.copyOf(plante, compteur);
     }
-
+    /**
+     * fonction qui perrmet de faire la rotation entre une plante et une autre plante du plateau
+     * @param coord coordonnes de la plante
+     * @param vitalites la vitalité du plateau actuel
+     * @param plateau le plateau de jeu
+     * @param actions l'ensemble des actions possibles (en construction)
+     * @param couleurJoueur La couleur du joueur actuel
+     * @param compteurRouge le nombre de voisin rouge
+     * @param compteurBleu le nombre de voisin bleu
+     */
     void ajoutActionRotation(Coordonnees coord, ActionsPossibles actions, Vitalites vitalites, Case[][] plateau, char couleurJoueur, int compteurRouge, int compteurBleu) {
         int vitaliterR = vitalites.vitalitesRouge;
         int vitaliterB = vitalites.vitalitesBleu;

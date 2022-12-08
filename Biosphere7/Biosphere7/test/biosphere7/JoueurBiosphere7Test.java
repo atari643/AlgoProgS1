@@ -1,5 +1,7 @@
 package biosphere7;
 
+import org.junit.Assert;
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -387,6 +389,7 @@ public class JoueurBiosphere7Test {
                 actionsPossiblesDepuisPlateau.length);
 
     }
+
     /**
      * Test de la fonction actionsPossibles, au niveau 9
      */
@@ -424,10 +427,31 @@ public class JoueurBiosphere7Test {
         assertTrue(actionsPossibles2.contient("RSbD,24,27"));
         assertTrue(actionsPossibles2.contient("RPbD,24,27"));
         assertTrue(actionsPossibles2.contient("RBbD,24,27"));
-        
 
     }
-    
+
+    @Test
+    public void testlisteDesPlantesPouvantRemplacer() {
+        char planteActuel = 'P';
+        char[] tab = new char[]{'B', 'D', 'H', 'T'};
+        assertArrayEquals(tab, JoueurBiosphere7.listeDesPlantesPouvantRemplacer(planteActuel));
+        char planteActuel2 = 'S';
+        char[] tab2 = new char[]{'B', 'D', 'H', 'T'};
+        assertArrayEquals(tab2, JoueurBiosphere7.listeDesPlantesPouvantRemplacer(planteActuel2));
+
+        char planteActuel3 = 'B';
+        char[] tab3 = new char[]{'P','S', 'D', 'H', 'T'};
+        assertArrayEquals(tab3, JoueurBiosphere7.listeDesPlantesPouvantRemplacer(planteActuel3));
+        char planteActuel4 = 'D';
+        char[] tab4 = new char[]{'P', 'S', 'B'};
+        assertArrayEquals(tab4, JoueurBiosphere7.listeDesPlantesPouvantRemplacer(planteActuel4));
+        char planteActuel5 = 'H';
+        char[] tab5 = new char[]{'P', 'S', 'B'};
+        assertArrayEquals(tab5, JoueurBiosphere7.listeDesPlantesPouvantRemplacer(planteActuel5));
+        char planteActuel6 = 'T';
+        char[] tab6 = new char[]{'P', 'S', 'B'};
+        assertArrayEquals(tab6, JoueurBiosphere7.listeDesPlantesPouvantRemplacer(planteActuel6));
+    }
 
     @Test
     public void testMinimum1Espèce() {
