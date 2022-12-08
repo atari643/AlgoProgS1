@@ -31,4 +31,13 @@ public class AdditionSousCondition {
             
         }
     }
-}
+    void Condition(Coordonnees coord, boolean condition1){
+        if(condition1){
+            VitaliteRouge+=valeurAjouter;
+        }else{
+            VitaliteBleu+=valeurAjouter;
+        }
+    }
+        
+    }
+

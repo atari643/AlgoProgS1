@@ -224,14 +224,11 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
             Vitalites vitalites, char couleur, Plante p) {
         int vitaliterR = vitalites.vitalitesRouge;
         int vitaliterB = vitalites.vitalitesBleu;
-        if (couleur == 'R') {
-            vitaliterR += 1;
-        } else if (couleur == 'B') {
-            vitaliterB += 1;
-        }
+        AdditionSousCondition val = new AdditionSousCondition(vitaliterR, vitaliterB, 1);
+        val.Condition(coord, couleur=='R');
         String action = "" + initiale(p) + coord.carLigne() + coord.carColonne() + ","
-                + (vitaliterR) + ","
-                + (vitaliterB);
+                + (val.VitaliteRouge) + ","
+                + (val.VitaliteBleu);
         actions.ajouterAction(action);
     } 
 
