@@ -13,7 +13,8 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
     /**
      * Maximum de voisin possible pour une case
      */
-    final int MAXIMUMVOISINPOSSIBLE=4;
+    final int MAXIMUMVOISINPOSSIBLE = 4;
+
     /**
      * Cette méthode renvoie, pour un plateau donné et un joueur donné, toutes
      * les actions possibles pour ce joueur.
@@ -37,7 +38,7 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
             for (int col = 0; col < Coordonnees.NB_COLONNES; col++) {
                 Coordonnees coord = new Coordonnees(lig, col);
                 Coordonnees[] v = voisines(coord, 14);
-                
+
                 int compteur = 0;
                 int compteurBleu = 0;
                 int compteurRouge = 0;
@@ -101,13 +102,7 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
 
                         }
                     }
-                    if (checkEspece(plateau[coord.ligne][coord.colonne].espece)) {
-                        if (minimum1voisinDeMemeEspece(coord, plateau, v)) {
-                            ajoutActionDisséminer(coord, actions, vitalites, couleurJoueur, plateau, v, compteur);
-                        }
-                    } else {
-                        ajoutActionDisséminer(coord, actions, vitalites, couleurJoueur, plateau, v, compteur);
-                    }
+                    faireDissémination(plateau, coord, v, actions, vitalites, couleurJoueur, compteur);
                     ajoutActionRotation(coord, actions, vitalites, plateau, couleurJoueur, compteurRouge, compteurBleu, status);
                 }
                 vitalites = vitalitesPlateau(plateau);
@@ -116,6 +111,17 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         ajouterOmbre(vitalites, plateau, actions);
         System.out.println("actionsPossibles : fin");
         return actions.nettoyer();
+    }
+
+    void faireDissémination(Case[][] plateau, Coordonnees coord, Coordonnees[] v, ActionsPossibles actions, Vitalites vitalites, 
+            char couleurJoueur, int compteur) {
+        if (checkEspece(plateau[coord.ligne][coord.colonne].espece)) {
+            if (minimum1voisinDeMemeEspece(coord, plateau, v)) {
+                ajoutActionDisséminer(coord, actions, vitalites, couleurJoueur, plateau, v, compteur);
+            }
+        } else {
+            ajoutActionDisséminer(coord, actions, vitalites, couleurJoueur, plateau, v, compteur);
+        }
     }
 
     /**
@@ -216,18 +222,18 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
      */
     void ajoutAction(Coordonnees coord, ActionsPossibles actions,
             Vitalites vitalites, char couleur, Plante p) {
-        int vitaliterR = 0;
-        int vitaliterB = 0;
+        int vitaliterR = vitalites.vitalitesRouge;
+        int vitaliterB = vitalites.vitalitesBleu;
         if (couleur == 'R') {
             vitaliterR += 1;
         } else if (couleur == 'B') {
             vitaliterB += 1;
         }
         String action = "" + initiale(p) + coord.carLigne() + coord.carColonne() + ","
-                + (vitalites.vitalitesRouge + vitaliterR) + ","
-                + (vitalites.vitalitesBleu + vitaliterB);
+                + (vitaliterR) + ","
+                + (vitaliterB);
         actions.ajouterAction(action);
-    }
+    } 
 
     /**
      * Donne les initiale de chaque plante
@@ -316,14 +322,11 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         if (plateau[coord.ligne][coord.colonne].vitalite + valeurAjouter >= 9) {
             valeurAjouter = 9 - plateau[coord.ligne][coord.colonne].vitalite;
         }
-        if (plateau[coord.ligne][coord.colonne].couleur == 'R') {
-            vitaliterR += valeurAjouter;
-        } else {
-            vitaliterB += valeurAjouter;
-        }
+        AdditionSousCondition val = new AdditionSousCondition(vitaliterR, vitaliterB, valeurAjouter);
+        val.Condition(plateau, coord);
         String action = "F" + coord.carLigne() + coord.carColonne() + ","
-                + (vitaliterR) + ","
-                + (vitaliterB);
+                + (val.VitaliteRouge) + ","
+                + (val.VitaliteBleu);
         actions.ajouterAction(action);
 
     }
