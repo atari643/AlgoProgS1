@@ -15,9 +15,14 @@ public class AdditionSousCondition {
     int VitaliteBleu;
     
     int valeurAjouter;
+
+    AdditionSousCondition() {
+    }
     
-    AdditionSousCondition(int VitaliteR, int vitaliteB, int uneValeurAjouter){
-        VitaliteRouge=VitaliteR;
+    
+    
+    AdditionSousCondition(int vitaliteR, int vitaliteB, int uneValeurAjouter){
+        VitaliteRouge=vitaliteR;
         VitaliteBleu=vitaliteB;
         valeurAjouter=uneValeurAjouter;
     }
