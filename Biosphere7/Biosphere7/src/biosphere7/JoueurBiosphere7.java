@@ -203,19 +203,17 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         // TODO il y en aura besoin à un moment !
         int vitaliterR = 0;
         int vitaliterB = 0;
+        AdditionSousCondition val = new AdditionSousCondition(vitaliterR, vitaliterB, 0);
         for (int lig = 0; lig < Coordonnees.NB_LIGNES; lig++) {
             for (int col = 0; col < Coordonnees.NB_COLONNES; col++) {
                 Coordonnees coord = new Coordonnees(lig, col);
+                val.valeurAjouter=plateau[coord.ligne][coord.colonne].vitalite;
                 if (plateau[coord.ligne][coord.colonne].plantePresente() == true) {
-                    if (plateau[coord.ligne][coord.colonne].couleur == 'R') {
-                        vitaliterR += plateau[coord.ligne][coord.colonne].vitalite;
-                    } else {
-                        vitaliterB += plateau[coord.ligne][coord.colonne].vitalite;
+                    val.Condition(plateau, coord);
                     }
                 }
             }
-        }
-        return new Vitalites(vitaliterR, vitaliterB);
+        return new Vitalites(val.VitaliteRouge, val.VitaliteBleu);
     }
 
     /**
