@@ -410,7 +410,6 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         ajouterAction(val, "I", coord, actions);
 
     }
-    
     void ajouterAction(AdditionSousCondition val, String letter, Coordonnees coord, ActionsPossibles actions){
         String action = letter + coord.carLigne() + coord.carColonne() + ","
                 + (val.VitaliteRouge) + ","
