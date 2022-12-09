@@ -22,7 +22,6 @@ public class AdditionSousCondition {
      * La valeur a ajouter
      */
     int valeurAjouter;
-    int valeur = 0;
     /**
      * Constructeur d'un objet vide
      */
@@ -85,21 +84,23 @@ public class AdditionSousCondition {
             VitaliteBleu += valeurAjouter;
         }
     }
-
+    /**
+     * Admet les condition du joueur Rouge
+     * @param couleur du joeur
+     */
     void ConditionRouge(char couleur) {
         if (couleur == 'R') {
             VitaliteRouge += valeurAjouter;
         }
     }
-
+    /**
+     * Admet les condition du joueur Bleur
+     * @param couleur couleur du joueur
+     * **/
     void ConditionBleu(char couleur){
         if (couleur == 'B'){
             VitaliteBleu+=valeurAjouter;
         }
     }
-    void ConditionSeul(boolean condition, int valeur){
-        if(condition){
-            this.valeur+=valeur;
-        }
-    }
+    
 }
