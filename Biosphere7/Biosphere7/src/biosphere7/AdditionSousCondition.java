@@ -9,6 +9,7 @@ package biosphere7;
  * @author atari
  */
 public class AdditionSousCondition {
+
     /**
      * La valeur de vitalité du joueur rouge
      */
@@ -18,28 +19,33 @@ public class AdditionSousCondition {
      */
     int VitaliteBleu;
     /**
-     * La valeur a ajouter 
+     * La valeur a ajouter
      */
     int valeurAjouter;
-
+    int valeur = 0;
     /**
-     * Constructeur d'un objet vide 
+     * Constructeur d'un objet vide
      */
     AdditionSousCondition() {
     }
+
     /**
      * Initialisation des variables
+     *
      * @param vitaliteR la valeur de la vitaliteR du Joueur rouge
      * @param vitaliteB la valeur de la vitaliteB du Joueur bleu
-     * @param uneValeurAjouter la valeur à ajouter 
+     * @param uneValeurAjouter la valeur à ajouter
      */
     AdditionSousCondition(int vitaliteR, int vitaliteB, int uneValeurAjouter) {
         VitaliteRouge = vitaliteR;
         VitaliteBleu = vitaliteB;
         valeurAjouter = uneValeurAjouter;
     }
+
     /**
-     * Fonction qui affecte la valeur Ajouter selon si la cood est rouge dans le plateau ou bleu
+     * Fonction qui affecte la valeur Ajouter selon si la cood est rouge dans le
+     * plateau ou bleu
+     *
      * @param plateau le plateau de jeux
      * @param coord les coordonnees de la case
      */
@@ -52,8 +58,10 @@ public class AdditionSousCondition {
 
         }
     }
+
     /**
-     * Vérifie la couleur du joueur 
+     * Vérifie la couleur du joueur
+     *
      * @param couleur La couleur du joueur
      */
     void Condition(char couleur) {
@@ -63,8 +71,11 @@ public class AdditionSousCondition {
             VitaliteBleu += valeurAjouter;
         }
     }
+
     /**
-     * Vérifie une autre condition qui implique le joueur Rouge ou le joueur Bleu 
+     * Vérifie une autre condition qui implique le joueur Rouge ou le joueur
+     * Bleu
+     *
      * @param condition une condition a respecter avec la vitalite Rouge
      */
     void Condition(boolean condition) {
@@ -72,6 +83,23 @@ public class AdditionSousCondition {
             VitaliteRouge += valeurAjouter;
         } else {
             VitaliteBleu += valeurAjouter;
+        }
+    }
+
+    void ConditionRouge(char couleur) {
+        if (couleur == 'R') {
+            VitaliteRouge += valeurAjouter;
+        }
+    }
+
+    void ConditionBleu(char couleur){
+        if (couleur == 'B'){
+            VitaliteBleu+=valeurAjouter;
+        }
+    }
+    void ConditionSeul(boolean condition, int valeur){
+        if(condition){
+            this.valeur+=valeur;
         }
     }
 }
