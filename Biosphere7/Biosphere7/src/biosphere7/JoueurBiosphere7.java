@@ -48,26 +48,26 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                 Coordonnees[] v = voisines(coord, 14);
                 int compteur = 0;
                 presenceEau = false;
-                AdditionSousCondition val = new AdditionSousCondition();
                 AdditionSousCondition val2 = new AdditionSousCondition(vitalites.vitalitesRouge, vitalites.vitalitesBleu, 0);
+                AdditionSousCondition val = new AdditionSousCondition();
                 if (plateau[coord.ligne][coord.colonne].plantePresente() == false && plateau[coord.ligne][coord.colonne].nature == 'T') {
                     val.valeurAjouter = 1;
                     val2.valeurAjouter = 1;
                     for (int i = 0; i < v.length; i++) {
                         val.ConditionBleu(couleurJoueur);
                         val.ConditionRouge(couleurJoueur);
-                        val2.ConditionRouge(couleurJoueur);
-                        val2.ConditionBleu(couleurJoueur);
                         if (plateau[v[i].ligne][v[i].colonne].nature == 'E') {
                             presenceEau = true;
                         }
                         if (plateau[v[i].ligne][v[i].colonne].plantePresente()) {
                             boolean t = avoir3Voisines(v[i], 14, plateau);
+                            val2.ConditionBleu(couleurJoueur);
                             if (plateau[v[i].ligne][v[i].colonne].couleur == 'B') {
                                 if (t) {
                                     val2.VitaliteBleu -= plateau[v[i].ligne][v[i].colonne].vitalite;
                                 }
                             } else if (plateau[v[i].ligne][v[i].colonne].couleur == 'R') {
+                                val2.ConditionRouge(couleurJoueur);
                                 if (t) {
                                     val2.VitaliteRouge -= plateau[v[i].ligne][v[i].colonne].vitalite;
                                 }
