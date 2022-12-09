@@ -61,8 +61,8 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                         }
                         if (plateau[v[i].ligne][v[i].colonne].plantePresente()) {
                             boolean t = avoir3Voisines(v[i], 14, plateau);
-                            val2.ConditionBleu(couleurJoueur);
                             if (plateau[v[i].ligne][v[i].colonne].couleur == 'B') {
+                                val2.ConditionBleu(couleurJoueur);
                                 if (t) {
                                     val2.VitaliteBleu -= plateau[v[i].ligne][v[i].colonne].vitalite;
                                 }
@@ -82,7 +82,7 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                     if (compteur < MAXIMUMVOISINPOSSIBLE || compteur == MAXIMUMVOISINPOSSIBLE && presenceEau == true) {
                         for (Plante p : Plante.values()) {
                             Vitalites vitalites2 = new Vitalites(val2.VitaliteRouge, val2.VitaliteBleu);
-                            ajoutAction(coord, actions, vitalites2, couleurJoueur, p);
+                            ajoutActionPlante(coord, actions, vitalites2, couleurJoueur, p);
                         }
                     }
                 } else if (plateau[coord.ligne][coord.colonne].plantePresente()) {
@@ -242,16 +242,11 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
      * @param couleur la couleur de la plante à ajouter
      * @param p l'espèce de la plante
      */
-    void ajoutAction(Coordonnees coord, ActionsPossibles actions,
+    void ajoutActionPlante(Coordonnees coord, ActionsPossibles actions,
             Vitalites vitalites, char couleur, Plante p) {
-        int vitaliterR = vitalites.vitalitesRouge;
-        int vitaliterB = vitalites.vitalitesBleu;
-        AdditionSousCondition val = new AdditionSousCondition(vitaliterR, vitaliterB, 1);
+        AdditionSousCondition val = new AdditionSousCondition(vitalites.vitalitesRouge, vitalites.vitalitesBleu, 1);
         val.Condition(couleur == 'R');
-        String action = "" + initiale(p) + coord.carLigne() + coord.carColonne() + ","
-                + (val.VitaliteRouge) + ","
-                + (val.VitaliteBleu);
-        actions.ajouterAction(action);
+        ajouterAction(val, ""+initiale(p), coord, actions);
     }
 
     /**
@@ -339,10 +334,7 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
             val.valeurAjouter = VITALEMAXIMAL - plateau[coord.ligne][coord.colonne].vitalite;
         }
         val.Condition(plateau, coord);
-        String action = "F" + coord.carLigne() + coord.carColonne() + ","
-                + (val.VitaliteRouge) + ","
-                + (val.VitaliteBleu);
-        actions.ajouterAction(action);
+        ajouterAction(val, "F", coord, actions);
 
     }
 
@@ -378,12 +370,10 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
         int compteur = 0;
         boolean statue = false;
         boolean checkPlante = plateau[coord.ligne][coord.colonne].plantePresente();
-        if (checkPlante == true) {
+        if (checkPlante) {
             char espece = plateau[coord.ligne][coord.colonne].espece;
             while (compteur < voisine.length && !statue) {
-                if (plateau[voisine[compteur].ligne][voisine[compteur].colonne].espece == espece) {
-                    statue = true;
-                }
+                statue = plateau[voisine[compteur].ligne][voisine[compteur].colonne].espece == espece;
                 compteur++;
             }
         }
@@ -417,11 +407,15 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
 
         val.valeurAjouter *= voisinVide;
         val.Condition(couleurJ);
-        String action = "I" + coord.carLigne() + coord.carColonne() + ","
+        ajouterAction(val, "I", coord, actions);
+
+    }
+    
+    void ajouterAction(AdditionSousCondition val, String letter, Coordonnees coord, ActionsPossibles actions){
+        String action = letter + coord.carLigne() + coord.carColonne() + ","
                 + (val.VitaliteRouge) + ","
                 + (val.VitaliteBleu);
         actions.ajouterAction(action);
-
     }
 
     /**
@@ -448,11 +442,7 @@ public class JoueurBiosphere7 implements IJoueurBiosphere7 {
                 }
             }
         }
-        String action = "C" + coord.carLigne() + coord.carColonne() + ","
-                + (val.VitaliteRouge) + ","
-                + (val.VitaliteBleu);
-        actions.ajouterAction(action);
-
+        ajouterAction(val, "C", coord, actions);
     }
 
     /**

@@ -581,14 +581,14 @@ public class JoueurBiosphere7Test {
      * Test de la fonction ajoutAction.
      */
     @Test
-    public void testAjoutAction() {
+    public void testAjoutActionPlante() {
         JoueurBiosphere7 joueur = new JoueurBiosphere7();
         ActionsPossibles actions = new ActionsPossibles();
         Vitalites vitalites = new Vitalites(0, 0);
         // pour l'instant pas d'action possible
         assertEquals(0, actions.nbActions);
         // on crée le tableau d'actions et on en ajoute une
-        joueur.ajoutAction(Coordonnees.depuisCars('f', 'D'), actions,
+        joueur.ajoutActionPlante(Coordonnees.depuisCars('f', 'D'), actions,
                 vitalites, Case.CAR_ROUGE, Plante.POMMIER);
         // l'action est devenue possible
         assertTrue(actions.contient("PfD,1,0"));
@@ -597,18 +597,42 @@ public class JoueurBiosphere7Test {
         // pour l'instant une seule action possible
         assertEquals(1, actions.nbActions);
         // ajout d'une deuxième action possible
-        joueur.ajoutAction(Coordonnees.depuisCars('b', 'H'), actions,
+        joueur.ajoutActionPlante(Coordonnees.depuisCars('b', 'H'), actions,
                 vitalites, Case.CAR_ROUGE, Plante.POMMIER);
         // l'action a bien été ajoutée
         assertTrue(actions.contient("PbH,1,0"));
         // désormais, deux actions possibles
         assertEquals(2, actions.nbActions);
-        joueur.ajoutAction(Coordonnees.depuisCars('a', 'A'), actions,
+        joueur.ajoutActionPlante(Coordonnees.depuisCars('a', 'A'), actions,
                 vitalites, Case.CAR_ROUGE, Plante.FRANBOISIER);
         // l'action a bien été ajoutée
         assertTrue(actions.contient("BaA,1,0"));
-        // désormais, deux actions possibles
+        // désormais, trois actions possibles
         assertEquals(3, actions.nbActions);
+        joueur.ajoutActionPlante(Coordonnees.depuisCars('n', 'N'), actions,
+                vitalites, Case.CAR_ROUGE, Plante.HARICOTS);
+        // l'action a bien été ajoutée
+        assertTrue(actions.contient("HnN,1,0"));
+        // désormais, quatre actions possibles
+        assertEquals(4, actions.nbActions);
+        joueur.ajoutActionPlante(Coordonnees.depuisCars('k', 'K'), actions,
+                vitalites, Case.CAR_ROUGE, Plante.POMMESDETERRE);
+        // l'action a bien été ajoutée
+        assertTrue(actions.contient("DkK,1,0"));
+        // désormais, cinq actions possibles
+        assertEquals(5, actions.nbActions);
+        joueur.ajoutActionPlante(Coordonnees.depuisCars('b', 'B'), actions,
+                vitalites, Case.CAR_ROUGE, Plante.SUREAU);
+        // l'action a bien été ajoutée
+        assertTrue(actions.contient("SbB,1,0"));
+        // désormais, six actions possibles
+        assertEquals(6, actions.nbActions);
+        joueur.ajoutActionPlante(Coordonnees.depuisCars('c', 'C'), actions,
+                vitalites, Case.CAR_ROUGE, Plante.TOMATES);
+        // l'action a bien été ajoutée
+        assertTrue(actions.contient("TcC,1,0"));
+        // désormais, sept actions possibles
+        assertEquals(7, actions.nbActions);
     }
 
     /**
