@@ -1,5 +1,6 @@
 package jump;
 
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -7,6 +8,8 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Serveur de jeu.
@@ -166,8 +169,11 @@ public class Serveur extends UnicastRemoteObject implements IServeur, Runnable {
      */
     static void log(TypeLog type, String message) {
         Calendar c = Calendar.getInstance();
+        logfile.format("%s %td/%tm/%ty %tT %s%s", type.formatServeur(),
+                c, c, c, c, message, System.lineSeparator());
         System.out.format("%s %td/%tm/%ty %tT %s%s", type.formatServeur(),
                 c, c, c, c, message, System.lineSeparator());
+        logfile.flush();
     }
 
     /**
@@ -176,6 +182,11 @@ public class Serveur extends UnicastRemoteObject implements IServeur, Runnable {
      * @param args arguments de la ligne de commande.
      */
     public static void main(String[] args) {
+        try{
+            logfile = new PrintWriter(LOG_FILENAME);
+        } catch (FileNotFoundException ex) {
+            System.out.println("Fichier inexistant: "+ex);
+        }
         log(TypeLog.INFO, "Démarrage du serveur.");
         // récupération de l'argument passé en ligne de commande
         if (args.length != 1) {

@@ -493,6 +493,6 @@ class Plateau {
             textBuilder.append("|").append(System.lineSeparator());
         }
         textBuilder.append(contourHoriz()).append(System.lineSeparator());
-        return textBuilder.toString();
+        return ""+textBuilder;
     }
 }

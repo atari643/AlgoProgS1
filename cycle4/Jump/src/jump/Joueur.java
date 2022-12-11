@@ -1,5 +1,6 @@
 package jump;
 
+import java.util.Scanner;
 
 /**
  * Un joueur.
@@ -61,13 +62,13 @@ class Joueur {
     /**
      * Retourne le nom tronqué sur 10 caractères (ou le nom s'il est composé de
      * 10 caractères ou moins).
-     * 
+     *
      * @param unNom le nom
      * @return le nom tronqué
      */
     static String tronquerNom(String unNom) {
         String nomJoueur = unNom;
-        if (!nomJoueur.isEmpty() && nomJoueur.length()>10){
+        if (!nomJoueur.isEmpty() && nomJoueur.length() > 10) {
             nomJoueur = unNom.substring(0, 10);
         }
         return nomJoueur; // TODO
@@ -90,15 +91,15 @@ class Joueur {
      */
     boolean nomCorrect() {
         boolean caract = false;
-        if(!nom.isEmpty()){
+        if (!nom.isEmpty()) {
             char initial = caracterePlateau();
-            if (initial>='A' && initial<='Z' 
-                    && !nom.contains(Plateau.SEPARATEUR) 
-                    && !nom.contains(Joueur.SEPARATEUR) 
-                    && !nom.contains(Partie.SEPARATEUR))
+            if (initial >= 'A' && initial <= 'Z'
+                    && !nom.contains(Plateau.SEPARATEUR)
+                    && !nom.contains(Joueur.SEPARATEUR)
+                    && !nom.contains(Partie.SEPARATEUR)) {
                 caract = true;
+            }
 
-            
         }
         return caract;
     }
@@ -109,7 +110,16 @@ class Joueur {
      * @return une chaîne représentant ce joueur
      */
     String serialiser() {
-        return "";
+        StringBuilder info = new StringBuilder();
+        info.append(nom)
+                .append(SEPARATEUR)
+                .append(colonne)
+                .append(SEPARATEUR)
+                .append(score)
+                .append(SEPARATEUR)
+                .append(statut.serialiser())
+                .append(SEPARATEUR);
+        return info.toString();
     }
 
     /**
@@ -119,12 +129,20 @@ class Joueur {
      * @return le joueur obtenu à partir d'une sérialisation donnée.
      */
     static Joueur deserialiser(String serial) {
-        return null;
+        Joueur newJoueur;
+        try ( Scanner scanner = new Scanner(serial)) {
+            scanner.useDelimiter(SEPARATEUR);
+            newJoueur = new Joueur(scanner.next());
+            newJoueur.colonne = scanner.nextInt();
+            newJoueur.score = scanner.nextInt();
+            newJoueur.statut = StatutJoueur.deserialiser(scanner.next());
+        }
+        return newJoueur;
     }
-    
+
     /**
      * Ligne correspondant à ce joueur dans le fichier de scores.
-     * 
+     *
      * @return la ligne correspondant à ce joueur dans le fichier de scores
      */
     String ligneFichierScore() {

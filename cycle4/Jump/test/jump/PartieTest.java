@@ -321,7 +321,7 @@ public class PartieTest {
         partie1().sauverScores();
         partie1().sauverScores();
         partie1().sauverScores();
-        assertEquals(3, Partie.nombrePartiesJouees("Alex"));
+        assertEquals(4, Partie.nombrePartiesJouees("Alex"));
     }
 
     final static String SERIAL1 = "1:4:1:"

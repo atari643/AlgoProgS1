@@ -427,6 +427,13 @@ class Partie {
      * Sauvegarder la partie en cours.
      */
     void sauvegarder() {
+        try(PrintWriter fichier = new PrintWriter(FICHIER_SAUVEGARDE)){
+            fichier.println(serialiser());
+        } catch (FileNotFoundException ex) {
+            System.out.println("fichier non trouvé: " + ex);
+        }
+;
+        
     }
 
     /**
@@ -528,8 +535,8 @@ class Partie {
             System.out.println("Exception rattrapée : " + e1);
         } catch (IOException e2) {
             System.out.println("Excepiton rattrapée: " + e2);
-        }finally {
-            if (fichier != null){
+        } finally {
+            if (fichier != null) {
                 fichier.close();
             }
         }
@@ -544,22 +551,24 @@ class Partie {
      */
     static int nombrePartiesJouees(String nomJoueur) {
         int compteur = 0;
-        try (Scanner scanner = new Scanner(FICHIER_SCORES)){
-            scanner.useDelimiter(Joueur.SEPARATEUR);
-            while(scanner.hasNextLine()){
-                String mot = scanner.nextLine();
-                if (mot.equals(nomJoueur)){
-                    compteur+=1;
+        try ( Scanner scanner = new Scanner(new File(FICHIER_SCORES))) {
+            while (scanner.hasNextLine()) {
+                String ligne = scanner.nextLine();
+                String nom = ligne.split(Joueur.SEPARATEUR, -1)[0];
+                if (nom.equals(nomJoueur)) {
+                    compteur += 1;
                 }
             }
+        } catch (FileNotFoundException ex) {
+            System.out.println("Fichier non trouvé : " + ex);
         }
         return compteur;
-        
+
     }
 
     /**
      * Sauvegarde des 10 meilleurs scores dans le fichier de scores.
      */
-    void sauverTopScores() {
+    void sauverTopScores() {  
     }
 }
