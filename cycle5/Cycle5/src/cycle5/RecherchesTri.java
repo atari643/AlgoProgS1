@@ -4,8 +4,12 @@
  */
 package cycle5;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -13,13 +17,31 @@ import java.util.Random;
  */
 public class RecherchesTri {
 
-    final static int MAX_TAILLE = 10000;
+    final static int MAX_TAILLE = 100000;
+
+    final static String FICHIERPOUR = "benchmarkRechercheBouclePour.txt";
+
+    final static String FICHIERTANTQUE = "benchmarkRechercheBoucleTantQue.txt";
+
+    final static String FICHIERDICHOTOMIQUE = "benchmarkRechercheDichotomique.txt";
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        ecriture(FICHIERPOUR, TypeRecherche.POUR);
+        ecriture(FICHIERTANTQUE, TypeRecherche.TANTQUE);
+        ecriture(FICHIERDICHOTOMIQUE, TypeRecherche.DICHO);
+    }
 
+    static void ecriture(String fichier, TypeRecherche type) {
+        try ( PrintWriter write = new PrintWriter(fichier)) {
+            for (int taille = 10000; taille < MAX_TAILLE; taille += 10000) {
+                write.println(taille  + " " + rechercheTri(10, taille, type));
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(RecherchesTri.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -29,7 +51,7 @@ public class RecherchesTri {
      * @param n nombre à rechercher
      * @return le nombre de comparaison
      */
-    static int recherchePour(int[] tab, int n) {
+    static int recherchePour(int[] tab,int taille, int n) {
         int result = 0;
         int compteur = 0;
         for (int i = 0; i < tab.length; i++) {
@@ -55,8 +77,8 @@ public class RecherchesTri {
      */
     static int rechercheTantQue(int[] tab, int n) {
         int compteur = 1;
-        int index = 0;
-        while (tab[index] != n) {
+        int index = 1;
+        while (tab[index - 1] != n) {
             index++;
             compteur++;
         }
@@ -71,9 +93,9 @@ public class RecherchesTri {
      */
     static int[] tableauAleatoire(int n) {
         Random rd = new Random();
-        int[] tab = new int[n];
+        int[] tab = new int[MAX_TAILLE];
         for (int i = 0; i < tab.length; i++) {
-            tab[i] = rd.nextInt(n);
+            tab[i] = rd.nextInt();
         }
         return tab;
     }
@@ -89,28 +111,33 @@ public class RecherchesTri {
         int g = 0;
         int d = tab.length;
         int compteur = 1;
-        while (tab[0] != n && (d - g) != 0) {
-            if (n > tab[d / 2]) {
-                g = (d / 2) + 1;
-            } else if (n < tab[d / 2]) {
-                d = (d / 2) - 1;
+        boolean trouve = false;
+        while (g <= d && !trouve) {
+            int m = (d + g) / 2;
+            if (n > tab[m]) {
+                g = m + 1;
+            } else if (n < tab[m]) {
+                d = m - 1;
+            } else {
+                trouve = true;
             }
             compteur++;
         }
         return compteur;
     }
 
-    static int typeDeTri(int[] tab, TypeRecherche type) {
+    static int typeDeTri(int[] tab, TypeRecherche type, int taille) {
         int comparaison = 0;
+        Random rd = new Random();
         switch (type) {
             case POUR:
-                comparaison = recherchePour(tab, MAX_TAILLE);
+                comparaison = recherchePour(tab, tab[rd.nextInt(taille)]);
                 break;
             case TANTQUE:
-                comparaison = rechercheTantQue(tab, MAX_TAILLE);
+                comparaison = rechercheTantQue(tab, tab[rd.nextInt(taille)]);
                 break;
             case DICHO:
-                comparaison = rechercheDichotomique(tab, MAX_TAILLE);
+                comparaison = rechercheDichotomique(tab, tab[rd.nextInt(taille)]);
                 break;
             default:
                 comparaison = 0;
@@ -120,15 +147,15 @@ public class RecherchesTri {
 
     }
 
-    static int rechercheTri(TypeRecherche type) {
+    static double rechercheTri(int repetition, int taille, TypeRecherche type) {
         int[] tab;
-        int moy = 0;
-        tab = tableauAleatoire(MAX_TAILLE);
-        triTableauAléatoire(tab);
-        for (int i = 0; i < 100000; i++) {
-            moy += typeDeTri(tab, type)/MAX_TAILLE;
+        double moy = 0;
+        for (int i = 0; i < repetition; i++) {
+            tab = tableauAleatoire(taille);
+            triTableauAléatoire(tab);
+            moy += typeDeTri(tab, type, taille);
         }
-        return moy;
+        return moy / taille;
     }
 
 }
