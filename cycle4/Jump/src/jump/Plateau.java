@@ -383,10 +383,10 @@ class Plateau {
         // premier champ : largeur
         texte.append(largeur).append(SEPARATEUR);
         // deuxième champ : hauteur
-        texte.append(hauteur).append(SEPARATEUR);
+        texte.append(hauteur).append(SEPARATEUR).append(System.lineSeparator());
         // lignes suivantes : plateau, ligne par ligne
         for (int ligne = 0; ligne < hauteur; ligne++) {
-            texte.append(serialiserLigne(ligne, true)).append(SEPARATEUR);
+            texte.append(serialiserLigne(ligne, true)).append(SEPARATEUR).append(System.lineSeparator());
         }
         return texte.toString();
     }

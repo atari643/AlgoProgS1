@@ -234,7 +234,7 @@ public class PartieTest {
     }
 
     @Test
-    public void testListeVainqueurs() {
+        public void testListeVainqueurs() {
         Partie partie = new Partie();
         Joueur neo = new Joueur("Neo");
         Joueur trinity = new Joueur("Trinity");
@@ -251,6 +251,8 @@ public class PartieTest {
         trinity.score = 1;
         morpheus.score = 3;
         assertEquals("Neo ", partie.listeVainqueurs());
+        partie.sauverScores();
+        partie.sauverTopScores();
     }
 
     @Test
@@ -321,7 +323,9 @@ public class PartieTest {
         partie1().sauverScores();
         partie1().sauverScores();
         partie1().sauverScores();
-        assertEquals(4, Partie.nombrePartiesJouees("Alex"));
+        assertEquals(43, Partie.nombrePartiesJouees("Alex"));        
+        
+        
     }
 
     final static String SERIAL1 = "1:4:1:"

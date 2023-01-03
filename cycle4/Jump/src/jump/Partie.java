@@ -427,13 +427,11 @@ class Partie {
      * Sauvegarder la partie en cours.
      */
     void sauvegarder() {
-        try(PrintWriter fichier = new PrintWriter(FICHIER_SAUVEGARDE)){
+        try ( PrintWriter fichier = new PrintWriter(FICHIER_SAUVEGARDE)) {
             fichier.println(serialiser());
         } catch (FileNotFoundException ex) {
             System.out.println("fichier non trouvé: " + ex);
         }
-;
-        
     }
 
     /**
@@ -479,10 +477,10 @@ class Partie {
         // nombre de joueurs
         serial.append(nbJoueurs).append(SEPARATEUR);
         // état de la partie (en attente, en cours ou terminée)
-        serial.append(etat.ordinal()).append(SEPARATEUR);
+        serial.append(etat.ordinal()).append(SEPARATEUR).append(System.lineSeparator());
         // liste des joueurs : nom, colonne, score, statut
         for (int i = 0; i < nbJoueurs; i++) {
-            serial.append(joueurs[i].serialiser()).append(SEPARATEUR);
+            serial.append(joueurs[i].serialiser()).append(SEPARATEUR).append(System.lineSeparator());
         }
         // plateau
         serial.append(plateau.serialiser()).append(SEPARATEUR);
@@ -567,8 +565,57 @@ class Partie {
     }
 
     /**
+     * Décaler les valeurs d'un tableau d'un rang vers la droite. La dernière
+     * valeur est perdue, et la première est dupliquée (tab[0] et tab[1]).
+     *
+     * @param tab le tableau à modifier
+     */
+    static void decalageDroite(String[] tab) {
+        int i = tab.length - 1;
+        while (i >= 1) {
+            tab[i] = tab[i - 1];
+            i--;
+        }
+
+    }
+
+    /**
      * Sauvegarde des 10 meilleurs scores dans le fichier de scores.
      */
-    void sauverTopScores() {  
+    void sauverTopScores() {
+        PrintWriter text = null;
+        String[] tab = new String[]{"nom!0", "nom!0", "nom!0", "nom!0", "nom!0", "nom!0", "nom!0", "nom!0", "nom!0", "nom!0"};
+        try ( Scanner scanner = new Scanner(new File(FICHIER_SCORES))) {
+            text = new PrintWriter("topScore.txt");
+            while (scanner.hasNextLine()) {
+                String ligne = scanner.nextLine();
+                String nom = ligne.split(Joueur.SEPARATEUR, -1)[0];
+                int numScore = Integer.parseInt(ligne.split(Joueur.SEPARATEUR, 0)[1]);
+                boolean trouver = false;
+                int i = 0;
+                while (trouver == false && i < 10) {
+                    Scanner scanner2 = new Scanner(tab[i]);
+                    scanner2.useDelimiter("!");
+                    String nom2 = scanner2.next();
+                    int espaceScore = scanner2.nextInt();
+                    if (espaceScore < numScore) {
+                        decalageDroite(tab);
+                        tab[i] = ""+nom+Joueur.SEPARATEUR+numScore;
+                        trouver = true;
+                    }
+                    i++;
+                }
+            }
+            for (int i=0 ; i<tab.length; i++){
+                text.println(tab[i]);
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println("Exeption levée " + ex);
+        } finally {
+            if (text != null) {
+                text.close();
+            }
+        }
     }
+
 }

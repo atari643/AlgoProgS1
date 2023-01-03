@@ -116,7 +116,8 @@ class UI {
                 .append("---------------+--------").append(System.lineSeparator());
         for (int i = 0; i < partie.nbJoueurs; i++) {
             Joueur joueur = partie.joueurs[i];
-            tabJoueurs.append(ligneJoueur(joueur));
+            tabJoueurs.append(ligneJoueur(joueur))
+                    .append("\n");
         }
         return tabJoueurs;
     }
@@ -128,7 +129,7 @@ class UI {
      * @return la ligne affichée pour ce joueur
      */
     static String ligneJoueur(Joueur joueur) {
-        return String.format(" %s  %s |   %d ", carStatutJoueur(joueur), joueur.nom, joueur.score);
+        return String.format(" %s  %s     |   %d ", carStatutJoueur(joueur), joueur.nom, joueur.score);
     }
 
     /**

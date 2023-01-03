@@ -53,7 +53,7 @@ class Joueur {
      * @param unClient client du joueur
      */
     Joueur(String unNom, ICallback unClient) {
-        nom = unNom;
+        nom = tronquerNom(unNom);
         client = unClient;
         score = 0;
         statut = StatutJoueur.A_JOUE;

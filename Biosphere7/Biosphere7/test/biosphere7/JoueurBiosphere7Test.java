@@ -458,7 +458,7 @@ public class JoueurBiosphere7Test {
                 = new ActionsPossibles(actionsPossiblesDepuisPlateau6);
         actionsPossibles6.afficher();
         assertTrue(actionsPossibles6.contient("RSnF,11,13"));
-                Case[][] plateau5 = Utils.plateauDepuisTexte(PLATEAU_NIVEAU10_3);
+        Case[][] plateau5 = Utils.plateauDepuisTexte(PLATEAU_NIVEAU10_3);
         String[] actionsPossiblesDepuisPlateau7
                 = joueur.actionsPossibles(plateau5, 'B', 10);
         ActionsPossibles actionsPossibles7
@@ -728,16 +728,19 @@ public class JoueurBiosphere7Test {
         Vitalites vita1 = JoueurBiosphere7.vitalitesPlateau(plateau1);
         assertEquals(0, vita1.vitalitesRouge);
         assertEquals(0, vita1.vitalitesBleu);
+        state s = new state();
+        assertEquals(0, s.hashMatrice(plateau1));
         // plateau : rouge 2, bleu 2
         Case[][] plateau2 = Utils.plateauDepuisTexte(PLATEAU_NIVEAU2);
         Vitalites vita2 = JoueurBiosphere7.vitalitesPlateau(plateau2);
         assertEquals(2, vita2.vitalitesRouge);
         assertEquals(2, vita2.vitalitesBleu);
+        assertEquals(718, s.hashMatrice(plateau2));
         // plateau : rouge 6, bleu 4
         Case[][] plateau3 = Utils.plateauDepuisTexte(PLATEAU_NIVEAU3);
         Vitalites vita3 = JoueurBiosphere7.vitalitesPlateau(plateau3);
         assertEquals(6, vita3.vitalitesRouge);
-        assertEquals(4, vita3.vitalitesBleu);
+        assertEquals(4, vita3.vitalitesBleu);       
         // plateau : rouge 12, bleu 12
         Case[][] plateau4 = Utils.plateauDepuisTexte(PLATEAU_NIVEAU6);
         Vitalites vita4 = JoueurBiosphere7.vitalitesPlateau(plateau4);
@@ -812,7 +815,7 @@ public class JoueurBiosphere7Test {
             + "a|   |   |   |   |   |   |   |   |   |   |   |   |   |PB1|\n"
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
             + "b|   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
-            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
+            + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n" 
             + "c|   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
             + " +---+---+---+---+---+---+---+---+---+---+---+---+---+---+\n"
             + "d|   |   |   |   |   |   |   |   |   |   |   |   |   |   |\n"
