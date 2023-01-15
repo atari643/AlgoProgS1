@@ -10,6 +10,7 @@ package cycle5;
  */
 public enum TypeRecherche {
     POUR,
+    POURNONTRI,
     TANTQUE,
     DICHO;
 }

@@ -15,9 +15,9 @@ import static org.junit.Assert.*;
  *
  * @author qartigala
  */
-public class Indice_comparaisonTest {
+public class IndiceComparaisonTest {
     
-    public Indice_comparaisonTest() {
+    public IndiceComparaisonTest() {
     }
     
     @BeforeClass
