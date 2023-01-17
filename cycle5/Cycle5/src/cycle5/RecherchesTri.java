@@ -58,7 +58,7 @@ public class RecherchesTri {
      */
     public static void main(String[] args) {
         int graine = (int) System.currentTimeMillis();
-        ecriture(FICHIERSANSTRI, TypeRecherche.POURNONTRI, graine);
+        ecriture(FICHIERSANSTRI, TypeRecherche.TANTQUENONTRI, graine);
         ecriture(FICHIERTRIPOUR, TypeRecherche.POUR, graine);
         ecriture(FICHIERTRITANTQUE, TypeRecherche.TANTQUE, graine);
         ecriture(FICHIERTRIDICHOTOMIQUE, TypeRecherche.DICHO, graine);
@@ -74,10 +74,10 @@ public class RecherchesTri {
      * @param seed le nombre aléatoire
      */
     static void ecriture(String fichier, TypeRecherche type, int seed) {
-        try (PrintWriter write = new PrintWriter(fichier)) {
+        try ( PrintWriter write = new PrintWriter(fichier)) {
             write.println("nombre_de_recherches nombre_de_comparaisons");
-            for (int taille = 1; taille <= 200000; taille += 20000) {
-                IndiceComparaison resul = rechercheTri(taille, taille, type, seed);
+            for (int taille = 0; taille <= 180000; taille += 20000) {
+                IndiceComparaison resul = rechercheTri(taille, type, seed);
                 write.println(resul.indice + " " + resul.comparaison);
             }
         } catch (FileNotFoundException ex) {
@@ -93,15 +93,15 @@ public class RecherchesTri {
      * @return le nombre de comparaison
      */
     static long triParSelection(int[] tab, int taille) {
-        int indice = 0;
+        int indice;
         long compteur = 0;
         for (int i = 0; i < taille; i++) {
             int min = tab[i];
+            indice = i;
             for (int n = i; n < taille; n++) {
                 if (tab[n] <= min) {
                     min = tab[n];
                     indice = n;
-                    compteur++;
                 }
                 compteur++;
             }
@@ -226,7 +226,7 @@ public class RecherchesTri {
      */
     static IndiceComparaison rechercher(int[] tab, TypeRecherche type, int taille, int seed) {
         IndiceComparaison comparaison = new IndiceComparaison(0, 0);
-        Random rd = new Random();
+        Random rd = new Random(seed);
         switch (type) {
             case POUR:
                 comparaison = recherchePour(tab, taille, tab[rd.nextInt(taille)]);
@@ -237,8 +237,8 @@ public class RecherchesTri {
             case DICHO:
                 comparaison = rechercheDichotomique(tab, taille, tab[rd.nextInt(taille)]);
                 break;
-            case POURNONTRI:
-                comparaison = recherchePour(tab, taille, tab[rd.nextInt(taille)]);
+            case TANTQUENONTRI:
+                comparaison = rechercheTantQue(tab, taille, tab[rd.nextInt(taille)]);
                 break;
             default:
                 System.out.println("stop");
@@ -257,21 +257,16 @@ public class RecherchesTri {
      * @param seed le modèle de nombre aléatoire
      * @return un tableau avec la moyenne et l'indice où il a était trouver
      */
-    static IndiceComparaison rechercheTri(int repetition, int taille, TypeRecherche type, int seed) {
+    static IndiceComparaison rechercheTri(int repetition, TypeRecherche type, int seed) {
         int[] tab;
         long moy = 0;
         tab = tableauAleatoire(MAX_TAILLE, seed);
-        if (type != TypeRecherche.POURNONTRI) {
+        if (type != TypeRecherche.TANTQUENONTRI) {
             moy += triTableau(tab, MAX_TAILLE);
         }
-        long te = 0;
         for (int i = 0; i < repetition; i++) {
             IndiceComparaison test = rechercher(tab, type, MAX_TAILLE, i);
-            if (type != TypeRecherche.POURNONTRI) {
-                moy += test.comparaison;
-            } else {
-                moy += test.indice;
-            }
+            moy += test.comparaison;
         }
         return new IndiceComparaison(repetition, moy);
 

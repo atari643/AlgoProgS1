@@ -9,8 +9,21 @@ package cycle5;
  * @author qartigala
  */
 public enum TypeRecherche {
+    /**
+     * recherche avec une boucle Pour avec tableau trié
+     */
     POUR,
-    POURNONTRI,
+    /**
+     * recherche avec une boucle Tant que avec tableau non trié
+
+     */
+    TANTQUENONTRI,
+    /**
+     * recherche avec une boucle Tant que avec tableau trié
+     */
     TANTQUE,
+    /**
+     * recherche avec un algorithme dichotomique avec tableau trié
+     */
     DICHO;
 }

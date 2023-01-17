@@ -4,7 +4,6 @@
  */
 package cycle5;
 
-import org.junit.Assert;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -37,7 +36,7 @@ public class RecherchesTriTest {
         int[] tab2 = new int[]{2, 4, 1, 9, 2, 5, 1};
         RecherchesTri.echanger(tab, 0, 2);
         assertArrayEquals(tab2, tab);
-        int[] tab3 = new int[]{0};
+        int[] tab3 = {0};
         int[] tab4 = new int[]{0};
         RecherchesTri.echanger(tab, 0, 0);
         assertArrayEquals(tab4, tab3);
